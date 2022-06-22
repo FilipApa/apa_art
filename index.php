@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-<main> 
-    index
-</main>
+ 
+index
 <?php  get_footer(); ?>

@@ -8,10 +8,14 @@
     <?php wp_head(); ?>
 </head>
 
-<body >
-    <?php wp_body_open(); ?>
-    <header>
-    <h1>Apatovic Art</h1>
-    </header>
-</body>
-</html>
+<body class="bg-light" id="site-body" <?php body_class();  $apa_site_url = get_site_url(); ?> data-website-url="<?php echo $apa_site_url; ?>" >
+    <?php 
+        if( function_exists('wp_body_open')) {
+            wp_body_open();
+        }
+    ?>
+    <div id="page" class="site">
+        <header class="mb-4" role="banner">
+            <?php get_template_part('template-parts/header/navigation') ?>
+        </header>
+        <main id="content" class="site-content">   
