@@ -15,7 +15,6 @@ BACKGROUND SHAPE
 */
 
 .background-shape {
-    background-image: url("assets/images/hero-bg-shape.png");
     background-repeat: no-repeat;
     background-position: left center;
 }
