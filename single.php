@@ -1,9 +1,17 @@
-single
-<?php 
+<div class="container">
+    <?php 
+        while(have_posts()) {
+            the_post();?>
+            <div class="post-navigation">
+                <?php the_title(); ?>
+            </div>
+            <div class="post-wrapper">
+                <div class="post-image">
 
-    while(have_posts()) {
-        the_post();
-        the_title();
-        the_content();
-    }
-?>
+                </div>
+            </div>
+            
+           
+        <?php}
+    ?>
+</div>

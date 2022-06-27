@@ -20,7 +20,7 @@ $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
       $loop_by_category = new WP_Query( $args ); 
 ?>
 
-<div  class="container">
+    <div class="container">
         <?php 
             $index         = 0;
             $no_of_columns = 3;
