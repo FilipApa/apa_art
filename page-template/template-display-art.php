@@ -7,9 +7,10 @@
 <?php get_header(); ?>
 <?php
 $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
-    // Get the page slug
-    $slug = $current_page->post_name;
+    // Get the page slugs
+    $slug = $current_page->category_nicename;
 
+if ($slug) {
     $args = array(
         'posts_per_page' => -1,
         'post_type' => 'post',
@@ -70,7 +71,7 @@ $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
                     $index ++;
                     if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
                         </div> 
-                    <?php } endwhile; ?>
+                    <?php } endwhile; } ?>
 </div>
 
 <?php get_footer(); ?>

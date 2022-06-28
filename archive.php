@@ -1,10 +1,4 @@
 <?php get_header(); ?>
 Archive
-<?php 
-    while(have_posts()) {
-        the_post();
-        the_title();
-       
-    }
-?>
+<?php get_template_part('page-template/template-display-art') ?>
 <?php  get_footer(); ?>
