@@ -18,3 +18,9 @@ BACKGROUND SHAPE
     background-repeat: no-repeat;
     background-position: left center;
 }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black;
+    padding: 15px 10px;
+}

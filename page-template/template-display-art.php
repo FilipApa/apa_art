@@ -8,9 +8,10 @@
 <?php
 $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
     // Get the page slugs
-    $slug = $current_page->category_nicename;
+    $slug = $current_page->slug;
 
 if ($slug) {
+    echo 'cat';
     $args = array(
         'posts_per_page' => -1,
         'post_type' => 'post',
@@ -18,14 +19,15 @@ if ($slug) {
         'category_name' => $slug
       );
 
-      $loop_by_category = new WP_Query( $args ); 
+      $query = new WP_Query( $args ); 
+
 ?>
 
     <div class="container">
         <?php 
             $index         = 0;
             $no_of_columns = 3;
-            while($loop_by_category->have_posts()) : $loop_by_category->the_post(); ?>
+            while($query->have_posts()) : $query->the_post(); ?>
             <?php 
             $apa_post_id = get_the_ID();
 
@@ -71,7 +73,7 @@ if ($slug) {
                     $index ++;
                     if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
                         </div> 
-                    <?php } endwhile; } ?>
+                    <?php } endwhile; } else {echo "NOTHING";} ?>
 </div>
 
 <?php get_footer(); ?>

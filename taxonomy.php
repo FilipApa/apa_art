@@ -1,11 +1,35 @@
 <?php get_header(); ?>
-Arch
-<div class="container">
+<?php
+$current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
+    // Get the page slugs
+    $taxonomy = $current_page->taxonomy;
+    $tax_term = $current_page->slug;
+;
+
+if(is_tax( $taxonomy )) {
+    echo 'tax';
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => -1,
+        'order' => 'ASC',
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'field'    => 'slug',
+                'terms'    => $tax_term
+            ),
+        ),
+    );
+    $query = new WP_Query( $args );
+
+?>
+
+    <div class="container">
         <?php 
             $index         = 0;
             $no_of_columns = 3;
-            while(have_posts()) : the_post(); 
-           
+            while($query->have_posts()) : $query->the_post(); ?>
+            <?php 
             $apa_post_id = get_the_ID();
 
             if ( $index % $no_of_columns === 0  ) {
@@ -30,12 +54,8 @@ Arch
                             </h3>
                             <div>
                                 <?php 
-                                    $apa_taxonomies = wp_get_post_terms( $apa_post_id, [ 'year']);
+                                    $apa_taxonomies = wp_get_post_terms( $apa_post_id, 'post_tag');
 
-                                    if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
-                                    return;
-                                    }
-                
                                     foreach ($apa_taxonomies as $key => $apa_tax) { ?>
                                         <a class="btn btn-outline-primary" href="<?php echo esc_url(get_term_link($apa_tax))?>">
                                             <?php echo esc_html( $apa_tax->name ); ?>
@@ -49,7 +69,8 @@ Arch
                     <?php 
                     $index ++;
                     if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
-                        </div> 
-                    <?php } endwhile; ?>
+                    </div> 
+                    <?php } endwhile; } else {echo "NOTHING";} ?>
 </div>
-<?php  get_footer(); ?>
+
+<?php get_footer(); ?>
