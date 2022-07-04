@@ -5,18 +5,8 @@ Version: 1.0
 */
 
 
-/*
-MODAL
-*/
-
-
-/*
-BACKGROUND SHAPE
-*/
-
-.background-shape {
-    background-repeat: no-repeat;
-    background-position: left center;
+body {
+    font-family: 'Outfit', sans-serif;
 }
 
 .carousel-control-prev-icon,
