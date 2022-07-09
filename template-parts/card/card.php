@@ -1,4 +1,10 @@
 <div class="card">
+    <?php 
+        $curr_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
+        // Get the page slug
+        $curr_slug = $curr_page->slug;
+    ?>
+    
     <div class="card-img-top" >
         <a href="<?php the_permalink(); ?>">
             <?php     
@@ -20,11 +26,16 @@
                 return;
                 }
 
-                foreach ($apa_taxonomies as $key => $apa_tax) { ?>
+                foreach ($apa_taxonomies as $key => $apa_tax) {
+                    // echo $apa_tax -> slug;
+                    // var_dump($apa_tax);
+                    if($curr_slug !== $apa_tax -> slug) {
+                    ?>
+                
                     <a class="btn btn-outline-primary" href="<?php echo esc_url(get_term_link($apa_tax))?>">
                         <?php echo esc_html( $apa_tax->name ); ?>
                     </a>
-            <?php }?> 
+            <?php }}?> 
              <?php 
              if(is_tax( )) {
                 $category = get_the_category( $id );
