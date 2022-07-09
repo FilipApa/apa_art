@@ -44,7 +44,7 @@ if ($slug) {
             <div class="collapse" id="collapseExample">
                 <div class="card card-body d-flex flex-sm-column flex-md-row ">
                     <div class="me-4">
-                        <h3>Year </h3>
+                        <h3 class="fs-5">Year</h3>
                         <div>
                             <?php 
                                 $args=array(
@@ -75,8 +75,8 @@ if ($slug) {
                         </div>  
                     </div>
                     
-                    <div >
-                        <h3>Series</h3>
+                    <div>
+                        <h3 class="fs-5">Series</h3>
                         <div>
                             <?php 
                             $args=array(

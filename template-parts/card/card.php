@@ -13,13 +13,16 @@
                 <?php }
             ?>
         </a>
+        
     </div>
-    <div class="card-body d-flex justify-content-between">
-        <h3 class="card-title">
-            <?php the_title(); ?>
-        </h3>
-        <div>
-            <?php 
+
+    <div>
+        <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded">
+            <h2 class="card-title fw-semibold fs-5 ps-2 text">
+                <?php the_title(); ?>
+            </h2>
+            <div>
+                <?php 
                 $apa_taxonomies = wp_get_post_terms( $id, [ 'year', 'serie']);
 
                 if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
@@ -27,25 +30,22 @@
                 }
 
                 foreach ($apa_taxonomies as $key => $apa_tax) {
-                    // echo $apa_tax -> slug;
-                    // var_dump($apa_tax);
-                    if($curr_slug !== $apa_tax -> slug) {
-                    ?>
-                
+                    if($curr_slug !== $apa_tax -> slug) {?>
                     <a class="btn btn-outline-primary" href="<?php echo esc_url(get_term_link($apa_tax))?>">
                         <?php echo esc_html( $apa_tax->name ); ?>
                     </a>
-            <?php }}?> 
-             <?php 
-             if(is_tax( )) {
-                $category = get_the_category( $id );
-                $category_slug = $category[0] -> slug;
-                $category_url =  get_home_url() . '/category' . '/' . $category_slug;
-                ?> 
-                <a class="" href="<?php echo esc_url($category_url)?>">
-                    <?php echo esc_html( $category[0] -> name); ?>
-                </a> 
-                <?php } ?>            
+                <?php }}?> 
+                <?php 
+                if(is_tax( )) {
+                    $category = get_the_category( $id );
+                    $category_slug = $category[0] -> slug;
+                    $category_url =  get_home_url() . '/category' . '/' . $category_slug;
+                    ?> 
+                    <a class="btn btn-outline-dark" href="<?php echo esc_url($category_url)?>">
+                        <?php echo esc_html( $category[0] -> name); ?>
+                    </a> 
+                <?php } ?> 
+            </div>
         </div>
     </div>
 </div>    

@@ -6,10 +6,10 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item mx-1">
           <a class="nav-link" href="#">About</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item mx-1 dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Art
           </a>
@@ -19,7 +19,7 @@
             <li><a class="dropdown-item" href="<?php echo site_url( 'category/music/') ?>">Music</a></li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-1">
           <a class="nav-link" href="#">Contact</a>
         </li>
       </ul>
