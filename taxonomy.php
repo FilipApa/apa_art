@@ -4,7 +4,7 @@ $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
     // Get the page slugs
     $taxonomy = $current_page->taxonomy;
     $tax_term = $current_page->slug;
-;
+    $tax_name = $current_page->name;
 
 if(is_tax( $taxonomy )) {
     $args = array(
@@ -32,7 +32,7 @@ if(is_tax( $taxonomy )) {
                         <a href="<?php echo home_url() ?>"> Home </a>  
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        <?php echo  $tax_term ?>
+                        <?php echo  $tax_name ?>
                     </li>
                 </ol>
             </nav>   

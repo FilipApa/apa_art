@@ -4,6 +4,7 @@
 */
 ?>
 
+
 <?php get_header(); ?>
 <?php
 $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
@@ -23,7 +24,6 @@ if ($slug) {
 ?>
     <div class="container">
          <div class="post-navigation">
-  
             <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -33,7 +33,52 @@ if ($slug) {
                         <?php echo  $current_page->name; ?>
                     </li>
                 </ol>
-            </nav>   
+            </nav> 
+            Year
+                <?php 
+                $args=array(
+                'name'    => 'year',
+                'public'   => true,
+                '_builtin' => false
+                );
+                $output = 'names'; // or objects
+                $operator = 'and';
+                $taxonomies=get_taxonomies($args,$output,$operator); 
+
+                if  ($taxonomies) {
+                foreach ($taxonomies  as $taxonomy ) {
+                    $terms = get_terms([
+                        'taxonomy' => $taxonomy,
+                        'hide_empty' => false,
+                    ]);
+    
+                        foreach ( $terms as $term) {
+                ?>
+                        <li><br><a href="#"><input type="checkbox" name="profile[]" value=""><?php echo $term->name; ?> <br/></a></li>
+                <?php }}}?>                                 
+                            Series
+                <?php 
+                $args=array(
+                'name'    => 'serie',
+                'public'   => true,
+                '_builtin' => false
+                );
+                $output = 'names'; // or objects
+                $operator = 'and';
+                $taxonomies=get_taxonomies($args,$output,$operator); 
+ 
+                if  ($taxonomies) {
+                foreach ($taxonomies  as $taxonomy ) {
+                    $terms = get_terms([
+                        'taxonomy' => $taxonomy,
+                        'hide_empty' => false,
+                    ]);
+    
+                        foreach ( $terms as $term) {
+                ?>
+                        <li><br><a href="#"><input type="checkbox" name="profile[]" value=""><?php echo $term->name; ?> <br/></a></li>
+                <?php }}}?> 
+            
         </div>
         <?php 
             $index         = 0;

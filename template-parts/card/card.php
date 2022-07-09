@@ -15,7 +15,7 @@
         </h3>
         <div>
             <?php 
-                $apa_taxonomies = wp_get_post_terms( $apa_post_id, ['post_tag', 'year']);
+                $apa_taxonomies = wp_get_post_terms( $apa_post_id, [ 'year', 'serie']);
 
                 if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
                 return;
