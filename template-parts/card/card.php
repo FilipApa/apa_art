@@ -1,10 +1,9 @@
 <div class="card">
     <div class="card-img-top" >
         <a href="<?php the_permalink(); ?>">
-            <?php 
-                $apa_post_id = get_the_ID();
-                if ( has_post_thumbnail( $apa_post_id ) ) {?>
-                    <?php echo get_the_post_thumbnail( $apa_post_id, 'featuredImage', array('class' => 'img-fluid') ); ?>
+            <?php     
+                if ( has_post_thumbnail( $id ) ) {?>
+                    <?php echo get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') ); ?>
                 <?php }
             ?>
         </a>
@@ -15,7 +14,7 @@
         </h3>
         <div>
             <?php 
-                $apa_taxonomies = wp_get_post_terms( $apa_post_id, [ 'year', 'serie']);
+                $apa_taxonomies = wp_get_post_terms( $id, [ 'year', 'serie']);
 
                 if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
                 return;
@@ -26,6 +25,16 @@
                         <?php echo esc_html( $apa_tax->name ); ?>
                     </a>
             <?php }?> 
+             <?php 
+             if(is_tax( )) {
+                $category = get_the_category( $id );
+                $category_slug = $category[0] -> slug;
+                $category_url =  get_home_url() . '/category' . '/' . $category_slug;
+                ?> 
+                <a class="" href="<?php echo esc_url($category_url)?>">
+                    <?php echo esc_html( $category[0] -> name); ?>
+                </a> 
+                <?php } ?>            
         </div>
     </div>
 </div>    

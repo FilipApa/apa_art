@@ -23,62 +23,93 @@ if ($slug) {
 
 ?>
     <div class="container">
-         <div class="post-navigation">
+         <div class="post-navigation mb-4">
             <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="<?php echo home_url() ?>"> Home </a>  
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        <?php echo  $current_page->name; ?>
+                        <?php echo esc_html($current_page->name); ?>
                     </li>
                 </ol>
             </nav> 
-            Year
-                <?php 
-                $args=array(
-                'name'    => 'year',
-                'public'   => true,
-                '_builtin' => false
-                );
-                $output = 'names'; // or objects
-                $operator = 'and';
-                $taxonomies=get_taxonomies($args,$output,$operator); 
+        </div>
+        <div>
+            <p>  
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Filter 
+                </button>   
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body d-flex flex-sm-column flex-md-row ">
+                    <div class="me-4">
+                        <h3>Year </h3>
+                        <div>
+                            <?php 
+                                $args=array(
+                                'name'    => 'year',
+                                'public'   => true,
+                                '_builtin' => false
+                                );
+                                $output = 'names'; // or objects
+                                $operator = 'and';
+                                $taxonomies=get_taxonomies($args,$output,$operator); 
 
-                if  ($taxonomies) {
-                foreach ($taxonomies  as $taxonomy ) {
-                    $terms = get_terms([
-                        'taxonomy' => $taxonomy,
-                        'hide_empty' => false,
-                    ]);
-    
-                        foreach ( $terms as $term) {
-                ?>
-                        <li><br><a href="#"><input type="checkbox" name="profile[]" value=""><?php echo $term->name; ?> <br/></a></li>
-                <?php }}}?>                                 
-                            Series
-                <?php 
-                $args=array(
-                'name'    => 'serie',
-                'public'   => true,
-                '_builtin' => false
-                );
-                $output = 'names'; // or objects
-                $operator = 'and';
-                $taxonomies=get_taxonomies($args,$output,$operator); 
- 
-                if  ($taxonomies) {
-                foreach ($taxonomies  as $taxonomy ) {
-                    $terms = get_terms([
-                        'taxonomy' => $taxonomy,
-                        'hide_empty' => false,
-                    ]);
-    
-                        foreach ( $terms as $term) {
-                ?>
-                        <li><br><a href="#"><input type="checkbox" name="profile[]" value=""><?php echo $term->name; ?> <br/></a></li>
-                <?php }}}?> 
+                                if  ($taxonomies) {
+                                foreach ($taxonomies  as $taxonomy ) {
+                                    $terms = get_terms([
+                                        'taxonomy' => $taxonomy,
+                                        'hide_empty' => false,
+                                    ]);
+                    
+                                        foreach ( $terms as $term) {
+                                ?>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                            <?php echo esc_html($term->name); ?>
+                                            </label>
+                                        </div>
+                                <?php }}}?> 
+                        </div>  
+                    </div>
+                    
+                    <div >
+                        <h3>Series</h3>
+                        <div>
+                            <?php 
+                            $args=array(
+                            'name'    => 'serie',
+                            'public'   => true,
+                            '_builtin' => false
+                            );
+                            $output = 'names'; 
+                            $operator = 'and';
+                            $taxonomies=get_taxonomies($args,$output,$operator); 
             
+                            if  ($taxonomies) {
+                            foreach ($taxonomies  as $taxonomy ) {
+                                $terms = get_terms([
+                                    'taxonomy' => $taxonomy,
+                                    'hide_empty' => false,
+                                ]);
+                
+                                    foreach ( $terms as $term) {
+                            ?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                <?php echo esc_html($term->name); ?>
+                                </label>
+                            </div>
+                                
+                            <?php }}}?> 
+                        </div>
+                        
+                    </div> 
+                </div>
+            </div>
         </div>
         <?php 
             $index         = 0;
@@ -87,7 +118,7 @@ if ($slug) {
             <?php 
             if ( $index % $no_of_columns === 0  ) {
                 ?>
-                <div class="row">
+                <div class="row" id="template-grid-content">
                 <?php } ?>
 
                     <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4" >
