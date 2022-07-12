@@ -8,7 +8,7 @@ $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
 
 if(is_tax( $taxonomy )) {
     $args = array(
-        'paged' => $paged,
+        'paged' => get_query_var( 'paged', 1),
         'post_type' => 'post',
         'posts_per_page' => 9,
         'order' => 'ASC',
@@ -56,10 +56,9 @@ if(is_tax( $taxonomy )) {
             if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
             </div> 
             <?php } endwhile; } else {echo "Nothing to display";} 
-           echo paginate_links( array(
-            'total' => $query->max_num_pages,
-            'type' => 'list'
-        ));
+            
+           bootstrap_pagination($query, $args );
+           wp_reset_postdata();
             ?>
     </div>
 

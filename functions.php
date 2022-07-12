@@ -86,8 +86,8 @@
           'show_all'     => false,
           'end_size'     => 2,
           'mid_size'     => 1,
-          'prev_text'    => __( '« Prev' ),
-          'next_text'    => __( 'Next »' ),
+          'prev_text'    => __( 'Prev' ),
+          'next_text'    => __( 'Next' ),
           'add_fragment' => '',
       );
        
