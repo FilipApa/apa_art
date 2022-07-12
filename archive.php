@@ -31,6 +31,9 @@
             $index ++;
             if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
             </div> 
-            <?php } endwhile; ?>           
+            <?php } endwhile; else {echo "Nothing to dispaly";}
+               echo paginate_links(); 
+            ?> 
+
 </div>
 <?php  get_footer(); ?>

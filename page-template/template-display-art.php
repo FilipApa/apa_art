@@ -13,11 +13,13 @@ $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
 
 if ($slug) {
     $args = array(
-        'posts_per_page' => -1,
+        'paged' => get_query_var( 'paged', 1),
+        'post_per_page' => 9,
         'post_type' => 'post',
         'order' => 'ASC',
         'category_name' => $slug
       );
+      
 
       $query = new WP_Query( $args ); 
 
@@ -49,7 +51,7 @@ if ($slug) {
                         </a>
                         
                         <div class="collapse" id="collapseYear">
-                            <div class="card card-body  mb-2">
+                            <div class="card card-body mb-2">
                                 <?php 
                                     $args=array(
                                     'name'    => 'year',
@@ -83,14 +85,14 @@ if ($slug) {
                         </a>
                         
                         <div class="collapse" id="collapseSeries">
-                            <div class="card card-body  mb-2">
+                            <div class="card card-body mb-2">
                                 <?php 
                                     $args=array(
                                     'name'    => 'serie',
                                     'public'   => true,
                                     '_builtin' => false
                                     );
-                                    $output = 'names'; // or objects
+                                    $output = 'names';
                                     $operator = 'and';
                                     $taxonomies=get_taxonomies($args,$output,$operator); 
 
@@ -130,7 +132,10 @@ if ($slug) {
             $index ++;
             if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
                 </div> 
-            <?php } endwhile; } else {echo "NOTHING";} ?>
+            <?php } endwhile; } else {echo "Nothing to display";} 
+            bootstrap_pagination($query, $args );
+            wp_reset_postdata();
+            ?>
     </div>
 
 <?php get_footer(); ?>

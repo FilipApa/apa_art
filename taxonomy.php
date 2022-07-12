@@ -8,8 +8,9 @@ $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
 
 if(is_tax( $taxonomy )) {
     $args = array(
+        'paged' => $paged,
         'post_type' => 'post',
-        'posts_per_page' => -1,
+        'posts_per_page' => 9,
         'order' => 'ASC',
         'tax_query' => array(
             array(
@@ -25,7 +26,6 @@ if(is_tax( $taxonomy )) {
     
     <div class="container">
         <div class="post-navigation">
-  
             <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -55,7 +55,12 @@ if(is_tax( $taxonomy )) {
             $index ++;
             if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
             </div> 
-            <?php } endwhile; } else {echo "NOTHING";} ?>
+            <?php } endwhile; } else {echo "Nothing to display";} 
+           echo paginate_links( array(
+            'total' => $query->max_num_pages,
+            'type' => 'list'
+        ));
+            ?>
     </div>
 
 <?php get_footer(); ?>
