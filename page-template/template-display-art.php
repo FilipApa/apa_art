@@ -79,7 +79,7 @@ if ($slug) {
                             </div>  
                         </div>
                     
-                        <div class=" me-4">
+                        <div class="me-4">
                         <a class="btn btn-outline-dark mb-2" data-bs-toggle="collapse" href="#collapseSeries" role="button" aria-expanded="false" aria-controls="collapseSeries">
                             Series
                         </a>
@@ -122,10 +122,10 @@ if ($slug) {
             <?php 
             if ( $index % $no_of_columns === 0  ) {
                 ?>
-                <div class="row" id="template-grid-content" >
+                <div class="row " id="template-grid-content" >
                 <?php } ?>
 
-                    <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4" >
+                    <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4 py-xl-0 py-xxl-2" >
                         <?php get_template_part( './template-parts/card/card'); ?>    
                     </div>
             <?php 
