@@ -47,7 +47,7 @@ if(is_tax( $taxonomy )) {
                 <div class="row">
                 <?php }?>
 
-                <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4"> 
+                <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4 py-xl-0 py-xxl-2"> 
                     <?php get_template_part( './template-parts/card/card'); ?>        
                 </div>
                 
@@ -56,7 +56,7 @@ if(is_tax( $taxonomy )) {
             if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
             </div> 
             <?php } endwhile; } else {echo "Nothing to display";} 
-            
+
            bootstrap_pagination($query, $args );
            wp_reset_postdata();
             ?>
