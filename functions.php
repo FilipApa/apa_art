@@ -1,4 +1,5 @@
 <?php
+  //ADD STYLES AND SCRYPTS
   function apa_files() {
       // Register styles
       wp_register_style('apa-main-styles', get_stylesheet_uri(), [], filemtime(get_template_directory() . '/style.css'), 'all');
@@ -20,6 +21,7 @@
   }
   add_action('wp_enqueue_scripts', 'apa_files');
 
+  //THEME SUPPORT
   function apa_features() {
       add_theme_support('title-tag');
       add_theme_support('post-thumbnails');
@@ -27,6 +29,7 @@
   }
   add_action('after_setup_theme', 'apa_features');
   
+  //REGISTER CUSTOM TAXONOMY
   function apa_add_custom_taxonomies() {
       register_taxonomy('year', 'post', array(
         'hierarchical' => true,
@@ -115,6 +118,22 @@
       }
        
       return false;
+  };
+
+  //REGISTER REST API FIELD
+
+  function apa_register_rest_field() {
+    register_rest_field( 'post', 'taxonomy', array(
+      "get_callback" => function() {
+        $apa_taxonomies = wp_get_post_terms( get_the_ID(), [ 'year', 'serie']);
+        if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
+          return;
+        } else {
+          return $apa_taxonomies;
+        }
+      }));
   }
+
+  add_action( 'rest_api_init', 'apa_register_rest_field' )
 ?>
 

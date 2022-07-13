@@ -34,6 +34,5 @@
             <?php } endwhile; else {echo "Nothing to dispaly";}
                echo paginate_links(); 
             ?> 
-
 </div>
 <?php  get_footer(); ?>
