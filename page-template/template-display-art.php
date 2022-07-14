@@ -69,7 +69,7 @@ if ($slug) {
                                             'hide_empty' => false,
                                         ]); foreach ( $terms as $term) {?>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
+                                                <input class="form-check-input form-check-input-year" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 <?php echo esc_html($term->name); ?>
                                                 </label>
@@ -103,7 +103,7 @@ if ($slug) {
                                             'hide_empty' => false,
                                         ]); foreach ( $terms as $term) {?>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
+                                                <input class="form-check-input form-check-input-series" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 <?php echo esc_html($term->name); ?>
                                                 </label>
@@ -112,6 +112,7 @@ if ($slug) {
                                 </div>
                             </div>  
                         </div>
+                        <button class="btn btn-primary" id="filterBtn">Filter</button>
                 </div>
             </div>
         </div>

@@ -123,9 +123,19 @@
   //REGISTER REST API FIELD
 
   function apa_register_rest_field() {
-    register_rest_field( 'post', 'taxonomy', array(
+    register_rest_field( 'post', 'taxonomyYear', array(
       "get_callback" => function() {
-        $apa_taxonomies = wp_get_post_terms( get_the_ID(), [ 'year', 'serie']);
+        $apa_taxonomies = wp_get_post_terms( get_the_ID(), [ 'year']);
+        if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
+          return;
+        } else {
+          return $apa_taxonomies;
+        }
+      }));
+
+      register_rest_field( 'post', 'taxonomySerie', array(
+      "get_callback" => function() {
+        $apa_taxonomies = wp_get_post_terms( get_the_ID(), ['serie']);
         if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
           return;
         } else {
