@@ -1,13 +1,13 @@
-<p>  
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<div>  
+    <button class="btn btn-primary container-fluid d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Filter 
     </button>   
-</p>
+</div>
 
-<div class="collapse " id="collapseExample">
+<div class="collapse d-lg-block" id="collapseExample">
     <div class="card card-body d-flex flex-sm-column  ">
-        <div class=" me-4">
-            <a class="btn btn-outline-dark mb-2" data-bs-toggle="collapse" href="#collapseYear" role="button" aria-expanded="false" aria-controls="collapseYear">
+        <div class="">
+            <a class="btn btn-outline-dark mb-2 container-fluid" data-bs-toggle="collapse" href="#collapseYear" role="button" aria-expanded="false" aria-controls="collapseYear">
                 Year
             </a>
             
@@ -40,8 +40,8 @@
                 </div>  
             </div>
         
-            <div class="me-4">
-            <a class="btn btn-outline-dark mb-2" data-bs-toggle="collapse" href="#collapseSeries" role="button" aria-expanded="false" aria-controls="collapseSeries">
+            <div class="">
+            <a class="btn btn-outline-dark mb-2 container-fluid" data-bs-toggle="collapse" href="#collapseSeries" role="button" aria-expanded="false" aria-controls="collapseSeries">
                 Series
             </a>
             

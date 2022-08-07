@@ -31,36 +31,43 @@ if ($slug) {
             <?php get_template_part( './template-parts/breadcrumb/breadcrumb'); ?>   
         </div>
 
-        <?php // FILTER TEMPLATE ?>
-        <div>
-            <?php get_template_part( './template-parts/filter/filter'); ?>   
+        <div class="row-lg d-lg-flex pt-lg-5">
+            <?php // FILTER TEMPLATE ?>
+            <div class="col-lg-2 me-lg-3">
+                <?php get_template_part( './template-parts/filter/filter'); ?>   
+            </div>
+
+            <div class="col-lg-10">
+            <?php  // WP LOOP
+                $index         = 0;
+                $no_of_columns = 3;
+                while($query->have_posts()) : $query->the_post(); ?>
+                <?php 
+                if ( $index % $no_of_columns === 0  ) { ?>
+
+                    <div class="row" id="template-grid-content" >
+                    <?php } ?>
+                        
+                        <?php // CARD TEMPLATE ?>
+                        <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4 py-lg-0 mt-lg-0 mb-lg-4"  >
+                            <?php get_template_part( './template-parts/card/card'); ?>    
+                        </div>
+
+                <?php 
+                $index ++;
+                if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
+                    </div> 
+                <?php } endwhile; } else { echo "<h1 class='text-center'>Nothing to display</h1>";} 
+                ?>
+            </div>
         </div>
-
-        <?php  // WP LOOP
-            $index         = 0;
-            $no_of_columns = 3;
-            while($query->have_posts()) : $query->the_post(); ?>
-            <?php 
-            if ( $index % $no_of_columns === 0  ) { ?>
-            
-                <div class="row " id="template-grid-content" >
-                <?php } ?>
-                    
-                    <?php // CARD TEMPLATE ?>
-                    <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4 py-xl-0 py-xxl-2" >
-                        <?php get_template_part( './template-parts/card/card'); ?>    
-                    </div>
-
-            <?php 
-            $index ++;
-            if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
-                </div> 
-            <?php } endwhile; } else { echo "<h1 class='text-center'>Nothing to display</h1>";} 
-
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <?php 
             // PAGINATION
             bootstrap_pagination( $query, $args );
             wp_reset_postdata();
-            ?>
+        ?>
     </div>
 
 <?php get_footer(); ?>
