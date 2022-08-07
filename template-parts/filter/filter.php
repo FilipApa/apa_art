@@ -32,7 +32,11 @@
                                 <div class="form-check">
                                     <input class="form-check-input form-check-input-year" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
-                                    <?php echo esc_html($term->name); ?>
+                                    <?php echo esc_html($term->name); ?> 
+                                    <span class="ms-1 text-secondary">
+                                        <?php echo "(" . esc_html($term->count) . ")"; ?>
+                                    </span>
+    
                                     </label>
                                 </div>
                         <?php }}}?> 
@@ -67,6 +71,9 @@
                                     <input class="form-check-input form-check-input-series" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                     <?php echo esc_html($term->name); ?>
+                                    <span class="ms-1 text-secondary">
+                                        <?php echo "(" . esc_html($term->count) . ")"; ?>
+                                    </span>
                                     </label>
                                 </div>
                         <?php }}}?> 
