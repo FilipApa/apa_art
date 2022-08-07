@@ -33,6 +33,7 @@
   function apa_add_custom_taxonomies() {
       register_taxonomy('year', 'post', array(
         'hierarchical' => true,
+        'show_in_rest' => true,
         'labels' => array(
           'name' => _x( 'Year', 'taxonomy general name' ),
           'singular_name' => _x( 'Year', 'taxonomy singular name' ),
@@ -52,6 +53,7 @@
       ));
       register_taxonomy('serie', 'post', array(
         'hierarchical' => true,
+        'show_in_rest' => true,
         'labels' => array(
           'name' => _x( 'Serie', 'taxonomy general name' ),
           'singular_name' => _x( 'Serie', 'taxonomy singular name' ),
