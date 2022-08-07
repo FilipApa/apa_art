@@ -2,6 +2,7 @@
 
 <div class="container">
     <div class="post-navigation">
+        
         <?php // BREADCRUMB TEMPLATE ?>
         <?php get_template_part( './template-parts/breadcrumb/breadcrumb'); ?>   
         
@@ -14,8 +15,10 @@
         if ( $index % $no_of_columns === 0  ) { ?>
             <div class="row"> <?php } ?>
                 <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4">
-                    <?php // BREADCRUMB CARD ?>
-                    <?php get_template_part( './template-parts/card/card'); ?>        
+
+                    <?php // CARD TEMPLATE ?>
+                    <?php get_template_part( './template-parts/card/card'); ?> 
+
                 </div>
                 <?php 
             $index ++;
