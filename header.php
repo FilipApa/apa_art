@@ -15,7 +15,7 @@
         }
     ?>
     <div id="page" class="site">
-        <header class="mb-4" role="banner">
+        <header class="container mb-4" role="banner">
             <?php get_template_part('template-parts/header/navigation') ?>
         </header>
-        <main id="content" class="site-content">   
+        <main id="content" class="container site-content">   

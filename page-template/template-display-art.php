@@ -17,14 +17,28 @@ if ($slug) {
         'post_per_page' => 9,
         'post_type' => 'post',
         'order' => 'ASC',
-        'category_name' => $slug
+        'category_name' => $slug,
+        'tax_query' => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'year', 
+                'field' => 'slug',
+                'terms' => array( '2019', '2020' )
+            ),
+            array(
+            'taxonomy' => 'serie',
+            'field' => 'slug',
+            'terms' => 'blue-dog'
+            )
+        )
       );
+    
+
+      $query = new WP_Query( $args );
       
 
-      $query = new WP_Query( $args ); 
-
 ?>
-    <div class="container" id="container" data-post-category="<?php echo esc_html( $slug ); ?>" data-website-url="<?php echo home_url(); ?>" >
+    <div id="container" data-post-category="<?php echo esc_html( $slug ); ?>" data-website-url="<?php echo home_url(); ?>" >
         
         <?php // BREADCRUMB TEMPLATE ?>
         <div>
@@ -32,12 +46,7 @@ if ($slug) {
         </div>
 
         <div class="row-lg d-lg-flex pt-lg-5">
-            <?php // FILTER TEMPLATE ?>
-            <div class="col-lg-2 me-lg-3">
-                <?php get_template_part( './template-parts/filter/filter'); ?>   
-            </div>
-
-            <div class="col-lg-10">
+            <div>
             <?php  // WP LOOP
                 $index         = 0;
                 $no_of_columns = 3;
@@ -59,8 +68,8 @@ if ($slug) {
                     </div> 
                 <?php } endwhile; } else { echo "<h1 class='text-center'>Nothing to display</h1>";} 
                 ?>
-            </div>
         </div>
+
     </div>
     <div class="d-flex justify-content-center align-items-center">
         <?php 

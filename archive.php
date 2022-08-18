@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="container">
+<div>
     <div class="post-navigation">
         
         <?php // BREADCRUMB TEMPLATE ?>
@@ -24,7 +24,7 @@
             $index ++;
             if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
             </div> 
-            <?php } endwhile; else {echo "Nothing to dispaly";}
+            <?php } endwhile; else {echo "<h1 class='text-center'>Nothing to display</h1>";}
                echo paginate_links(); 
             ?> 
 </div>

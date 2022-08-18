@@ -124,28 +124,21 @@
 
   //REGISTER REST API FIELD
 
-  function apa_register_rest_field() {
-    register_rest_field( 'post', 'taxonomyYear', array(
-      "get_callback" => function() {
-        $apa_taxonomies = wp_get_post_terms( get_the_ID(), [ 'year']);
-        if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
-          return;
-        } else {
-          return $apa_taxonomies;
-        }
-      }));
+  function apa_post_by_category($category, $params) {
+    $year = json_decode($params->get_param('year'));
+    $serie = json_decode($params->get_param('serie'));
 
-      register_rest_field( 'post', 'taxonomySerie', array(
-      "get_callback" => function() {
-        $apa_taxonomies = wp_get_post_terms( get_the_ID(), ['serie']);
-        if( empty( $apa_taxonomies ) || !is_array($apa_taxonomies)) {
-          return;
-        } else {
-          return $apa_taxonomies;
-        }
-      }));
+
+    $para = json_decode($params);
+    return $para;
+   
   }
 
-  add_action( 'rest_api_init', 'apa_register_rest_field' )
+  add_action( 'rest_api_init', function() {
+    register_rest_route( 'apa/v1', 'posts/(?P<category>[a-zA-Z0-9-]+)', array(
+      'methods' => 'GET',
+      'callback' => 'apa_post_by_category',
+      ) );
+  })
 ?>
 

@@ -23,7 +23,7 @@ if(is_tax( $taxonomy )) {
 
 ?>
     
-    <div class="container">
+    <div>
 
             <?php // BREADCRUMB TEMPLATE ?>
             <?php get_template_part( './template-parts/breadcrumb/breadcrumb'); ?> 
@@ -47,7 +47,7 @@ if(is_tax( $taxonomy )) {
             $index ++;
             if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
             </div> 
-            <?php } endwhile; } else {echo "Nothing to display";} 
+            <?php } endwhile; } else {echo "<h1 class='text-center'>Nothing to display</h1>";} 
 
            bootstrap_pagination($query, $args );
            wp_reset_postdata();

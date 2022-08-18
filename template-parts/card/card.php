@@ -17,8 +17,8 @@
     </div>
 
     <div>
-        <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded">
-            <h2 class="card-title fw-semibold fs-5 ps-2 text">
+        <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
+            <h2 class="card-title fw-semibold fs-4 ps-2 text">
                 <?php the_title(); ?>
             </h2>
             <div>
@@ -41,7 +41,7 @@
                     $category_slug = $category[0] -> slug;
                     $category_url =  get_home_url() . '/category' . '/' . $category_slug;
                     ?> 
-                    <a class="btn btn-outline-dark" href="<?php echo esc_url($category_url)?>">
+                    <a class="btn btn-outline-dark " href="<?php echo esc_url($category_url)?>">
                         <?php echo esc_html( $category[0] -> name); ?>
                     </a> 
                 <?php } ?> 
