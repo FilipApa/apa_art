@@ -123,22 +123,130 @@
   };
 
   //REGISTER REST API FIELD
+  function filter_by_cat_and_terms( $category, ...$taxonomies ) {
+    $terms = [];
 
-  function apa_post_by_category($category, $params) {
+    if($taxonomies) {
+      foreach( $taxonomies as $tax ) {
+        array_push( $terms, $tax );
+      }
+    }
+
+    $years = (array)$terms[0];
+    $series = (array)$terms[1];
+
+    if(!empty( $terms )) {
+        if ($years[0] && $series[0]) { 
+            $args = array(
+                'paged' => get_query_var( 'paged', 1),
+                'post_per_page' => 9,
+                'post_type' => 'post',
+                'order' => 'ASC',
+                'category_name' => $category,
+                'tax_query' => array(
+                    'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'year', 
+                            'field' => 'slug',
+                            'terms' => $years 
+                        ),
+                        array(
+                        'taxonomy' => 'serie',
+                        'field' => 'slug',
+                        'terms' => $series
+                        )
+                )
+            );
+        }else if($years[0] || $series[0]) {
+          
+          if(!empty($years[0])) {
+            $args = array(
+              'paged' => get_query_var( 'paged', 1),
+              'post_per_page' => 9,
+              'post_type' => 'post',
+              'order' => 'ASC',
+              'category_name' => $category,
+              'tax_query' => array(
+                      array(
+                          'taxonomy' => 'year', 
+                          'field' => 'slug',
+                          'terms' => $years 
+                      )
+                    )
+              );
+          } else if(!empty($series[0])) {
+            $args = array(
+              'paged' => get_query_var( 'paged', 1),
+              'post_per_page' => 9,
+              'post_type' => 'post',
+              'order' => 'ASC',
+              'category_name' => $category,
+              'tax_query' => array(
+                      array(
+                          'taxonomy' => 'serie', 
+                          'field' => 'slug',
+                          'terms' => $series
+                      )
+                    )
+              );
+          }
+      } else {
+        $args = array(
+          'paged' => get_query_var( 'paged', 1),
+          'post_per_page' => 9,
+          'post_type' => 'post',
+          'order' => 'ASC',
+          'category_name' => $category
+        );
+      }
+    }
+
+    $posts = new WP_Query($args);
+    
+    $data = [];
+    $i = 0;
+
+    foreach($posts->posts as $post) {
+      $data[$i]['id'] = $post->ID;
+      $data[$i]['title'] = $post->post_title;
+      $data[$i]['link'] = $post->guid;
+     
+      $apa_taxonomies = wp_get_post_terms( $post->ID, [ 'year', 'serie']);
+
+      foreach ($apa_taxonomies as $key => $apa_tax) {
+        $data[$i][ $apa_tax->name ] =  $apa_tax->name; 
+      }
+      $i++;
+    }
+
+    var_dump($data);
+
+    return $data;
+    
+}
+  function apa_post_by_paintings($params) {
     $year = json_decode($params->get_param('year'));
     $serie = json_decode($params->get_param('serie'));
 
+    filter_by_cat_and_terms( 'paintings', $year, $serie );
+  }
 
-    $para = json_decode($params);
-    return $para;
-   
+  function apa_post_by_digital_art($params) {
+    $year = json_decode($params->get_param('year'));
+    $serie = json_decode($params->get_param('serie'));
+
+    filter_by_cat_and_terms( 'digital-art', $year, $serie );
   }
 
   add_action( 'rest_api_init', function() {
-    register_rest_route( 'apa/v1', 'posts/(?P<category>[a-zA-Z0-9-]+)', array(
+    register_rest_route( 'apa/v1', 'posts/paintings', array(
       'methods' => 'GET',
-      'callback' => 'apa_post_by_category',
+      'callback' => 'apa_post_by_paintings',
       ) );
+      register_rest_route( 'apa/v1', 'posts/digital-art', array(
+        'methods' => 'GET',
+        'callback' => 'apa_post_by_digital_art',
+        ) );
   })
 ?>
 

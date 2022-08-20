@@ -17,20 +17,7 @@ if ($slug) {
         'post_per_page' => 9,
         'post_type' => 'post',
         'order' => 'ASC',
-        'category_name' => $slug,
-        'tax_query' => array(
-            'relation' => 'AND',
-            array(
-                'taxonomy' => 'year', 
-                'field' => 'slug',
-                'terms' => array( '2019', '2020' )
-            ),
-            array(
-            'taxonomy' => 'serie',
-            'field' => 'slug',
-            'terms' => 'blue-dog'
-            )
-        )
+        'category_name' => $slug
       );
     
 
