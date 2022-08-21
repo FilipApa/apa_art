@@ -2,11 +2,11 @@
   //ADD STYLES AND SCRYPTS
   function apa_files() {
       // Register styles
-      wp_register_style('apa-main-styles', get_stylesheet_uri(), [], filemtime(get_template_directory() . '/style.css'), 'all');
+      wp_register_style('apa-main-styles', get_template_directory_uri() . '/assets/src/css/style.css', [], filemtime(get_template_directory() . '/assets/src/css/style.css'), 'all');
       wp_register_style('apa-bootsrap', get_template_directory_uri() . '/assets/src/library/bootstrap/css/bootstrap.min.css', [], false, 'all');
       
       // Register scrpts
-      wp_register_script('apa-main-script',  get_template_directory_uri() . '/assets/main.js', [], filemtime(get_template_directory() . '/assets/main.js'), true);
+      wp_register_script('apa-main-script',  get_template_directory_uri() . '/assets/src/js/main.js', [], filemtime(get_template_directory() . '/assets/src/js/main.js'), true);
       wp_register_script('apa-bootsrap-js', get_template_directory_uri() . '/assets/src/library/bootstrap/js/bootstrap.bundle.min.js', array( 'jquery' ), false, true);
 
       // Enqueue styles

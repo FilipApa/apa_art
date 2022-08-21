@@ -8,7 +8,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body class="bg-light" id="site-body" <?php body_class();  $apa_site_url = get_site_url(); ?> data-website-url="<?php echo $apa_site_url; ?>" >
+<body id="site-body" <?php body_class();  $apa_site_url = get_site_url(); ?> data-website-url="<?php echo $apa_site_url; ?>" >
     <?php 
         if( function_exists('wp_body_open')) {
             wp_body_open();

@@ -31,7 +31,7 @@
 
                 foreach ($apa_taxonomies as $key => $apa_tax) {
                     if($curr_slug !== $apa_tax -> slug) {?>
-                    <a class="btn btn-outline-primary" href="<?php echo esc_url(get_term_link($apa_tax))?>">
+                    <a class="" href="<?php echo esc_url(get_term_link($apa_tax))?>">
                         <?php echo esc_html( $apa_tax->name ); ?>
                     </a>
                 <?php }}?> 

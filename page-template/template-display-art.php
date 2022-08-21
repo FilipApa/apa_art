@@ -18,50 +18,57 @@ if ($slug) {
         'post_type' => 'post',
         'order' => 'ASC',
         'category_name' => $slug
-      );
+    );
     
-
-      $query = new WP_Query( $args );
-      
+    $query = new WP_Query( $args );
+}      
+    $num_of_post = $query-> post_count; 
 
 ?>
     <div id="container" data-post-category="<?php echo esc_html( $slug ); ?>" data-website-url="<?php echo home_url(); ?>" >
         
         <?php // BREADCRUMB TEMPLATE ?>
-        <div>
+        <div class="post-breadcrumb">
             <?php get_template_part( './template-parts/breadcrumb/breadcrumb'); ?>   
+            <span>Posts: <?php echo $num_of_post; ?></span>
         </div>
 
-        <div class="row-lg d-lg-flex pt-lg-5">
-            <div>
+        <div class="post-container">
+            <div class="post-filter">
+                <?php get_template_part( './template-parts/filter/filter'); ?>    
+            </div>
+            
+            <div class="post-wrapper" id="template-grid-content">
             <?php  // WP LOOP
                 $index         = 0;
                 $no_of_columns = 3;
-                while($query->have_posts()) : $query->the_post(); ?>
-                <?php 
+                while($query->have_posts()) : $query->the_post(); 
                 if ( $index % $no_of_columns === 0  ) { ?>
 
-                    <div class="row" id="template-grid-content" >
+                    <div class="post-row">
                     <?php } ?>
                         
                         <?php // CARD TEMPLATE ?>
-                        <div class="post col-lg-4 col-md-6 col-sm-12 d-flex flex-column align-items-center gy-4 py-lg-0 mt-lg-0 mb-lg-4"  >
+                        <div class="post"  >
                             <?php get_template_part( './template-parts/card/card'); ?>    
                         </div>
 
                 <?php 
                 $index ++;
                 if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
-                    </div> 
-                <?php } endwhile; } else { echo "<h1 class='text-center'>Nothing to display</h1>";} 
-                ?>
-        </div>
+                </div> 
+                <?php } endwhile; ?>
+            </div>
 
     </div>
-    <div class="d-flex justify-content-center align-items-center">
+    <div class="post-pagination">
         <?php 
             // PAGINATION
-            bootstrap_pagination( $query, $args );
+            the_posts_pagination( array(
+                'mid_size' => 2,
+                'prev_text' => __( 'Previous Page', 'textdomain' ),
+                'next_text' => __( 'Next Page', 'textdomain' ),
+                ) );
             wp_reset_postdata();
         ?>
     </div>
