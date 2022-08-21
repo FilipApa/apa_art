@@ -19,6 +19,10 @@
                         'public'   => true,
                         '_builtin' => false,
                         );
+                        $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
+                        // Get the page slug
+                        $slug = $current_page->slug;
+
                         $output = 'names'; // or objects
                         $operator = 'and';
                         $taxonomies=get_taxonomies($args,$output,$operator); 
@@ -34,7 +38,7 @@
                                     <label class="form-check-label" for="flexCheckDefault">
                                         <?php echo esc_html($term->name); ?> 
                                         <span class="ms-1 text-secondary">
-                                        <?php echo "(" . esc_html($term->count) . ")"; ?>
+                                        <?php echo '(' . calc_num_of_posts($slug, 'year', $term->name) . ')'; ?>
                                     </span>
                                     </label>
                                 </div>
@@ -71,7 +75,7 @@
                                     <label class="form-check-label" for="flexCheckDefault">
                                     <?php echo esc_html($term->name); ?>
                                     <span class="ms-1 text-secondary">
-                                        <?php echo "(" . esc_html($term->count) . ")"; ?>
+                                        <?php echo '(' . calc_num_of_posts($slug, 'serie', $term->name) . ')'; ?>
                                     </span>
                                     </label>
                                 </div>

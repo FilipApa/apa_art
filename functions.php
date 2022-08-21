@@ -72,181 +72,205 @@
         ),
       ));
     }
-    add_action( 'init', 'apa_add_custom_taxonomies', 0 );
+  add_action( 'init', 'apa_add_custom_taxonomies', 0 );
 
-    //PAGINATION WITH BOOTSTRAP
-    function bootstrap_pagination( $wp_query = false, $echo = true, $args = array() ) {
-      //Fallback to $wp_query global variable if no query passed
-      if ( false === $wp_query ) {
-          global $wp_query;
-      }
-       
-      //Set Defaults
-      $defaults = array(
-          'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-          'format'       => '?paged=%#%',
-          'current'      => max( 1, get_query_var( 'paged' ) ),
-          'total'        => $wp_query->max_num_pages,
-          'type'         => 'array',
-          'show_all'     => false,
-          'end_size'     => 2,
-          'mid_size'     => 1,
-          'prev_text'    => __( 'Prev' ),
-          'next_text'    => __( 'Next' ),
-          'add_fragment' => '',
-      );
-       
-      //Merge the defaults with passed arguments
-      $merged = wp_parse_args( $args, $defaults );
-       
-      //Get the paginated links
-      $lists = paginate_links($merged);
-   
-      if ( is_array( $lists ) ) {
-           
-          $html = '<nav class="mt-5"><ul class="pagination justify-content-center">';
-   
-          foreach ( $lists as $list ) {
-              $html .= '<li class="page-item' . (strpos($list, 'current') !== false ? ' active' : '') . '"> ' . str_replace('page-numbers', 'page-link', $list) . '</li>';
-          }
-   
-          $html .= '</ul></nav>';
-   
-          if ( $echo ) {
-              echo $html;
-          } else {
-              return $html;
-          }
-      }
-       
-      return false;
-  };
+  //CALCULITE NUMBER OF POSTS WITH SAME CATEGORY AND TAXONOMY
+  function calc_num_of_posts($category, $tax, $term) {
+    $args = array(
+      'paged' => get_query_var( 'paged', 1),
+      'post_per_page' => 9,
+      'post_type' => 'post',
+      'order' => 'ASC',
+      'category_name' => $category,
+      'tax_query' => array(
+          'relation' => 'AND',
+              array(
+                  'taxonomy' => $tax, 
+                  'field' => 'slug',
+                  'terms' => $term 
+              )
+            )
+          );
 
-  //REGISTER REST API FIELD
-  function filter_by_cat_and_terms( $category, ...$taxonomies ) {
-    $terms = [];
+      $data = new WP_Query($args);
+      
+      $num_of_post = $data-> post_count;
+      return $num_of_post; 
+  }  
 
-    if($taxonomies) {
-      foreach( $taxonomies as $tax ) {
-        array_push( $terms, $tax );
-      }
+  //PAGINATION WITH BOOTSTRAP
+  function bootstrap_pagination( $wp_query = false, $echo = true, $args = array() ) {
+    //Fallback to $wp_query global variable if no query passed
+    if ( false === $wp_query ) {
+        global $wp_query;
     }
-
-    $years = (array)$terms[0];
-    $series = (array)$terms[1];
-
-    if(!empty( $terms )) {
-        if ($years[0] && $series[0]) { 
-            $args = array(
-                'paged' => get_query_var( 'paged', 1),
-                'post_per_page' => 9,
-                'post_type' => 'post',
-                'order' => 'ASC',
-                'category_name' => $category,
-                'tax_query' => array(
-                    'relation' => 'AND',
-                        array(
-                            'taxonomy' => 'year', 
-                            'field' => 'slug',
-                            'terms' => $years 
-                        ),
-                        array(
-                        'taxonomy' => 'serie',
-                        'field' => 'slug',
-                        'terms' => $series
-                        )
-                )
-            );
-        }else if($years[0] || $series[0]) {
+      
+    //Set Defaults
+    $defaults = array(
+        'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+        'format'       => '?paged=%#%',
+        'current'      => max( 1, get_query_var( 'paged' ) ),
+        'total'        => $wp_query->max_num_pages,
+        'type'         => 'array',
+        'show_all'     => false,
+        'end_size'     => 2,
+        'mid_size'     => 1,
+        'prev_text'    => __( 'Prev' ),
+        'next_text'    => __( 'Next' ),
+        'add_fragment' => '',
+    );
+      
+    //Merge the defaults with passed arguments
+    $merged = wp_parse_args( $args, $defaults );
+      
+    //Get the paginated links
+    $lists = paginate_links($merged);
+  
+    if ( is_array( $lists ) ) {
           
-          if(!empty($years[0])) {
-            $args = array(
+        $html = '<nav class="mt-5"><ul class="pagination justify-content-center">';
+  
+        foreach ( $lists as $list ) {
+            $html .= '<li class="page-item' . (strpos($list, 'current') !== false ? ' active' : '') . '"> ' . str_replace('page-numbers', 'page-link', $list) . '</li>';
+        }
+  
+        $html .= '</ul></nav>';
+  
+        if ( $echo ) {
+            echo $html;
+        } else {
+            return $html;
+        }
+    }
+      
+    return false;
+};
+
+//REGISTER REST API FIELD
+function filter_by_cat_and_terms( $category, ...$taxonomies ) {
+  $terms = [];
+
+  if($taxonomies) {
+    foreach( $taxonomies as $tax ) {
+      array_push( $terms, $tax );
+    }
+  }
+
+  $years = (array)$terms[0];
+  $series = (array)$terms[1];
+
+  if(!empty( $terms )) {
+      if ($years[0] && $series[0]) { 
+          $args = array(
               'paged' => get_query_var( 'paged', 1),
               'post_per_page' => 9,
               'post_type' => 'post',
               'order' => 'ASC',
               'category_name' => $category,
               'tax_query' => array(
+                  'relation' => 'AND',
                       array(
                           'taxonomy' => 'year', 
                           'field' => 'slug',
                           'terms' => $years 
-                      )
-                    )
-              );
-          } else if(!empty($series[0])) {
-            $args = array(
-              'paged' => get_query_var( 'paged', 1),
-              'post_per_page' => 9,
-              'post_type' => 'post',
-              'order' => 'ASC',
-              'category_name' => $category,
-              'tax_query' => array(
+                      ),
                       array(
-                          'taxonomy' => 'serie', 
-                          'field' => 'slug',
-                          'terms' => $series
+                      'taxonomy' => 'serie',
+                      'field' => 'slug',
+                      'terms' => $series
                       )
+              )
+          );
+      }else if($years[0] || $series[0]) {
+        
+        if(!empty($years[0])) {
+          $args = array(
+            'paged' => get_query_var( 'paged', 1),
+            'post_per_page' => 9,
+            'post_type' => 'post',
+            'order' => 'ASC',
+            'category_name' => $category,
+            'tax_query' => array(
+                    array(
+                        'taxonomy' => 'year', 
+                        'field' => 'slug',
+                        'terms' => $years 
                     )
-              );
-          }
-      } else {
-        $args = array(
-          'paged' => get_query_var( 'paged', 1),
-          'post_per_page' => 9,
-          'post_type' => 'post',
-          'order' => 'ASC',
-          'category_name' => $category
-        );
-      }
+                  )
+            );
+        } else if(!empty($series[0])) {
+          $args = array(
+            'paged' => get_query_var( 'paged', 1),
+            'post_per_page' => 9,
+            'post_type' => 'post',
+            'order' => 'ASC',
+            'category_name' => $category,
+            'tax_query' => array(
+                    array(
+                        'taxonomy' => 'serie', 
+                        'field' => 'slug',
+                        'terms' => $series
+                    )
+                  )
+            );
+        }
+    } else {
+      $args = array(
+        'paged' => get_query_var( 'paged', 1),
+        'post_per_page' => 9,
+        'post_type' => 'post',
+        'order' => 'ASC',
+        'category_name' => $category
+      );
     }
+  }
 
-    $posts = new WP_Query($args);
+  $posts = new WP_Query($args);
+  
+  $data = [];
+  $i = 0;
+
+  foreach($posts->posts as $post) {
+    $data[$i]['id'] = $post->ID;
+    $data[$i]['title'] = $post->post_title;
+    $data[$i]['link'] = $post->guid;
     
-    $data = [];
-    $i = 0;
+    $apa_taxonomies = wp_get_post_terms( $post->ID, [ 'year', 'serie']);
 
-    foreach($posts->posts as $post) {
-      $data[$i]['id'] = $post->ID;
-      $data[$i]['title'] = $post->post_title;
-      $data[$i]['link'] = $post->guid;
-     
-      $apa_taxonomies = wp_get_post_terms( $post->ID, [ 'year', 'serie']);
-
-      foreach ($apa_taxonomies as $key => $apa_tax) {
-        $data[$i][ $apa_tax->name ] =  $apa_tax->name; 
-      }
-      $i++;
+    foreach ($apa_taxonomies as $key => $apa_tax) {
+      $data[$i][ $apa_tax->name ] =  $apa_tax->name; 
     }
+    $i++;
+  }
 
-    var_dump($data);
+  var_dump($data);
 
-    return $data;
-    
+  return $data;
+  
 }
-  function apa_post_by_paintings($params) {
-    $year = json_decode($params->get_param('year'));
-    $serie = json_decode($params->get_param('serie'));
+function apa_post_by_paintings($params) {
+  $year = json_decode($params->get_param('year'));
+  $serie = json_decode($params->get_param('serie'));
 
-    filter_by_cat_and_terms( 'paintings', $year, $serie );
-  }
+  filter_by_cat_and_terms( 'paintings', $year, $serie );
+}
 
-  function apa_post_by_digital_art($params) {
-    $year = json_decode($params->get_param('year'));
-    $serie = json_decode($params->get_param('serie'));
+function apa_post_by_digital_art($params) {
+  $year = json_decode($params->get_param('year'));
+  $serie = json_decode($params->get_param('serie'));
 
-    filter_by_cat_and_terms( 'digital-art', $year, $serie );
-  }
+  filter_by_cat_and_terms( 'digital-art', $year, $serie );
+}
 
-  add_action( 'rest_api_init', function() {
-    register_rest_route( 'apa/v1', 'posts/paintings', array(
+add_action( 'rest_api_init', function() {
+  register_rest_route( 'apa/v1', 'posts/paintings', array(
+    'methods' => 'GET',
+    'callback' => 'apa_post_by_paintings',
+    ) );
+    register_rest_route( 'apa/v1', 'posts/digital-art', array(
       'methods' => 'GET',
-      'callback' => 'apa_post_by_paintings',
+      'callback' => 'apa_post_by_digital_art',
       ) );
-      register_rest_route( 'apa/v1', 'posts/digital-art', array(
-        'methods' => 'GET',
-        'callback' => 'apa_post_by_digital_art',
-        ) );
-  })
+})
 ?>
 
