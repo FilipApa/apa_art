@@ -228,7 +228,7 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
 
   $posts = new WP_Query($args);
   
-  $data = [];
+  $data = array();
  
   while($posts->have_posts()) {
     $posts->the_post();
@@ -242,10 +242,6 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
     ));
   } 
   wp_reset_query();
-  $data = json_encode($data);
-  $data = preg_replace('/\[\/?et_pb.*?\]/', '', $data);
-  $data = json_decode($data);
-
 
   return $data;
 }
@@ -253,14 +249,18 @@ function apa_post_by_paintings($params) {
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
 
-  filter_by_cat_and_terms( 'paintings', $year, $serie );
+  $filterdPosts =  filter_by_cat_and_terms( 'paintings', $year, $serie );
+
+  return $filterdPosts;
 }
 
 function apa_post_by_digital_art($params) {
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
 
-  filter_by_cat_and_terms( 'digital-art', $year, $serie );
+  $filterdPosts =  filter_by_cat_and_terms( 'digital-art', $year, $serie );
+
+  return $filterdPosts;
 }
 
 add_action( 'rest_api_init', function() {
