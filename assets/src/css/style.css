@@ -24,6 +24,10 @@ ol {
 .post-filter .filter-btn {
     margin-bottom: 20px;
 }
+
+.post-filter .card-body {
+    width: 100%;
+} 
 /*POST TEMPALTE*/
 
 .post-wrapper {
@@ -56,7 +60,13 @@ ol {
     .container {
         max-width: 720px;   
     }
+    /*FILTER*/
 
+    .post-filter .card-body {
+        max-width: 375px !important;
+    }  
+
+    /*POST TEMPLATE*/
     .post-row {
         justify-content: space-between;
     }

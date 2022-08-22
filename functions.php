@@ -15,6 +15,7 @@
       wp_enqueue_style( 'apa-main-styles' );
 
       // Enqueue styles
+      wp_enqueue_script('apa-font-awesome', '//kit.fontawesome.com/4eef9c4c68.js');
       wp_enqueue_script( 'apa-bootsrap-js' );
       wp_enqueue_script( 'apa-main-script' );
       
@@ -160,7 +161,7 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
   $series = (array)$terms[1];
 
   if(!empty( $terms )) {
-      if ($years[0] && $series[0]) { 
+      if ($years && $series) { 
           $args = array(
               'paged' => get_query_var( 'paged', 1),
               'post_per_page' => 9,
@@ -181,9 +182,9 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
                       )
               )
           );
-      }else if($years[0] || $series[0]) {
+      }else if($years || $series) {
         
-        if(!empty($years[0])) {
+        if(!empty($years)) {
           $args = array(
             'paged' => get_query_var( 'paged', 1),
             'post_per_page' => 9,
@@ -198,7 +199,7 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
                     )
                   )
             );
-        } else if(!empty($series[0])) {
+        } else if(!empty($series)) {
           $args = array(
             'paged' => get_query_var( 'paged', 1),
             'post_per_page' => 9,
@@ -228,25 +229,25 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
   $posts = new WP_Query($args);
   
   $data = [];
-  $i = 0;
+ 
+  while($posts->have_posts()) {
+    $posts->the_post();
+    $year = wp_get_post_terms( get_the_ID(), 'year');
+    $serie = wp_get_post_terms( get_the_ID(), 'serie');
+    array_push($data, array(
+      'title' => get_the_title(),
+      'link' => get_the_permalink(),
+      'year' => $year ? $year[0]->name : null,
+      'serie' => $serie ? $serie[0]->name : null
+    ));
+  } 
+  wp_reset_query();
+  $data = json_encode($data);
+  $data = preg_replace('/\[\/?et_pb.*?\]/', '', $data);
+  $data = json_decode($data);
 
-  foreach($posts->posts as $post) {
-    $data[$i]['id'] = $post->ID;
-    $data[$i]['title'] = $post->post_title;
-    $data[$i]['link'] = $post->guid;
-    
-    $apa_taxonomies = wp_get_post_terms( $post->ID, [ 'year', 'serie']);
-
-    foreach ($apa_taxonomies as $key => $apa_tax) {
-      $data[$i][ $apa_tax->name ] =  $apa_tax->name; 
-    }
-    $i++;
-  }
-
-  var_dump($data);
 
   return $data;
-  
 }
 function apa_post_by_paintings($params) {
   $year = json_decode($params->get_param('year'));
@@ -264,11 +265,11 @@ function apa_post_by_digital_art($params) {
 
 add_action( 'rest_api_init', function() {
   register_rest_route( 'apa/v1', 'posts/paintings', array(
-    'methods' => 'GET',
+    'methods' => WP_REST_SERVER::READABLE,
     'callback' => 'apa_post_by_paintings',
     ) );
     register_rest_route( 'apa/v1', 'posts/digital-art', array(
-      'methods' => 'GET',
+      'methods' => WP_REST_SERVER::READABLE,
       'callback' => 'apa_post_by_digital_art',
       ) );
 })

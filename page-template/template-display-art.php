@@ -25,7 +25,7 @@ if ($slug) {
     $num_of_post = $query-> post_count; 
 
 ?>
-    <div id="container" data-post-category="<?php echo esc_html( $slug ); ?>" data-website-url="<?php echo home_url(); ?>" >
+    <div id="container-category" data-post-category="<?php echo esc_html( $slug ); ?>" data-website-url="<?php echo home_url(); ?>" >
         
         <?php // BREADCRUMB TEMPLATE ?>
         <div class="post-breadcrumb">

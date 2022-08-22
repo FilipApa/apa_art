@@ -1,6 +1,6 @@
 <div class="filter-btn">  
-    <button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Filter 
+    <button class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Filter
     </button>   
 </div>
 
@@ -10,7 +10,7 @@
             <a class="container-fluid" data-bs-toggle="collapse" href="#collapseYear" role="button" aria-expanded="false" aria-controls="collapseYear">
                 Year
             </a>
-            
+
             <div class="collapse" id="collapseYear">
                 <div class="card card-body mb-2">
                     <?php 
@@ -71,7 +71,7 @@
                                 'hide_empty' => false,
                             ]); foreach ( $terms as $term) { ?>
                                 <div class="form-check">
-                                    <input class="form-check-input form-check-input-series" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
+                                    <input class="form-check-input form-check-input-series" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->slug); ?>" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                     <?php echo esc_html($term->name); ?>
                                     <span class="ms-1 text-secondary">
