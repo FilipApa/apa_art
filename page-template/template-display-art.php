@@ -45,20 +45,20 @@ if ($slug) {
                 while($query->have_posts()) : $query->the_post(); 
                 if ( $index % $no_of_columns === 0  ) { ?>
 
-                    <div class="post-row">
-                    <?php } ?>
-                        
-                        <?php // CARD TEMPLATE ?>
-                        <div class="post"  >
-                            <?php get_template_part( './template-parts/card/card'); ?>    
-                        </div>
+                <div class="post-row">
+                <?php } ?>
+                    
+                    <?php // CARD TEMPLATE ?>
+                    <div class="post"  >
+                        <?php get_template_part( './template-parts/card/card'); ?>    
+                    </div>
 
-                <?php 
-                $index ++;
-                if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
-                </div> 
-                <?php } endwhile; ?>
-            </div>
+            <?php 
+            $index ++;
+            if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
+            </div> 
+            <?php } endwhile; ?>
+        </div>
 
     </div>
     <div class="post-pagination">

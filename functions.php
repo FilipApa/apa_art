@@ -232,13 +232,15 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
  
   while($posts->have_posts()) {
     $posts->the_post();
-    $year = wp_get_post_terms( get_the_ID(), 'year');
-    $serie = wp_get_post_terms( get_the_ID(), 'serie');
+    $id = get_the_ID();
+    $year = wp_get_post_terms( $id, 'year');
+    $serie = wp_get_post_terms( $id, 'serie');
     array_push($data, array(
       'title' => get_the_title(),
       'link' => get_the_permalink(),
       'year' => $year ? $year[0]->name : null,
-      'serie' => $serie ? $serie[0]->name : null
+      'serie' => $serie ? $serie[0]->name : null,
+      'thumbnail' => get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') )
     ));
   } 
   wp_reset_query();

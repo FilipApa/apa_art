@@ -16,25 +16,30 @@ function getCheckValues(inputFields) {
     return JSON.stringify(checkedValues);
 }
 
+async function fetchPosts(y, s) {  
+    try {
+        let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}?year=${y}&serie=${s}`);
+        let data = await response.json();
+        return data;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+function displayFilteredData(posts) {
+    const templateGrid = document.getElementById('template-grid-content');
+    let index = 0;
+
+}
+
 filterBtn.addEventListener('click', () => {
     const year = getCheckValues(inputElementsYear);
     const serie = getCheckValues(inputElementsSerie);
 
-    async function fetchPosts() {
-        
-        try {
-            let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}?year=${year}&serie=${serie}`);
-            let data = await response.json();
-            return data;
-        } catch(error) {
-            console.log(error);
-        }
-    }
-
-    const filterdPosts = fetchPosts();
+    const filterdPosts = fetchPosts(year, serie);
     filterdPosts.then(data => {
         if(data) {
-            console.log(data);
+           displayFilteredData(data); 
         }
 
     }).catch(error => {
