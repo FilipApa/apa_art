@@ -20,15 +20,5 @@ filterBtn.addEventListener('click', () => {
     const year = getCheckValues(inputElementsYear);
     const serie = getCheckValues(inputElementsSerie);
 
-    console.log(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}?year=${year}&serie=${serie}`)
-    async function fetchPosts() {
-        let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}?year=${year}&serie=${serie}`);
-        let data = await response.json();
-        console.log(data);
-        return data;
-    }
-
-    fetchPosts();
-
 })
 

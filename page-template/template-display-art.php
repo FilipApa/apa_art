@@ -30,7 +30,7 @@ if ($slug) {
         <?php // BREADCRUMB TEMPLATE ?>
         <div class="post-breadcrumb">
             <?php get_template_part( './template-parts/breadcrumb/breadcrumb'); ?>   
-            <span>Posts: <?php echo $num_of_post; ?></span>
+            <strong>Posts: <?php echo $num_of_post; ?></strong>
         </div>
 
         <div class="post-container">

@@ -68,7 +68,7 @@ ol {
 
     /*POST TEMPLATE*/
     .post-row {
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     .post-wrapper .post {

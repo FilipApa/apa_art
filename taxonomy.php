@@ -28,15 +28,11 @@ if(is_tax( $taxonomy )) {
         <?php // BREADCRUMB TEMPLATE ?>
         <div class="post-breadcrumb">
             <?php get_template_part( './template-parts/breadcrumb/breadcrumb'); ?>  
-           <span>Posts: <?php echo $num_of_post; ?></span>
- 
+           <strong>Posts: <?php echo $num_of_post; ?></strong>
         </div>
 
         <div class="post-container">
-            <div class="post-filter">
-                <?php get_template_part( './template-parts/filter/filter'); ?>    
-            </div>
-            
+         
             <div class="post-wrapper" id="template-grid-content">
             <?php  // WP LOOP
                 $index         = 0;
