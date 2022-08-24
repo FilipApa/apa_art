@@ -148,22 +148,24 @@
 };
 
 //REGISTER REST API FIELD
-function filter_by_cat_and_terms( $category, ...$taxonomies ) {
-  $terms = [];
+function filter_by_cat_and_terms( $category, ...$paramatars ) {
+  $rest_params = [];
 
-  if($taxonomies) {
-    foreach( $taxonomies as $tax ) {
-      array_push( $terms, $tax );
+  if($paramatars) {
+    foreach( $paramatars as $param ) {
+      array_push( $rest_params, $param );
     }
   }
 
-  $years = (array)$terms[0];
-  $series = (array)$terms[1];
+  $page = (array)$rest_params[0];
+  $years = (array)$rest_params[1];
+  $series = (array)$rest_params[2];
+  
 
-  if(!empty( $terms )) {
+  if(!empty( $rest_params)) {
       if ($years && $series) { 
           $args = array(
-              'paged' => get_query_var( 'paged', 1),
+              'paged' => $page,
               'post_per_page' => 9,
               'post_type' => 'post',
               'order' => 'ASC',
@@ -186,7 +188,7 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
         
         if(!empty($years)) {
           $args = array(
-            'paged' => get_query_var( 'paged', 1),
+            'paged' => $page,
             'post_per_page' => 9,
             'post_type' => 'post',
             'order' => 'ASC',
@@ -201,7 +203,7 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
             );
         } else if(!empty($series)) {
           $args = array(
-            'paged' => get_query_var( 'paged', 1),
+            'paged' => $page,
             'post_per_page' => 9,
             'post_type' => 'post',
             'order' => 'ASC',
@@ -228,20 +230,28 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
 
   $posts = new WP_Query($args);
   
-  $data = array();
- 
+  $data = array(
+    "postData" => array()
+  );
+  $data['pages'] = $posts->max_num_pages;
+  $data['total'] = $posts->found_posts;
+  
+
   while($posts->have_posts()) {
     $posts->the_post();
     $id = get_the_ID();
     $year = wp_get_post_terms( $id, 'year');
     $serie = wp_get_post_terms( $id, 'serie');
-    array_push($data, array(
+
+    $post_data = array(
       'title' => get_the_title(),
       'link' => get_the_permalink(),
       'year' => $year ? $year[0]->name : null,
       'serie' => $serie ? $serie[0]->name : null,
-      'thumbnail' => get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') )
-    ));
+      'thumbnail' => get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') ),
+    );
+
+    array_push($data['postData'], $post_data );
   } 
   wp_reset_query();
 
@@ -250,8 +260,8 @@ function filter_by_cat_and_terms( $category, ...$taxonomies ) {
 function apa_post_by_paintings($params) {
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
-
-  $filterdPosts =  filter_by_cat_and_terms( 'paintings', $year, $serie );
+  $page = $params['page'];
+  $filterdPosts =  filter_by_cat_and_terms( 'paintings', $page, $year, $serie );
 
   return $filterdPosts;
 }
@@ -259,21 +269,31 @@ function apa_post_by_paintings($params) {
 function apa_post_by_digital_art($params) {
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
-
-  $filterdPosts =  filter_by_cat_and_terms( 'digital-art', $year, $serie );
+  $page = $params['page'];
+  $filterdPosts =  filter_by_cat_and_terms( 'digital-art', $page, $year, $serie );
 
   return $filterdPosts;
 }
 
 add_action( 'rest_api_init', function() {
-  register_rest_route( 'apa/v1', 'posts/paintings', array(
+  register_rest_route( 'apa/v1', 'posts/paintings/(?P<page>[1-9]{1,2})', array(
     'methods' => WP_REST_SERVER::READABLE,
     'callback' => 'apa_post_by_paintings',
-    ) );
-    register_rest_route( 'apa/v1', 'posts/digital-art', array(
+    'args' => array(
+      'page' => array (
+          'required' => true
+        ) 
+      )
+    ));
+    register_rest_route( 'apa/v1', 'posts/digital-art/(?P<page>[1-9]{1,2})', array(
       'methods' => WP_REST_SERVER::READABLE,
       'callback' => 'apa_post_by_digital_art',
-      ) );
+      'args' => array(
+        'page' => array (
+            'required' => true
+          ) 
+        )
+      ));
 })
 ?>
 

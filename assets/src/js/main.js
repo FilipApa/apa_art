@@ -16,9 +16,9 @@ function getCheckValues(inputFields) {
     return JSON.stringify(checkedValues);
 }
 
-async function fetchPosts(y, s) {  
+async function fetchPosts(p, y, s) {  
     try {
-        let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}?year=${y}&serie=${s}`);
+        let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}/${p}?year=${y}&serie=${s}`);
         let data = await response.json();
         return data;
     } catch(error) {
@@ -32,8 +32,7 @@ function displayFilteredData(posts) {
     const row = document.createElement('div');
     row.classList.add('post-row');
     const taxonomy = document.createElement('div');
-  
-        for(let post of posts) {
+        for(let post of posts.postData) {
             console.log(post);
             const column = document.createElement('div');
             column.classList.add('post');
@@ -69,8 +68,8 @@ function displayFilteredData(posts) {
 filterBtn.addEventListener('click', () => {
     const year = getCheckValues(inputElementsYear);
     const serie = getCheckValues(inputElementsSerie);
-
-    const filterdPosts = fetchPosts(year, serie);
+    const page = 1;
+    const filterdPosts = fetchPosts(page, year, serie);
     filterdPosts.then(data => {
         if(data) {
            displayFilteredData(data); 
