@@ -28,8 +28,42 @@ async function fetchPosts(y, s) {
 
 function displayFilteredData(posts) {
     const templateGrid = document.getElementById('template-grid-content');
-    let index = 0;
+    templateGrid.innerHTML = '';
+    const row = document.createElement('div');
+    row.classList.add('post-row');
+    const taxonomy = document.createElement('div');
+  
+        for(let post of posts) {
+            console.log(post);
+            const column = document.createElement('div');
+            column.classList.add('post');
+            
+            column.innerHTML = ` 
+            <div class="card">
+                <div class="card-img-top" >
+                    <a href="${post.link}">
+                        ${post.thumbnail}
+                    </a>
+                    
+                </div>
+                <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
+                    <h2 class="card-title fw-semibold fs-4 ps-2 text">
+                        ${post.title}
+                    </h2>
 
+                    <div>
+                
+                    ${post.year ? taxonomy.innerText = post.year : ''}
+                  
+                    ${post.serie ? taxonomy.innerText = post.serie : ''}
+
+                    </div>
+                </div>
+            </div>    
+            `; 
+            row.appendChild(column);
+        }
+    templateGrid.appendChild(row);
 }
 
 filterBtn.addEventListener('click', () => {
@@ -40,6 +74,7 @@ filterBtn.addEventListener('click', () => {
     filterdPosts.then(data => {
         if(data) {
            displayFilteredData(data); 
+            console.log(data)
         }
 
     }).catch(error => {
