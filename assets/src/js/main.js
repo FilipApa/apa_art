@@ -5,6 +5,8 @@ const inputElementsSerie = document.getElementsByClassName('form-check-input-ser
 const filterBtn = document.getElementById('filterBtn');
 const numPosts = document.getElementById('num-posts');
 
+let postCard = document.getElementsByClassName('card-post');
+
 function getCheckValues(inputFields) {
     let counter = 0;
     const checkedValues = new Object;
@@ -33,7 +35,7 @@ function displayFilteredData(posts) {
 
     const row = document.createElement('div');
     row.classList.add('post-row');
-    
+
     const getNumPosts = posts.total;
     numPosts.innerText = getNumPosts;
 
@@ -44,12 +46,9 @@ function displayFilteredData(posts) {
             column.classList.add('post');
             
             column.innerHTML = ` 
-            <div class="card">
+            <div class="card card-post" data-post-id="${post.id}">
                 <div class="card-img-top" >
-                    <a href="${post.link}">
-                        ${post.thumbnail}
-                    </a>
-                    
+                    ${post.thumbnail}
                 </div>
                 <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
                     <h2 class="card-title fw-semibold fs-4 ps-2 text">
@@ -76,15 +75,52 @@ filterBtn.addEventListener('click', () => {
     const serie = getCheckValues(inputElementsSerie);
     const page = 1;
     const filterdPosts = fetchPosts(page, year, serie);
-    console.log(filterdPosts);
+
     filterdPosts.then(data => {
         if(data) {
            displayFilteredData(data); 
-            console.log(data)
         }
 
     }).catch(error => {
         console.log(error);
     });
+
+    for(let post of postCard) {
+        post.parentNode.removeChild(post)
+    }
+    console.log(postCard)
+
+    postCard = document.getElementsByClassName('card-post');
+    
+    
+    
 })
 
+/** */
+
+async function fetchSinglePost(id) {  
+    try {
+        let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${id}`);
+        let data = await response.json();
+        return data;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+
+for(let post of postCard) {
+    post.addEventListener('click', () => {
+        console.log(post);
+        const postID = post.dataset.postId;
+        const singlePost =  fetchSinglePost(postID);
+        singlePost.then(data => {
+            if(data) {
+              console.log(data); 
+            }
+    
+        }).catch(error => {
+            console.log(error);
+        });
+    })
+}

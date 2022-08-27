@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card card-post" data-post-id="<?php echo get_the_ID( )?>">
     <?php 
         $curr_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
         // Get the page slug
@@ -6,13 +6,13 @@
     ?>
     
     <div class="card-img-top" >
-        <a href="<?php the_permalink(); ?>">
-            <?php     
-                if ( has_post_thumbnail( $id ) ) {?>
-                    <?php echo get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') ); ?>
-                <?php }
-            ?>
-        </a>
+
+        <?php     
+            if ( has_post_thumbnail( $id ) ) {?>
+                <?php echo get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') ); ?>
+            <?php }
+        ?>
+     
         
     </div>
 

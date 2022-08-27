@@ -147,7 +147,7 @@
     return false;
 };
 
-//REGISTER REST API FIELD
+//FUNCTIONS FOR FILTERING POSTS BY TAXONOMIES
 function filter_by_cat_and_terms( $category, ...$paramatars ) {
   $rest_params = [];
 
@@ -244,6 +244,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
     $serie = wp_get_post_terms( $id, 'serie');
 
     $post_data = array(
+      'id' => $id,
       'title' => get_the_title(),
       'link' => get_the_permalink(),
       'year' => $year ? $year[0]->name : null,
@@ -257,6 +258,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
 
   return $data;
 }
+
 function apa_post_by_paintings($params) {
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
@@ -273,6 +275,69 @@ function apa_post_by_digital_art($params) {
   $filterdPosts =  filter_by_cat_and_terms( 'digital-art', $page, $year, $serie );
 
   return $filterdPosts;
+}
+
+//FUNCTIONS FOR FETCHING SINGLE POST
+
+//REGISTER REST API ENDPOINT
+function apa_get_single_post($id) {
+  $args = [
+		'p' => $id['id'],
+		'post_type' => 'post'
+	];
+
+  $post = new WP_Query($args);
+  
+  $data = array();
+
+  while($post->have_posts()) { 
+    $post->the_post();
+
+    $post_ID = get_the_ID();
+
+    $category = get_the_category(); 
+    $cat_id;
+    if( $category ) { $cat_id = $category["0"]->term_id;}
+
+    $taxonomies = wp_get_post_terms(  $post_ID, [ 'year', 'serie']);
+    $post_tax = array();
+    if($taxonomies) {
+      foreach($taxonomies as $key => $tax) {
+        array_push($post_tax, array(
+          'taxName' => $tax->name,
+          'taxLink' => get_term_link($tax)
+        ));
+      }
+    }
+
+    $prev_post = get_adjacent_post( false, '', true) ;
+    $prev_post_id = null;
+    if( !empty( $prev_post )) {
+      $prev_post_id = $prev_post->ID;
+    }
+
+    $next_post = get_adjacent_post( false, '', false );
+    $next_post_id = null;
+    if( !empty( $next_post )) {
+      $next_post_id = $next_post->ID;
+
+    }
+
+    array_push($data, array(
+      'id' =>  $post_ID,
+      'title' => get_the_title(),
+      'content' => get_the_content(),
+      'categoryLink' => get_category_link( $cat_id ),
+      'categoryName' => $category["0"]->cat_name,
+      'prevPostID' => $prev_post_id,
+      'nextPostID' => $next_post_id,
+      'taxonomies' => $post_tax
+    ));
+  }
+ 
+
+  return $data;
+  
 }
 
 add_action( 'rest_api_init', function() {
@@ -294,6 +359,11 @@ add_action( 'rest_api_init', function() {
           ) 
         )
       ));
+      register_rest_route( 'apa/v1', 'posts/(?P<id>[a-zA-Z0-9-]+)', array(
+        'methods' => 'GET',
+        'callback' => 'apa_get_single_post',
+        ) );
+
 })
 ?>
 
