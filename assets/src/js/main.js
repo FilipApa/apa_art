@@ -3,7 +3,8 @@ const currentPageCategory = document.getElementById('container-category').datase
 const inputElementsYear = document.getElementsByClassName('form-check-input-year');
 const inputElementsSerie = document.getElementsByClassName('form-check-input-series');
 const filterBtn = document.getElementById('filterBtn');
- 
+const numPosts = document.getElementById('num-posts');
+
 function getCheckValues(inputFields) {
     let counter = 0;
     const checkedValues = new Object;
@@ -29,11 +30,16 @@ async function fetchPosts(p, y, s) {
 function displayFilteredData(posts) {
     const templateGrid = document.getElementById('template-grid-content');
     templateGrid.innerHTML = '';
+
     const row = document.createElement('div');
     row.classList.add('post-row');
+    
+    const getNumPosts = posts.total;
+    numPosts.innerText = getNumPosts;
+
     const taxonomy = document.createElement('div');
         for(let post of posts.postData) {
-            console.log(post);
+            
             const column = document.createElement('div');
             column.classList.add('post');
             
@@ -70,6 +76,7 @@ filterBtn.addEventListener('click', () => {
     const serie = getCheckValues(inputElementsSerie);
     const page = 1;
     const filterdPosts = fetchPosts(page, year, serie);
+    console.log(filterdPosts);
     filterdPosts.then(data => {
         if(data) {
            displayFilteredData(data); 
