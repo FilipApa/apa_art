@@ -78,6 +78,7 @@ filterBtn.addEventListener('click', () => {
     filterdPosts.then(data => {
         if(data) {
            displayFilteredData(data); 
+           console.log(data);
         }
 
     }).catch(error => {
