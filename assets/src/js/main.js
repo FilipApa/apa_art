@@ -39,13 +39,13 @@ function displayFilteredData(posts) {
     numPosts.innerText = getNumPosts;
 
     const taxonomy = document.createElement('div');
+    let counter = 0;
         for(let post of posts.postData) {
-            
             const column = document.createElement('div');
             column.classList.add('post');
             
             column.innerHTML = ` 
-            <div class="card card-post" data-post-id="${post.id}">
+            <div class="card card-post" data-post-id="${post.id}" data-prev-id="${counter === 0 ? null : posts.postData[counter - 1].id}" data-next-id="${counter === posts.postData.length-1 ? null : posts.postData[counter + 1].id}">
                 <div class="card-img-top" >
                     ${post.thumbnail}
                 </div>
@@ -65,6 +65,7 @@ function displayFilteredData(posts) {
             </div>    
             `; 
             row.appendChild(column);
+            counter++;
         }
     templateGrid.appendChild(row);
 }
@@ -95,6 +96,11 @@ function getDOMPosts() {
         post.addEventListener('click', () => {
             console.log(post);
             const postID = post.dataset.postId;
+            const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
+            const nextPostID = post.dataset.nextId ?post.dataset.nextId : null;
+
+            console.log(prevPostID)
+            console.log( nextPostID)
             const singlePost =  fetchSinglePost(postID);
             singlePost.then(data => {
                 if(data) {
