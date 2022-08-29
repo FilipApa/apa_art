@@ -310,27 +310,12 @@ function apa_get_single_post($id) {
       }
     }
 
-    $prev_post = get_adjacent_post( false, '', true) ;
-    $prev_post_id = null;
-    if( !empty( $prev_post )) {
-      $prev_post_id = $prev_post->ID;
-    }
-
-    $next_post = get_adjacent_post( false, '', false );
-    $next_post_id = null;
-    if( !empty( $next_post )) {
-      $next_post_id = $next_post->ID;
-
-    }
-
     array_push($data, array(
       'id' =>  $post_ID,
       'title' => get_the_title(),
       'content' => get_the_content(),
       'categoryLink' => get_category_link( $cat_id ),
       'categoryName' => $category["0"]->cat_name,
-      'prevPostID' => $prev_post_id,
-      'nextPostID' => $next_post_id,
       'taxonomies' => $post_tax
     ));
   }

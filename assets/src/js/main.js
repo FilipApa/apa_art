@@ -2,10 +2,10 @@ const siteBody = document.getElementById('site-body').dataset.websiteUrl;
 const currentPageCategory = document.getElementById('container-category').dataset.postCategory;
 const inputElementsYear = document.getElementsByClassName('form-check-input-year');
 const inputElementsSerie = document.getElementsByClassName('form-check-input-series');
+const templateGrid = document.getElementById('template-grid-content');
 const filterBtn = document.getElementById('filterBtn');
 const numPosts = document.getElementById('num-posts');
-
-let postCard = document.getElementsByClassName('card-post');
+let postCard;
 
 function getCheckValues(inputFields) {
     let counter = 0;
@@ -30,7 +30,6 @@ async function fetchPosts(p, y, s) {
 }
 
 function displayFilteredData(posts) {
-    const templateGrid = document.getElementById('template-grid-content');
     templateGrid.innerHTML = '';
 
     const row = document.createElement('div');
@@ -85,18 +84,28 @@ filterBtn.addEventListener('click', () => {
         console.log(error);
     });
 
-    for(let post of postCard) {
-        post.parentNode.removeChild(post)
-    }
-    console.log(postCard)
-
-    postCard = document.getElementsByClassName('card-post');
-    
-    
-    
 })
 
-/** */
+/**SINGLE POST**/
+function getDOMPosts() {
+    postCard = document.getElementsByClassName('card-post');
+
+    for(let post of postCard) {
+        post.addEventListener('click', () => {
+            console.log(post);
+            const postID = post.dataset.postId;
+            const singlePost =  fetchSinglePost(postID);
+            singlePost.then(data => {
+                if(data) {
+                  console.log(data); 
+                }
+        
+            }).catch(error => {
+                console.log(error);
+            });
+        })
+    }
+}
 
 async function fetchSinglePost(id) {  
     try {
@@ -108,19 +117,12 @@ async function fetchSinglePost(id) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", getDOMPosts());
 
-for(let post of postCard) {
-    post.addEventListener('click', () => {
-        console.log(post);
-        const postID = post.dataset.postId;
-        const singlePost =  fetchSinglePost(postID);
-        singlePost.then(data => {
-            if(data) {
-              console.log(data); 
-            }
-    
-        }).catch(error => {
-            console.log(error);
-        });
-    })
-}
+const mutationObserver = new MutationObserver( entries => {
+    getDOMPosts();
+});
+
+mutationObserver.observe(templateGrid, {childList: true});
+
+
