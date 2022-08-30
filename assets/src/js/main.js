@@ -99,8 +99,6 @@ function getDOMPosts() {
             const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
             const nextPostID = post.dataset.nextId ?post.dataset.nextId : null;
 
-            console.log(prevPostID)
-            console.log( nextPostID)
             const singlePost =  fetchSinglePost(postID);
             singlePost.then(data => {
                 if(data) {
@@ -112,6 +110,10 @@ function getDOMPosts() {
             });
         })
     }
+}
+
+function displaySinglePost(data, prevID, nextID) {
+    
 }
 
 async function fetchSinglePost(id) {  

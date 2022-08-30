@@ -61,7 +61,7 @@ if ($slug) {
         </div>
 
     </div>
-    <div class="post-pagination">
+    <div class="post-pagination" id="post-pagination">
         <?php 
             // PAGINATION
             the_posts_pagination( array(
@@ -72,5 +72,7 @@ if ($slug) {
             wp_reset_postdata();
         ?>
     </div>
+
+    <div class="modal-dialog modal-xl" id="post-modal"></div>
 
 <?php get_footer(); ?>
