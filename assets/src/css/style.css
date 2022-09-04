@@ -50,6 +50,13 @@ img {
 } 
 
 /*POST TEMPALTE*/
+.post-container {
+    max-width: 1600px;
+    display: flex;
+    flex-direction: column;
+}
+
+
 .post-wrapper {
     display: flex;
     flex-direction: column;
@@ -211,6 +218,10 @@ img {
 @media screen and (min-width:992px) {
     .container {
         max-width: 960px;
+    }
+
+    .post-container {
+        flex-direction: row;
     }
 }
 

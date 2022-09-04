@@ -1,18 +1,18 @@
 <div class="filter-btn">  
-    <button class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <button class="" type="button" data-bs-toggle="" data-bs-target="" aria-expanded="" aria-controls="">
         Filter
     </button>   
 </div>
 
-<div class="collapse" id="collapseExample">
-    <div class="card card-body d-flex flex-sm-column  ">
+<div class="">
+    <div class="">
         <div class="">
-            <a class="container-fluid" data-bs-toggle="collapse" href="#collapseYear" role="button" aria-expanded="false" aria-controls="collapseYear">
+            <a class="" role="button" aria-expanded="false" aria-controls="collapseYear">
                 Year
             </a>
 
-            <div class="collapse" id="collapseYear">
-                <div class="card card-body mb-2">
+            <div class="" id="collapseYear">
+                <div class="">
                     <?php 
                         $args=array(
                         'name'    => 'year',
@@ -48,11 +48,11 @@
             </div>
         
             <div class="">
-            <a class="container-fluid" data-bs-toggle="collapse" href="#collapseSeries" role="button" aria-expanded="false" aria-controls="collapseSeries">
+            <a class=""  role="button" aria-expanded="false" aria-controls="">
                 Series
             </a>
             
-            <div class="collapse" id="collapseSeries">
+            <div class="" id="">
                 <div class="card card-body mb-2">
                     <?php 
                         $args=array(

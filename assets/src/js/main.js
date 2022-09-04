@@ -55,8 +55,8 @@ function displayFilteredData( posts ) {
             column.classList.add( 'post' );
             
             column.innerHTML = ` 
-            <div class="card card-post" id="exampleModal" data-post-id="${post.id}" data-prev-id="${counter === 0 ? null : posts.postData[counter - 1].id}" data-next-id="${counter === posts.postData.length-1 ? null : posts.postData[counter + 1].id}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="card-img-top" >
+            <div class="card card-post">
+                <div class="card-img-top" data-post-id="${post.id}" data-prev-id="${counter === 0 ? null : posts.postData[counter - 1].id}" data-next-id="${counter === posts.postData.length-1 ? null : posts.postData[counter + 1].id}">
                     ${post.thumbnail}
                 </div>
                 <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
@@ -111,8 +111,8 @@ async function fetchSinglePost( id ) {
 
 function getDOMPosts() {
     postCard = document.getElementsByClassName( 'card-img-top' );
-
     for( let post of postCard ) {
+        console.log(post)
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
             const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
@@ -122,7 +122,6 @@ function getDOMPosts() {
             singlePost.then( data => {
                 if( data ) {
                     displaySinglePost( data, prevPostID, nextPostID );
-                    console.log(data)
                 }
         
             }).catch( error => {

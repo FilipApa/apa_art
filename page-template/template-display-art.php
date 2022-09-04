@@ -38,7 +38,7 @@ if ($slug) {
                 <?php get_template_part( './template-parts/filter/filter'); ?>    
             </div>
             
-            <div class="post-wrapper" id="template-grid-content">
+            <div class="post-wrapper container" id="template-grid-content">
             <?php  // WP LOOP
                 $index         = 0;
                 $no_of_columns = 3;
