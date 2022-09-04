@@ -90,6 +90,7 @@ img {
 .post-modal-dialog {
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
+    border-radius: 10px;
 }
 
 .post-modal.show .post-modal-dialog {
