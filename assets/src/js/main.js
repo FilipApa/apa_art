@@ -1,32 +1,32 @@
-const siteBody = document.getElementById('site-body').dataset.websiteUrl;
-const currentPageCategory = document.getElementById('container-category').dataset.postCategory;
+const siteBody = document.getElementById( 'site-body' ).dataset.websiteUrl;
+const currentPageCategory = document.getElementById( 'container-category' ).dataset.postCategory;
 
-const inputElementsYear = document.getElementsByClassName('form-check-input-year');
-const inputElementsSerie = document.getElementsByClassName('form-check-input-series');
+const inputElementsYear = document.getElementsByClassName( 'form-check-input-year' );
+const inputElementsSerie = document.getElementsByClassName( 'form-check-input-series' );
 
-const templateGrid = document.getElementById('template-grid-content');
-const filterBtn = document.getElementById('filterBtn');
-const numPosts = document.getElementById('num-posts');
+const templateGrid = document.getElementById( 'template-grid-content' );
+const filterBtn = document.getElementById( 'filterBtn' );
+const numPosts = document.getElementById( 'num-posts' );
 
 //modal
-const modal = document.getElementById('post-modal');
-const postModalTitle = document.getElementById('post-modal-title');
-const postModalContent = document.getElementById('post-modal-content');
-const postModalCloseBtn = document.getElementById('post-modal-close');
+const modal = document.getElementById( 'post-modal' );
+const postModalTitle = document.getElementById( 'post-modal-title' );
+const postModalContent = document.getElementById( 'post-modal-content' );
+const postModalCloseBtn = document.getElementById( 'post-modal-close' );
 const postModalSerie = document.getElementById('post-serie');
-const postModalYear = document.getElementById('post-year');
+const postModalYear = document.getElementById( 'post-year' );
 let postCard;
 
-function getCheckValues(inputFields) {
+function getCheckValues( inputFields ) {
     let counter = 0;
     const checkedValues = new Object;
-    for (input of inputFields) {
-        if(input.checked) {     
+    for ( input of inputFields ) {
+        if( input.checked ) {     
             checkedValues[counter] = input.value;   
             counter++;
         }
     }
-    return JSON.stringify(checkedValues);
+    return JSON.stringify( checkedValues );
 }
 
 async function fetchPosts(p, y, s) {  
@@ -34,25 +34,25 @@ async function fetchPosts(p, y, s) {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}/${p}?year=${y}&serie=${s}`);
         let data = await response.json();
         return data;
-    } catch(error) {
-        console.log(error);
+    } catch( error ) {
+        console.log( error );
     }
 }
 
-function displayFilteredData(posts) {
+function displayFilteredData( posts ) {
     templateGrid.innerHTML = '';
 
-    const row = document.createElement('div');
-    row.classList.add('post-row');
+    const row = document.createElement( 'div' );
+    row.classList.add( 'post-row' );
 
     const getNumPosts = posts.total;
     numPosts.innerText = getNumPosts;
 
-    const taxonomy = document.createElement('div');
+    const taxonomy = document.createElement( 'div' );
     let counter = 0;
         for(let post of posts.postData) {
-            const column = document.createElement('div');
-            column.classList.add('post');
+            const column = document.createElement( 'div' );
+            column.classList.add( 'post' );
             
             column.innerHTML = ` 
             <div class="card card-post" id="exampleModal" data-post-id="${post.id}" data-prev-id="${counter === 0 ? null : posts.postData[counter - 1].id}" data-next-id="${counter === posts.postData.length-1 ? null : posts.postData[counter + 1].id}" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -74,72 +74,70 @@ function displayFilteredData(posts) {
                 </div>
             </div>    
             `; 
-            row.appendChild(column);
+            row.appendChild( column );
             counter++;
         }
-    templateGrid.appendChild(row);
+    templateGrid.appendChild( row );
 }
 
 if(filterBtn) {
-    filterBtn.addEventListener('click', () => {
-        const year = getCheckValues(inputElementsYear);
-        const serie = getCheckValues(inputElementsSerie);
+    filterBtn.addEventListener( 'click', () => {
+        const year = getCheckValues( inputElementsYear );
+        const serie = getCheckValues( inputElementsSerie );
         const page = 1;
-        const filterdPosts = fetchPosts(page, year, serie);
+        const filterdPosts = fetchPosts( page, year, serie );
     
-        filterdPosts.then(data => {
-            if(data) {
-               displayFilteredData(data); 
-               console.log(data);
+        filterdPosts.then( data => {
+            if( data ) {
+               displayFilteredData( data ); 
             }
     
         }).catch(error => {
-            console.log(error);
+            console.log( error );
         });
     });
 }
 
 /**SINGLE POST**/
-async function fetchSinglePost(id) {  
+async function fetchSinglePost( id ) {  
     try {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${id}`);
         let data = await response.json();
         return data;
-    } catch(error) {
-        console.log(error);
+    } catch( error ) {
+        console.log( error );
     }
 }
 
 function getDOMPosts() {
-    postCard = document.getElementsByClassName('card-img-top');
+    postCard = document.getElementsByClassName( 'card-img-top' );
 
-    for(let post of postCard) {
-        post.addEventListener('click', () => {
-            console.log(post);
+    for( let post of postCard ) {
+        post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
             const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
             const nextPostID = post.dataset.nextId ?post.dataset.nextId : null;
 
-            const singlePost =  fetchSinglePost(postID);
-            singlePost.then(data => {
-                if(data) {
-                    displaySinglePost(data, prevPostID, nextPostID);
+            const singlePost =  fetchSinglePost( postID );
+            singlePost.then( data => {
+                if( data ) {
+                    displaySinglePost( data, prevPostID, nextPostID );
                     console.log(data)
                 }
         
-            }).catch(error => {
-                console.log(error);
+            }).catch( error => {
+                console.log( error );
             });
         })
     }
 }
 
-function displaySinglePost(data, prevID, nextID) {
+function displaySinglePost( data, prevID, nextID ) {
     postModalTitle.innerText = data[0].title;
 
-    const imgWrapper = document.createElement('div');
+    const imgWrapper = document.createElement( 'div' );
     imgWrapper.innerHTML = data[0].content;
-    postModalContent.insertAdjacentElement('afterbegin', imgWrapper);
+    postModalContent.insertAdjacentElement( 'afterbegin', imgWrapper );
 
     postModalSerie.innerText = data[0].taxonomies[0] ? data[0].taxonomies[0].taxName  : '';
     postModalYear.innerText = data[0].taxonomies[1] ? data[0].taxonomies[1].taxName : '';
@@ -148,16 +146,15 @@ function displaySinglePost(data, prevID, nextID) {
 }
 
 // SINGLE POST EVENTS
-
 document.addEventListener("DOMContentLoaded", getDOMPosts());
 
 const mutationObserver = new MutationObserver( entries => {
     getDOMPosts();
 });
 
-mutationObserver.observe(templateGrid, {childList: true});
+mutationObserver.observe( templateGrid, { childList: true });
 
-postModalCloseBtn.addEventListener('click', () => {
+postModalCloseBtn.addEventListener( 'click', () => {
     postModalContent.replaceChildren();
-    modal.classList.remove('show')
-})
+    modal.classList.remove( 'show' )
+});

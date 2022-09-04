@@ -40,7 +40,7 @@
                     $category_slug = $category[0] -> slug;
                     $category_url =  get_home_url() . '/category' . '/' . $category_slug;
                     ?> 
-                    <a class="btn btn-outline-dark" href="<?php echo esc_url($category_url)?>">
+                    <a class="" href="<?php echo esc_url($category_url)?>">
                         <?php echo esc_html( $category[0] -> name); ?>
                     </a> 
                 <?php } ?> 
