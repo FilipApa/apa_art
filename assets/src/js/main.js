@@ -12,9 +12,11 @@ const numPosts = document.getElementById( 'num-posts' );
 const modal = document.getElementById( 'post-modal' );
 const postModalTitle = document.getElementById( 'post-modal-title' );
 const postModalContent = document.getElementById( 'post-modal-content' );
-const postModalCloseBtn = document.getElementById( 'post-modal-close' );
 const postModalSerie = document.getElementById('post-serie');
 const postModalYear = document.getElementById( 'post-year' );
+const postModalCloseBtn = document.getElementById( 'post-modal-close' );
+const postModalPrevBtn = document.getElementById( 'post-modal-prev' );
+const postModalNextBtn = document.getElementById( 'post-modal-next' );
 let postCard;
 
 function getCheckValues( inputFields ) {
@@ -112,11 +114,11 @@ async function fetchSinglePost( id ) {
 function getDOMPosts() {
     postCard = document.getElementsByClassName( 'card-img-top' );
     for( let post of postCard ) {
-        console.log(post)
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
             const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
-            const nextPostID = post.dataset.nextId ?post.dataset.nextId : null;
+            const nextPostID = post.dataset.nextId ? post.dataset.nextId : null;
+            console.log(prevPostID,nextPostID);
 
             const singlePost =  fetchSinglePost( postID );
             singlePost.then( data => {
@@ -141,7 +143,11 @@ function displaySinglePost( data, prevID, nextID ) {
     postModalSerie.innerText = data[0].taxonomies[0] ? data[0].taxonomies[0].taxName  : '';
     postModalYear.innerText = data[0].taxonomies[1] ? data[0].taxonomies[1].taxName : '';
 
-    modal.classList.add('show');
+    postModalPrevBtn.setAttribute('prev-post-id', prevID);
+    postModalNextBtn.setAttribute('next-post-id', nextID);
+    if(!modal.classList.contains('show')) {
+        modal.classList.add('show');
+    }  
 }
 
 // SINGLE POST EVENTS

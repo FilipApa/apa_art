@@ -3,9 +3,15 @@
         $curr_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
         // Get the page slug
         $curr_slug = $curr_page->slug;
+        $previous_post = get_previous_post();
+        $previous_post ? $previous_post = $previous_post->ID : $previous_post = null;
+
+        $next_post = get_next_post();
+        $next_post ? $next_post = $next_post->ID : $next_post = null;
+
     ?>
     
-    <div class="card-img-top" data-post-id="<?php echo get_the_ID( )?>" id="post" data-modal-target="#post-modal" >
+    <div class="card-img-top" data-post-id="<?php echo get_the_ID( )?>" id="post" data-prev-id="<?php echo $previous_post ?>" data-next-id="<?php echo $next_post ?>">
 
         <?php     
             if ( has_post_thumbnail( $id ) ) {?>

@@ -11,8 +11,8 @@
                 Year
             </a>
 
-            <div class="" id="collapseYear">
-                <div class="">
+            <div class="">
+                <div class="card card-body mb-2">
                     <?php 
                         $args=array(
                         'name'    => 'year',
@@ -52,7 +52,7 @@
                 Series
             </a>
             
-            <div class="" id="">
+            <div class="">
                 <div class="card card-body mb-2">
                     <?php 
                         $args=array(

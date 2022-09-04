@@ -4,7 +4,6 @@
 */
 ?>
 
-
 <?php get_header(); ?>
 <?php
 $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
@@ -88,10 +87,10 @@ if ($slug) {
 
             <div class="post-modal-footer">
                 <div class="post-modal-arrows">
-                    <div role="button" class="post-arrow-btn prev" id="post-prev">
+                    <div role="button" class="post-arrow-btn prev" id="post-modal-prev">
                         <i class="fa-solid fa-angle-left"></i>
                     </div>
-                    <div role="button" class="post-arrow-btn next" id="post-next">
+                    <div role="button" class="post-arrow-btn next" id="post-modal-next">
                         <i class="fa-solid fa-angle-right"></i>
                     </div>
                 </div>
