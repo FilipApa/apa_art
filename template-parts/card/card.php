@@ -1,11 +1,11 @@
-<div class="card card-post" data-post-id="<?php echo get_the_ID( )?>" id="post" data-modal-target="#post-modal">
+<div class="card card-post" >
     <?php 
         $curr_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
         // Get the page slug
         $curr_slug = $curr_page->slug;
     ?>
     
-    <div class="card-img-top" >
+    <div class="card-img-top" data-post-id="<?php echo get_the_ID( )?>" id="post" data-modal-target="#post-modal" >
 
         <?php     
             if ( has_post_thumbnail( $id ) ) {?>

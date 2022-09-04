@@ -110,7 +110,7 @@ async function fetchSinglePost(id) {
 }
 
 function getDOMPosts() {
-    postCard = document.getElementsByClassName('card-post');
+    postCard = document.getElementsByClassName('card-img-top');
 
     for(let post of postCard) {
         post.addEventListener('click', () => {
