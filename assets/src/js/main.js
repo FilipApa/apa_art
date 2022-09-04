@@ -140,8 +140,8 @@ function displaySinglePost(data, prevID, nextID) {
     imgWrapper.innerHTML = data[0].content;
     postModalContent.insertAdjacentElement('afterbegin', imgWrapper);
 
-    postModalSerie.innerText = data[0].taxonomies[0].taxName;
-    postModalYear.innerText = data[0].taxonomies[1].taxName;
+    postModalSerie.innerText = data[0].taxonomies[0] ? data[0].taxonomies[0].taxName  : '';
+    postModalYear.innerText = data[0].taxonomies[1] ? data[0].taxonomies[1].taxName : '';
 
     modal.classList.add('show');
 }
@@ -157,5 +157,6 @@ const mutationObserver = new MutationObserver( entries => {
 mutationObserver.observe(templateGrid, {childList: true});
 
 postModalCloseBtn.addEventListener('click', () => {
+    postModalContent.replaceChildren();
     modal.classList.remove('show')
 })

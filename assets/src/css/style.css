@@ -9,6 +9,11 @@ ol {
     margin: 0 !important;
 }
 
+img {
+    object-fit: cover;
+    max-width: 100%;
+}
+
 /* HEADER*/
 .container-fluid {
     padding: 0 !important;
