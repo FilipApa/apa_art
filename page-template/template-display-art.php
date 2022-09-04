@@ -77,7 +77,7 @@ if ($slug) {
         <div class="container post-modal-dialog">
             <div class="post-modal-header">
                 <strong class="post-modal-title" id="post-modal-title"></strong>
-                <div class="post-modal-close" id="post-modal-close">
+                <div role="button" class="post-modal-close" id="post-modal-close">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
             </div>
@@ -88,12 +88,12 @@ if ($slug) {
 
             <div class="post-modal-footer">
                 <div class="post-modal-arrows">
-                    <a id="post-prev">
+                    <div role="button" class="post-arrow-btn prev" id="post-prev">
                         <i class="fa-solid fa-angle-left"></i>
-                    </a>
-                    <a id="post-next">
-                    <i class="fa-solid fa-angle-right"></i>
-                    </a>
+                    </div>
+                    <div role="button" class="post-arrow-btn next" id="post-next">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </div>
                 </div>
 
                 <div class="post-category">

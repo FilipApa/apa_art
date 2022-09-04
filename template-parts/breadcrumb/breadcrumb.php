@@ -6,7 +6,7 @@
             <li class="breadcrumb-item">
                 <a href="<?php echo home_url(); ?>"> Home </a>  
             </li>
-            <li class="breadcrumb-item " aria-current="page">
+            <li class="breadcrumb-item" aria-current="page">
                 
                 <?php if(is_tax(array('year'))){echo 'Year: ';} else if(is_tax(array('serie'))) {echo 'Serie: ';}?>
                 <h1 class="breadcrumb-title">    
