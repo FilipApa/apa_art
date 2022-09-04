@@ -5,7 +5,7 @@ body {
     box-sizing: border-box;
 }
 
-ol {
+h1,h2,h3,h4,h5,h6,li,ol {
     margin: 0 !important;
 }
 
@@ -25,6 +25,11 @@ img {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.breadcrumb-title {
+    font-weight: 400;
+    font-size: 18px;
 }
 
 /*FILTER*/

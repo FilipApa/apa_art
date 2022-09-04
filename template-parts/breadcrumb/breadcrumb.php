@@ -9,9 +9,9 @@
             <li class="breadcrumb-item " aria-current="page">
                 
                 <?php if(is_tax(array('year'))){echo 'Year: ';} else if(is_tax(array('serie'))) {echo 'Serie: ';}?>
-                <strong>    
+                <h1 class="breadcrumb-title">    
                     <?php echo esc_html($current_page->name); ?> 
-                </strong>
+                </h1>
             </li>
         </ol>
     </nav> 
