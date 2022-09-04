@@ -1,4 +1,4 @@
-<div class="card card-post" data-post-id="<?php echo get_the_ID( )?>">
+<div class="card card-post" data-post-id="<?php echo get_the_ID( )?>" id="post" data-modal-target="#post-modal">
     <?php 
         $curr_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
         // Get the page slug

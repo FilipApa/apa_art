@@ -66,6 +66,6 @@ if(is_tax( $taxonomy )) {
         ?>
     </div>
 
-    <div class="modal-dialog modal-xl" id="post-modal"></div>                                     
+    <div class="modal-dialog fade modal-xl" id="post-modal"></div>                                     
 
 <?php get_footer(); ?>

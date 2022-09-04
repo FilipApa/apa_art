@@ -1,5 +1,8 @@
 body {
     font-family: 'Outfit', sans-serif;
+    position: relative;
+    overflow: auto;
+    box-sizing: border-box;
 }
 
 ol {
@@ -28,8 +31,8 @@ ol {
 .post-filter .card-body {
     width: 100%;
 } 
-/*POST TEMPALTE*/
 
+/*POST TEMPALTE*/
 .post-wrapper {
     display: flex;
     flex-direction: column;
@@ -50,6 +53,90 @@ ol {
     margin-bottom: 5%;
 }
 
+/*MODAL*/
+.post-modal {
+    display: none; 
+}
+
+.post-modal.show {
+    background: rgba(0, 0, 0, 0.45);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-modal-dialog {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.post-modal.show .post-modal-dialog {
+    margin: 0 5px;
+    position: relative;
+    z-index: 10;
+    opacity: 1;
+}
+
+.post-modal-header {
+    height: 80px;
+    padding: 0 20px;
+}
+
+.post-modal-header strong{
+    font-size: 25px;
+}
+ 
+.post-modal-header,
+.post-modal-footer {
+    background-color: #fff;
+}
+
+.post-modal-header,
+.post-modal-footer div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.post-modal-footer div:first-child {
+    padding: 15px 20px;
+}
+
+.post-modal-close {
+    height: 100%;
+    width: 80px;
+    margin-right: -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #000;
+}
+
+.post-modal-close i,
+.post-modal-arrows i {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.post-modal-body {
+    height: 75%;
+    width: 100%;
+    background-color: #fff;
+}
+
+.post-category {
+    padding: 5px 20px;
+}
+
+.post-modal-footer {
+    padding-bottom: 15px;
+}
+
 @media screen and (min-width:576px) {
     .container {
         max-width: 540px;
@@ -60,8 +147,8 @@ ol {
     .container {
         max-width: 720px;   
     }
-    /*FILTER*/
 
+    /*FILTER*/
     .post-filter .card-body {
         max-width: 375px !important;
     }  
@@ -80,7 +167,11 @@ ol {
         margin-left: 2%;
         margin-right: 2%;
     }
-    
+
+    /*MODAL*/
+    .post-modal.show .post-modal-dialog {
+        margin: 0;
+    }
 }
 
 @media screen and (min-width:992px) {

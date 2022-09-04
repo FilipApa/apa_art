@@ -73,6 +73,36 @@ if ($slug) {
         ?>
     </div>
 
-    <div class="modal-dialog modal-xl" id="post-modal"></div>
+    <div class="post-modal" id="post-modal">
+            <div class="container post-modal-dialog">
+                <div class="post-modal-header">
+                    <strong class="post-modal-title" id="post-modal-title"></strong>
+                    <div class="post-modal-close" id="post-modal-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+
+                <div class="post-modal-body" id="post-modal-content"></div>
+
+                <div class="post-modal-footer">
+                    <div class="post-modal-arrows">
+                        <a id="post-prev">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+                        <a id="post-next">
+                        <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="post-category">
+                        Serie: <strong id="post-serie"></strong>
+                    </div>
+                    <div class="post-category">
+                        Year: <strong id="post-year"></strong>
+                    </div>
+                </div>      
+            </div>
+        </div> 
+
 
 <?php get_footer(); ?>
