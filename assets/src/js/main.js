@@ -80,23 +80,24 @@ function displayFilteredData(posts) {
     templateGrid.appendChild(row);
 }
 
-filterBtn.addEventListener('click', () => {
-    const year = getCheckValues(inputElementsYear);
-    const serie = getCheckValues(inputElementsSerie);
-    const page = 1;
-    const filterdPosts = fetchPosts(page, year, serie);
-
-    filterdPosts.then(data => {
-        if(data) {
-           displayFilteredData(data); 
-           console.log(data);
-        }
-
-    }).catch(error => {
-        console.log(error);
+if(filterBtn) {
+    filterBtn.addEventListener('click', () => {
+        const year = getCheckValues(inputElementsYear);
+        const serie = getCheckValues(inputElementsSerie);
+        const page = 1;
+        const filterdPosts = fetchPosts(page, year, serie);
+    
+        filterdPosts.then(data => {
+            if(data) {
+               displayFilteredData(data); 
+               console.log(data);
+            }
+    
+        }).catch(error => {
+            console.log(error);
+        });
     });
-
-})
+}
 
 /**SINGLE POST**/
 async function fetchSinglePost(id) {  
