@@ -157,8 +157,14 @@ function displaySinglePost( data, prevID, nextID ) {
     postModalSerie.innerText = data[0].serie ? data[0].serie  : '';
     postModalYear.innerText = data[0].year ? data[0].year : '';
 
+    postModalPrevBtn.setAttribute('post-id', data[0].id);
     postModalPrevBtn.setAttribute('prev-post-id', prevID);
+    postModalPrevBtn.setAttribute('next-post-id', nextID);
+    
+    postModalNextBtn.setAttribute('post', data[0].id);
+    postModalNextBtn.setAttribute('prev-post-id', prevID);
     postModalNextBtn.setAttribute('next-post-id', nextID);
+    
     if(!modal.classList.contains('show')) {
         modal.classList.add('show');
     }  
