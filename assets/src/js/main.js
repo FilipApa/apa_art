@@ -107,7 +107,7 @@ async function fetchSinglePost( id ) {
     try {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${id}`);
         let data = await response.json();
-        console.log(data)
+        console.log(data);
         return data;
     } catch( error ) {
         console.log( error );
@@ -120,8 +120,8 @@ function getDOMPosts() {
         for( let post of postCard ) {
         let postIds = {
             "pId" : post.dataset.postId,
-            "prevID" : post.dataset.prevId,
-            "nextID" : post.dataset.nextId
+            "prevId" : post.dataset.prevId,
+            "nextId" : post.dataset.nextId
         }    
  
         postsIds.push( postIds );
@@ -133,21 +133,12 @@ function getDOMPosts() {
             const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
             const nextPostID = post.dataset.nextId ? post.dataset.nextId : null;
 
-            const singlePost =  fetchSinglePost( postID );
-            singlePost.then( data => {
-                if( data ) {
-                    displaySinglePost( data, prevPostID, nextPostID );
-                }
-        
-            }).catch( error => {
-                console.log( error );
-            });
+            comboFuncFetchDisplayPost(postID, prevPostID, nextPostID);
         })
     }
-    console.log(postsIds);
 }
 
-function displaySinglePost( data, prevID, nextID ) {
+function displaySinglePost( data, prevId, nextId ) {
     postModalTitle.innerText = data[0].title;
 
     const imgWrapper = document.createElement( 'div' );
@@ -157,17 +148,44 @@ function displaySinglePost( data, prevID, nextID ) {
     postModalSerie.innerText = data[0].serie ? data[0].serie  : '';
     postModalYear.innerText = data[0].year ? data[0].year : '';
 
-    postModalPrevBtn.setAttribute('post-id', data[0].id);
-    postModalPrevBtn.setAttribute('prev-post-id', prevID);
-    postModalPrevBtn.setAttribute('next-post-id', nextID);
+    postModalPrevBtn.setAttribute('data-post-id', data[0].id);
+    postModalPrevBtn.setAttribute('data-prev-post-id', prevId);
+    postModalPrevBtn.setAttribute('data-next-post-id', nextId);
     
-    postModalNextBtn.setAttribute('post', data[0].id);
-    postModalNextBtn.setAttribute('prev-post-id', prevID);
-    postModalNextBtn.setAttribute('next-post-id', nextID);
-    
+    postModalNextBtn.setAttribute('data-post-id', data[0].id);
+    postModalNextBtn.setAttribute('data-prev-post-id', prevId);
+    postModalNextBtn.setAttribute('data-next-post-id', nextId);
+
     if(!modal.classList.contains('show')) {
         modal.classList.add('show');
     }  
+}
+
+function comboFuncFetchDisplayPost(pId, prevPId, nextPId ) {
+    const singlePost =  fetchSinglePost( pId );
+    singlePost.then( data => {
+        if( data ) {
+            displaySinglePost( data, prevPId, nextPId );
+        }
+
+    }).catch( error => {
+        console.log( error );
+    });
+}
+
+function nextPost(postId) {
+    let prevPId;
+    let nextPId;
+    let count = 0;
+    for(let post of postsIds) {
+        if(post.pId === postId) {
+            prevPId = postId;
+
+        }
+        count++;
+    }
+
+    comboFuncFetchDisplayPost(postId, prevPId, nextPId )
 }
 
 // SINGLE POST EVENTS
@@ -183,3 +201,13 @@ postModalCloseBtn.addEventListener( 'click', () => {
     postModalContent.replaceChildren();
     modal.classList.remove( 'show' )
 });
+
+postModalPrevBtn.addEventListener('click', () => {
+    let pId = postModalPrevBtn.dataset.postId;
+    nextPrevPosts(pId);
+})
+
+postModalNextBtn.addEventListener('click', () => {
+    let pId = postModalNextBtn.dataset.postId;
+    nextPrevPosts(pId);
+})
