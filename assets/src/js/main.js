@@ -115,9 +115,15 @@ async function fetchSinglePost( id ) {
 
 function getDOMPosts() {
     postCard = document.getElementsByClassName( 'card-img-top' );
-    postsIds = [];
-    for( let post of postCard ) {
-        postsIds.push(post.dataset);
+    let count = 0;
+        for( let post of postCard ) {
+        let postIds = {
+            "pId" : post.dataset.postId,
+            "prevID" : post.dataset.prevId,
+            "nextID" : post.dataset.nextId
+        }    
+ 
+        postsIds.push( postIds );
     }
     for( let post of postCard ) {
         post.addEventListener( 'click', () => {
