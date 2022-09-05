@@ -17,7 +17,9 @@ const postModalYear = document.getElementById( 'post-year' );
 const postModalCloseBtn = document.getElementById( 'post-modal-close' );
 const postModalPrevBtn = document.getElementById( 'post-modal-prev' );
 const postModalNextBtn = document.getElementById( 'post-modal-next' );
+const postCads = document.getElementsByClassName('card-post');
 let postCard;
+let postsIds = [];
 
 function getCheckValues( inputFields ) {
     let counter = 0;
@@ -113,12 +115,15 @@ async function fetchSinglePost( id ) {
 
 function getDOMPosts() {
     postCard = document.getElementsByClassName( 'card-img-top' );
+    postsIds = [];
+    for( let post of postCard ) {
+        postsIds.push(post.dataset);
+    }
     for( let post of postCard ) {
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
             const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
             const nextPostID = post.dataset.nextId ? post.dataset.nextId : null;
-            console.log(prevPostID,nextPostID);
 
             const singlePost =  fetchSinglePost( postID );
             singlePost.then( data => {
@@ -131,6 +136,7 @@ function getDOMPosts() {
             });
         })
     }
+    console.log(postsIds);
 }
 
 function displaySinglePost( data, prevID, nextID ) {
