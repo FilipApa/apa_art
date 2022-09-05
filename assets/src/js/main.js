@@ -107,38 +107,13 @@ async function fetchSinglePost( id ) {
     try {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${id}`);
         let data = await response.json();
-        console.log(data);
         return data;
     } catch( error ) {
         console.log( error );
     }
 }
 
-function getDOMPosts() {
-    postCard = document.getElementsByClassName( 'card-img-top' );
-
-        for( let post of postCard ) {
-        let postIds = {
-            "pId" : post.dataset.postId,
-            "prevId" : post.dataset.prevId,
-            "nextId" : post.dataset.nextId
-        }    
- 
-        postsIds.push( postIds );
-    }
-
-    for( let post of postCard ) {
-        post.addEventListener( 'click', () => {
-            const postID = post.dataset.postId;
-            const prevPostID = post.dataset.prevId ? post.dataset.prevId : null;
-            const nextPostID = post.dataset.nextId ? post.dataset.nextId : null;
-
-            comboFuncFetchDisplayPost(postID, prevPostID, nextPostID);
-        })
-    }
-}
-
-function displaySinglePost( data, prevId, nextId ) {
+function displaySinglePost( data ) {
     postModalTitle.innerText = data[0].title;
 
     const imgWrapper = document.createElement( 'div' );
@@ -147,25 +122,39 @@ function displaySinglePost( data, prevId, nextId ) {
 
     postModalSerie.innerText = data[0].serie ? data[0].serie  : '';
     postModalYear.innerText = data[0].year ? data[0].year : '';
-
-    postModalPrevBtn.setAttribute('data-post-id', data[0].id);
-    postModalPrevBtn.setAttribute('data-prev-post-id', prevId);
-    postModalPrevBtn.setAttribute('data-next-post-id', nextId);
+ 
+    let postId = data[0].id;
+    postId = postId.toString();
     
-    postModalNextBtn.setAttribute('data-post-id', data[0].id);
-    postModalNextBtn.setAttribute('data-prev-post-id', prevId);
-    postModalNextBtn.setAttribute('data-next-post-id', nextId);
+    let count = 0;
+    let prevId;
+    let nextId;
+    
+ 
+    for(let post of postsIds) {
+        if(postId == post.pId) {
+
+        postsIds[count-1] ? prevId = postsIds[count-1].pId : prevId = null;
+        postsIds[count+1] ? nextId = postsIds[count+1].pId : nextId = null;
+        }
+
+        count++;
+    }
+
+    postModalPrevBtn.setAttribute('data-post-id', prevId );
+    
+    postModalNextBtn.setAttribute('data-post-id', nextId);
 
     if(!modal.classList.contains('show')) {
         modal.classList.add('show');
     }  
 }
 
-function comboFuncFetchDisplayPost(pId, prevPId, nextPId ) {
+function comboFuncFetchDisplayPost( pId ) {
     const singlePost =  fetchSinglePost( pId );
     singlePost.then( data => {
         if( data ) {
-            displaySinglePost( data, prevPId, nextPId );
+            displaySinglePost( data );
         }
 
     }).catch( error => {
@@ -173,20 +162,26 @@ function comboFuncFetchDisplayPost(pId, prevPId, nextPId ) {
     });
 }
 
-function nextPost(postId) {
-    let prevPId;
-    let nextPId;
-    let count = 0;
-    for(let post of postsIds) {
-        if(post.pId === postId) {
-            prevPId = postId;
+function getDOMPosts() {
+    postCard = document.getElementsByClassName( 'card-img-top' );
 
-        }
-        count++;
+        for( let post of postCard ) {
+        let postIds = {
+            "pId" : post.dataset.postId
+        }    
+ 
+        postsIds.push( postIds );
     }
 
-    comboFuncFetchDisplayPost(postId, prevPId, nextPId )
+    for( let post of postCard ) {
+        post.addEventListener( 'click', () => {
+            const postID = post.dataset.postId;
+
+            comboFuncFetchDisplayPost(postID);
+        })
+    }
 }
+
 
 // SINGLE POST EVENTS
 document.addEventListener("DOMContentLoaded", getDOMPosts());
@@ -199,15 +194,16 @@ mutationObserver.observe( templateGrid, { childList: true });
 
 postModalCloseBtn.addEventListener( 'click', () => {
     postModalContent.replaceChildren();
-    modal.classList.remove( 'show' )
+    modal.classList.remove( 'show' );
 });
 
 postModalPrevBtn.addEventListener('click', () => {
     let pId = postModalPrevBtn.dataset.postId;
-    nextPrevPosts(pId);
+    comboFuncFetchDisplayPost( pId );
 })
 
 postModalNextBtn.addEventListener('click', () => {
     let pId = postModalNextBtn.dataset.postId;
-    nextPrevPosts(pId);
+    console.log(pId)
+    comboFuncFetchDisplayPost( pId );
 })
