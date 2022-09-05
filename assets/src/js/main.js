@@ -60,7 +60,7 @@ function displayFilteredData( posts ) {
             
             column.innerHTML = ` 
             <div class="card card-post">
-                <div class="card-img-top" data-post-id="${post.id}" data-prev-id="${counter === 0 ? null : posts.postData[counter - 1].id}" data-next-id="${counter === posts.postData.length-1 ? null : posts.postData[counter + 1].id}">
+                <div class="card-img-top" data-post-id="${post.id}" >
                     ${post.thumbnail}
                 </div>
                 <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
@@ -132,7 +132,7 @@ function displaySinglePost( data ) {
     
  
     for(let post of postsIds) {
-        if(postId == post.pId) {
+        if(postId === post.pId) {
 
         postsIds[count-1] ? prevId = postsIds[count-1].pId : prevId = null;
         postsIds[count+1] ? nextId = postsIds[count+1].pId : nextId = null;
