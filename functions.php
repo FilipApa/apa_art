@@ -299,17 +299,20 @@ function apa_get_single_post($id) {
     $cat_id;
     if( $category ) { $cat_id = $category["0"]->term_id;}
 
-    $taxonomies = wp_get_post_terms(  $post_ID, [ 'year', 'serie']);
-    $post_tax = array();
-    if($taxonomies) {
-      foreach($taxonomies as $key => $tax) {
-        array_push($post_tax, array(
-          'taxName' => $tax->name,
-          'taxLink' => get_term_link($tax)
-        ));
-      }
+    $serie = wp_get_post_terms(  $post_ID, ['serie']);
+    if($serie) {
+      $serie = $serie[0]->name;
+    } else {
+      $serie = null;
     }
 
+    $year = wp_get_post_terms(  $post_ID, ['year']);
+    if($year) {
+      $year = $year[0]->name;
+    } else {
+      $year = null;
+    }
+ 
     $prev_post = get_adjacent_post( false, '', true) ;
     $prev_post_id = null;
     if( !empty( $prev_post )) {
@@ -331,7 +334,8 @@ function apa_get_single_post($id) {
       'categoryName' => $category["0"]->cat_name,
       'prevPostIDWP' => $prev_post_id,
       'nextPostIDWP' => $next_post_id,
-      'taxonomies' => $post_tax
+      'serie' => $serie,
+      'year' => $year
     ));
   }
  

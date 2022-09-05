@@ -107,6 +107,7 @@ async function fetchSinglePost( id ) {
     try {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${id}`);
         let data = await response.json();
+        console.log(data)
         return data;
     } catch( error ) {
         console.log( error );
@@ -115,7 +116,7 @@ async function fetchSinglePost( id ) {
 
 function getDOMPosts() {
     postCard = document.getElementsByClassName( 'card-img-top' );
-    let count = 0;
+
         for( let post of postCard ) {
         let postIds = {
             "pId" : post.dataset.postId,
@@ -125,6 +126,7 @@ function getDOMPosts() {
  
         postsIds.push( postIds );
     }
+
     for( let post of postCard ) {
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
@@ -152,8 +154,8 @@ function displaySinglePost( data, prevID, nextID ) {
     imgWrapper.innerHTML = data[0].content;
     postModalContent.insertAdjacentElement( 'afterbegin', imgWrapper );
 
-    postModalSerie.innerText = data[0].taxonomies[0] ? data[0].taxonomies[0].taxName  : '';
-    postModalYear.innerText = data[0].taxonomies[1] ? data[0].taxonomies[1].taxName : '';
+    postModalSerie.innerText = data[0].serie ? data[0].serie  : '';
+    postModalYear.innerText = data[0].year ? data[0].year : '';
 
     postModalPrevBtn.setAttribute('prev-post-id', prevID);
     postModalNextBtn.setAttribute('next-post-id', nextID);
