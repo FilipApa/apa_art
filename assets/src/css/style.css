@@ -149,20 +149,26 @@ img {
 .post-modal-footer .post-modal-arrows {
     margin-bottom: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    position: relative;
 }
 
 .post-modal-header .post-modal-close {
     border-left: 1px solid rgba(0, 0, 0, 0.4);
 }
 
+.post-modal-footer .post-arrow-btn.prev, 
+.post-modal-footer .post-arrow-btn.next {
+    position: absolute;
+}
+
 .post-modal-footer .post-arrow-btn.prev {
-    margin-right: 0;
-    margin-left: -20px;
+    left: 20px;
     border-right: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .post-modal-footer .post-arrow-btn.next {
     border-left: 1px solid rgba(0, 0, 0, 0.4);
+    right: 20px;
 }
 
 .post-modal-footer .post-category {

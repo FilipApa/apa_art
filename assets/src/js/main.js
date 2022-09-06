@@ -115,7 +115,7 @@ async function fetchSinglePost( id ) {
 
 function displaySinglePost( data ) {
     postModalTitle.innerText = data[0].title;
-
+    postModalContent.replaceChildren();
     const imgWrapper = document.createElement( 'div' );
     imgWrapper.innerHTML = data[0].content;
     postModalContent.insertAdjacentElement( 'afterbegin', imgWrapper );
@@ -141,7 +141,21 @@ function displaySinglePost( data ) {
         count++;
     }
 
-    postModalPrevBtn.setAttribute('data-post-id', prevId );
+    if(prevId) {
+        postModalPrevBtn.hidden = false;
+        postModalPrevBtn.setAttribute('data-post-id', prevId );
+    } else {
+        postModalPrevBtn.hidden = true;
+    }
+
+    if(nextId) {
+        postModalNextBtn.hidden = false;
+        postModalNextBtn.setAttribute('data-post-id', nextId);
+
+    } else {
+        postModalNextBtn.hidden = true;
+    }
+
     
     postModalNextBtn.setAttribute('data-post-id', nextId);
 
@@ -204,6 +218,5 @@ postModalPrevBtn.addEventListener('click', () => {
 
 postModalNextBtn.addEventListener('click', () => {
     let pId = postModalNextBtn.dataset.postId;
-    console.log(pId)
     comboFuncFetchDisplayPost( pId );
 })
