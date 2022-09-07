@@ -53,7 +53,6 @@ function displayFilteredData( posts ) {
     numPosts.innerText = getNumPosts;
 
     const taxonomy = document.createElement( 'div' );
-    let counter = 0;
         for(let post of posts.postData) {
             const column = document.createElement( 'div' );
             column.classList.add( 'post' );
@@ -79,7 +78,6 @@ function displayFilteredData( posts ) {
             </div>    
             `; 
             row.appendChild( column );
-            counter++;
         }
     templateGrid.appendChild( row );
 }
