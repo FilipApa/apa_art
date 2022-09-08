@@ -1,14 +1,14 @@
 const siteBody = document.getElementById( 'site-body' ).dataset.websiteUrl;
 const currentPageCategory = document.getElementById( 'container-category' ).dataset.postCategory;
 
+//for filter
 const inputElementsYear = document.getElementsByClassName( 'form-check-input-year' );
 const inputElementsSerie = document.getElementsByClassName( 'form-check-input-series' );
-
 const templateGrid = document.getElementById( 'template-grid-content' );
 const filterBtn = document.getElementById( 'filterBtn' );
 const numPosts = document.getElementById( 'num-posts' );
 
-//modal
+//for modal
 const modal = document.getElementById( 'post-modal' );
 const postModalTitle = document.getElementById( 'post-modal-title' );
 const postModalContent = document.getElementById( 'post-modal-content' );
@@ -17,9 +17,12 @@ const postModalYear = document.getElementById( 'post-year' );
 const postModalCloseBtn = document.getElementById( 'post-modal-close' );
 const postModalPrevBtn = document.getElementById( 'post-modal-prev' );
 const postModalNextBtn = document.getElementById( 'post-modal-next' );
-const postCads = document.getElementsByClassName('card-post');
+const postCads = document.getElementsByClassName( 'card-post' );
 let postCard;
 let postsIds = [];
+
+//for pagination
+const pagination = document.getElementById( 'post-pagination' )
 
 function getCheckValues( inputFields ) {
     let counter = 0;
@@ -80,6 +83,20 @@ function displayFilteredData( posts ) {
             row.appendChild( column );
         }
     templateGrid.appendChild( row );
+
+    //Pagination
+    pagination.replaceChildren();
+
+    const paginationH2 = document.createElement('h2');
+    paginationH2.hidden = true;
+    paginationH2.innerText = "Pagination";
+
+    pagination.insertAdjacentElement('afterbegin', paginationH2);
+
+    const paginationNavWraper = document.createElement('div');
+    paginationNavWraper.classList.add('pagination-nav-wrapper');
+    
+    console.log(posts.pages)
 }
 
 if(filterBtn) {
