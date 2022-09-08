@@ -91,11 +91,31 @@ function displayFilteredData( posts ) {
     paginationH2.hidden = true;
     paginationH2.innerText = "Pagination";
 
-    pagination.insertAdjacentElement('afterbegin', paginationH2);
+    pagination.insertAdjacentElement('beforeend', paginationH2);
 
     const paginationNavWraper = document.createElement('div');
     paginationNavWraper.classList.add('pagination-nav-wrapper');
-    
+
+    for(let count = 1; count <= posts.pages; count++) {
+        if(count === 1) {
+            let paginaitonCurrent = document.createElement('span');
+            paginaitonCurrent.setAttribute('aria-current', 'page');
+            paginaitonCurrent.setAttribute('data-current-page', count);
+            paginaitonCurrent.classList.add('page-numbers', 'current');
+            paginaitonCurrent.innerText = count;
+            paginationNavWraper.insertAdjacentElement('beforeend', paginaitonCurrent);
+
+        } else {
+            let paginaitonPage = document.createElement('span');
+            paginaitonPage.setAttribute('data-page', count);
+            paginaitonPage.classList.add('page-numbers');
+            paginaitonPage.innerText = count;
+            paginationNavWraper.insertAdjacentElement('beforeend', paginaitonPage);
+        }
+    }
+
+    pagination.insertAdjacentElement('afterend', paginationNavWraper);
+
     console.log(posts.pages)
 }
 
