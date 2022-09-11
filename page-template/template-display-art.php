@@ -21,15 +21,16 @@ if ($slug) {
     
     $query = new WP_Query( $args );
 }      
-    $num_of_post = $query-> post_count; 
-
+    $category_id = get_cat_ID( $slug );
+    $category = get_the_category( $category_id );
+    $num_of_posts = $category[0]->category_count;
 ?>
     <div id="container-category" data-post-category="<?php echo esc_html( $slug ); ?>" data-website-url="<?php echo home_url(); ?>" >
         
         <?php // BREADCRUMB TEMPLATE ?>
         <div class="post-breadcrumb">
             <?php get_template_part( './template-parts/breadcrumb/breadcrumb'); ?>   
-            <span>Posts: <strong id="num-posts"><?php echo $num_of_post; ?></strong></span>
+            <span>Posts: <strong id="num-posts"><?php echo $num_of_posts; ?></strong></span>
         </div>
 
         <div class="post-container">

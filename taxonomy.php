@@ -1,27 +1,31 @@
 <?php get_header(); ?>
 <?php
-$current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
-    // Get the page slugs
-    $taxonomy = $current_page->taxonomy;
-    $tax_term = $current_page->slug;
+    $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
+        // Get the page slugs
+        $taxonomy = $current_page->taxonomy;
+        $tax_term = $current_page->slug;
 
-if(is_tax( $taxonomy )) {
-    $args = array(
-        'paged' => get_query_var( 'paged', 1),
-        'post_type' => 'post',
-        'posts_per_page' => 9,
-        'order' => 'ASC',
-        'tax_query' => array(
-            array(
-                'taxonomy' => $taxonomy,
-                'field'    => 'slug',
-                'terms'    => $tax_term
+    if(is_tax( $taxonomy )) {
+        $args = array(
+            'paged' => get_query_var( 'paged', 1),
+            'post_type' => 'post',
+            'posts_per_page' => 9,
+            'order' => 'ASC',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'slug',
+                    'terms'    => $tax_term
+                ),
             ),
-        ),
-    );
-    $query = new WP_Query( $args );
-    $num_of_post = $query-> post_count; 
-    } ?>
+        );
+
+        $query = new WP_Query( $args );
+    } 
+
+    $query_object = get_queried_object();
+    $num_of_post = $query_object-> count; 
+    ?>
     
     <div id="container-category" data-post-category="<?php echo esc_html( $taxonomy ); ?>" data-website-url="<?php echo home_url(); ?>" >
         
