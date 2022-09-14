@@ -35,8 +35,9 @@ function getCheckValues( inputFields ) {
 
 async function fetchPosts(p, y, s) {  
     try {
-        let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${currentPageCategory}/${p}?year=${y}&serie=${s}`);
+        let response = await fetch(`${siteBody}/wp-json/apa/v1/filter/${currentPageCategory}/${p}?year=${y}&serie=${s}`);
         let data = await response.json();
+        console.log(data);
         return data;
     } catch( error ) {
         console.log( error );
@@ -176,7 +177,7 @@ function comboFuncFetchDisplayPost( pId ) {
 
 function getDOMPosts() {
     postCard = document.getElementsByClassName( 'card-img-top' );
-
+        postsIds = [];
         for( let post of postCard ) {
         let postIds = {
             "pId" : post.dataset.postId
@@ -185,6 +186,7 @@ function getDOMPosts() {
         postsIds.push( postIds );
     }
 
+    console.log(postsIds);
     for( let post of postCard ) {
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;

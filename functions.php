@@ -99,54 +99,6 @@
       return $num_of_post; 
   }  
 
-  //PAGINATION WITH BOOTSTRAP
-  function bootstrap_pagination( $wp_query = false, $echo = true, $args = array() ) {
-    //Fallback to $wp_query global variable if no query passed
-    if ( false === $wp_query ) {
-        global $wp_query;
-    }
-      
-    //Set Defaults
-    $defaults = array(
-        'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-        'format'       => '?paged=%#%',
-        'current'      => max( 1, get_query_var( 'paged' ) ),
-        'total'        => $wp_query->max_num_pages,
-        'type'         => 'array',
-        'show_all'     => false,
-        'end_size'     => 2,
-        'mid_size'     => 1,
-        'prev_text'    => __( 'Prev' ),
-        'next_text'    => __( 'Next' ),
-        'add_fragment' => '',
-    );
-      
-    //Merge the defaults with passed arguments
-    $merged = wp_parse_args( $args, $defaults );
-      
-    //Get the paginated links
-    $lists = paginate_links($merged);
-  
-    if ( is_array( $lists ) ) {
-          
-        $html = '<nav class="mt-5"><ul class="pagination justify-content-center">';
-  
-        foreach ( $lists as $list ) {
-            $html .= '<li class="page-item' . (strpos($list, 'current') !== false ? ' active' : '') . '"> ' . str_replace('page-numbers', 'page-link', $list) . '</li>';
-        }
-  
-        $html .= '</ul></nav>';
-  
-        if ( $echo ) {
-            echo $html;
-        } else {
-            return $html;
-        }
-    }
-      
-    return false;
-};
-
 //FUNCTIONS FOR FILTERING POSTS BY TAXONOMIES
 function filter_by_cat_and_terms( $category, ...$paramatars ) {
   $rest_params = [];
@@ -219,7 +171,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
         }
     } else {
       $args = array(
-        'paged' => get_query_var( 'paged', 1),
+        'paged' => $page,
         'post_per_page' => 9,
         'post_type' => 'post',
         'order' => 'ASC',
@@ -259,7 +211,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
   return $data;
 }
 
-function apa_post_by_paintings($params) {
+function apa_filter_paintings($params) {
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
   $page = $params['page'];
@@ -268,7 +220,7 @@ function apa_post_by_paintings($params) {
   return $filterdPosts;
 }
 
-function apa_post_by_digital_art($params) {
+function apa_filter_digital_art($params) {
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
   $page = $params['page'];
@@ -345,18 +297,18 @@ function apa_get_single_post($id) {
 }
 
 add_action( 'rest_api_init', function() {
-  register_rest_route( 'apa/v1', 'posts/paintings/(?P<page>[1-9]{1,2})', array(
+  register_rest_route( 'apa/v1', 'filter/paintings/(?P<page>[1-9]{1,2})', array(
     'methods' => WP_REST_SERVER::READABLE,
-    'callback' => 'apa_post_by_paintings',
+    'callback' => 'apa_filter_paintings',
     'args' => array(
       'page' => array (
           'required' => true
         ) 
       )
     ));
-    register_rest_route( 'apa/v1', 'posts/digital-art/(?P<page>[1-9]{1,2})', array(
+    register_rest_route( 'apa/v1', 'filter/digital-art/(?P<page>[1-9]{1,2})', array(
       'methods' => WP_REST_SERVER::READABLE,
-      'callback' => 'apa_post_by_digital_art',
+      'callback' => 'apa_filter_digital_art',
       'args' => array(
         'page' => array (
             'required' => true

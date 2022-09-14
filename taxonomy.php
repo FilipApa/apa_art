@@ -49,16 +49,9 @@
         </div>
 
     </div>
-    <div class="post-pagination" id="post-pagination">
-        <?php 
-            // PAGINATION
-            the_posts_pagination( array(
-                'mid_size' => 2,
-                'prev_text' => __( 'Previous Page', 'textdomain' ),
-                'next_text' => __( 'Next Page', 'textdomain' ),
-                ) );
-            wp_reset_postdata();
-        ?>
+    
+    <div class="btn__wrapper">
+        <a href="#!" class="btn btn__primary" id="load-more">Load more</a>
     </div>
 
     <div class="post-modal" id="post-modal">
