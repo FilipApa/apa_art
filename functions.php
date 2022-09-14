@@ -6,7 +6,7 @@
       wp_register_style('apa-bootsrap', get_template_directory_uri() . '/assets/src/library/bootstrap/css/bootstrap.min.css', [], false, 'all');
       
       // Register scrpts
-      wp_register_script('apa-main-script',  get_template_directory_uri() . '/assets/src/js/main.js', [], filemtime(get_template_directory() . '/assets/src/js/main.js'), true);
+      wp_register_script('apa-main-script',  get_template_directory_uri() . '/assets/src/js/main.js', array( 'jquery' ), filemtime(get_template_directory() . '/assets/src/js/main.js'), true);
       wp_register_script('apa-bootsrap-js', get_template_directory_uri() . '/assets/src/library/bootstrap/js/bootstrap.js', array( 'jquery' ), false, true);
 
       // Enqueue styles
@@ -367,7 +367,4 @@ add_action( 'rest_api_init', function() {
         'methods' => 'GET',
         'callback' => 'apa_get_single_post',
         ) );
-
-})
-?>
-
+});

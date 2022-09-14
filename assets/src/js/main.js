@@ -21,9 +21,6 @@ const postCads = document.getElementsByClassName( 'card-post' );
 let postCard;
 let postsIds = [];
 
-//for pagination
-const pagination = document.getElementById( 'post-pagination' )
-
 function getCheckValues( inputFields ) {
     let counter = 0;
     const checkedValues = new Object;
@@ -83,40 +80,6 @@ function displayFilteredData( posts ) {
             row.appendChild( column );
         }
     templateGrid.appendChild( row );
-
-    //Pagination
-    pagination.replaceChildren();
-
-    const paginationH2 = document.createElement('h2');
-    paginationH2.hidden = true;
-    paginationH2.innerText = "Pagination";
-
-    pagination.insertAdjacentElement('beforeend', paginationH2);
-
-    const paginationNavWraper = document.createElement('div');
-    paginationNavWraper.classList.add('pagination-nav-wrapper');
-
-    for(let count = 1; count <= posts.pages; count++) {
-        if(count === 1) {
-            let paginaitonCurrent = document.createElement('span');
-            paginaitonCurrent.setAttribute('aria-current', 'page');
-            paginaitonCurrent.setAttribute('data-current-page', count);
-            paginaitonCurrent.classList.add('page-numbers', 'current');
-            paginaitonCurrent.innerText = count;
-            paginationNavWraper.insertAdjacentElement('beforeend', paginaitonCurrent);
-
-        } else {
-            let paginaitonPage = document.createElement('span');
-            paginaitonPage.setAttribute('data-page', count);
-            paginaitonPage.classList.add('page-numbers');
-            paginaitonPage.innerText = count;
-            paginationNavWraper.insertAdjacentElement('beforeend', paginaitonPage);
-        }
-    }
-
-    pagination.insertAdjacentElement('afterend', paginationNavWraper);
-
-    console.log(posts.pages)
 }
 
 if(filterBtn) {
@@ -231,7 +194,6 @@ function getDOMPosts() {
     }
 }
 
-
 // SINGLE POST EVENTS
 document.addEventListener("DOMContentLoaded", getDOMPosts());
 
@@ -255,3 +217,6 @@ postModalNextBtn.addEventListener('click', () => {
     let pId = postModalNextBtn.dataset.postId;
     comboFuncFetchDisplayPost( pId );
 })
+
+
+

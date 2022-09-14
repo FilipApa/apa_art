@@ -6,6 +6,7 @@
 
 <?php get_header(); ?>
 <?php
+global $current_page;
 $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
 // Get the page slug
 $slug = $current_page->slug;
@@ -40,37 +41,19 @@ if ($slug) {
             
             <div class="post-wrapper container" id="template-grid-content">
             <?php  // WP LOOP
-                $index         = 0;
-                $no_of_columns = 3;
-                while($query->have_posts()) : $query->the_post(); 
-                if ( $index % $no_of_columns === 0  ) { ?>
+                while($query->have_posts()) : $query->the_post(); ?>
 
-                <div class="post-row">
-                <?php } ?>
-                    
-                    <?php // CARD TEMPLATE ?>
-                    <div class="post"  >
-                        <?php get_template_part( './template-parts/card/card'); ?>    
-                    </div>
-
-            <?php 
-            $index ++;
-            if ( $index !== 0  && $index % $no_of_columns === 0 ) { ?>
-            </div> 
-            <?php } endwhile; ?>
+                <?php // CARD TEMPLATE ?>
+                <div class="post">
+                    <?php get_template_part( './template-parts/card/card'); ?>    
+                </div>    
+            <?php endwhile; ?>
+            </div>
         </div>
-
     </div>
-    <div class="post-pagination" id="post-pagination">
-        <?php 
-            // PAGINATION
-            the_posts_pagination( array(
-                'mid_size' => 2,
-                'prev_text' => __( 'Previous Page', 'textdomain' ),
-                'next_text' => __( 'Next Page', 'textdomain' ),
-                ) );
-            wp_reset_postdata();
-        ?>
+
+    <div class="btn__wrapper">
+        <a href="#!" class="btn btn__primary" id="load-more">Load more</a>
     </div>
 
     <div class="post-modal" id="post-modal">
