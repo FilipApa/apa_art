@@ -39,7 +39,6 @@ function getCheckValues( inputFields ) {
 }
 
 //GET POSTS
-
 async function fetchPosts(p, y, s) {  
     try {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/filter/${currentPageCategory}/${p}?year=${y}&serie=${s}`);
@@ -52,7 +51,6 @@ async function fetchPosts(p, y, s) {
 }
 
 //FILTER POSTS
-
 function displayFilteredData( posts ) {
     templateGrid.innerHTML = '';
 
@@ -110,7 +108,7 @@ if(filterBtn) {
     });
 }
 
-/**SINGLE POST**/
+//SINGLE POST
 async function fetchSinglePost( id ) {  
     try {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/posts/${id}`);
@@ -172,6 +170,7 @@ function displaySinglePost( data ) {
     }  
 }
 
+//GET POSTS IDS FROM STATE POST IDS
 function comboFuncFetchDisplayPost( pId ) {
     const singlePost =  fetchSinglePost( pId );
     singlePost.then( data => {
@@ -184,6 +183,7 @@ function comboFuncFetchDisplayPost( pId ) {
     });
 }
 
+//SET POSTS IDS TO STATE POST IDS
 function getDOMPosts() {
     postCard = document.getElementsByClassName( 'card-img-top' );
         postsIds = [];
