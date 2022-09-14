@@ -18,8 +18,13 @@ const postModalCloseBtn = document.getElementById( 'post-modal-close' );
 const postModalPrevBtn = document.getElementById( 'post-modal-prev' );
 const postModalNextBtn = document.getElementById( 'post-modal-next' );
 const postCads = document.getElementsByClassName( 'card-post' );
+
+//for posts
 let postCard;
 let postsIds = [];
+
+//for load more
+const loadMoreBtn = document.getElementById('post-load-more');
 
 function getCheckValues( inputFields ) {
     let counter = 0;
@@ -33,6 +38,8 @@ function getCheckValues( inputFields ) {
     return JSON.stringify( checkedValues );
 }
 
+//GET POSTS
+
 async function fetchPosts(p, y, s) {  
     try {
         let response = await fetch(`${siteBody}/wp-json/apa/v1/filter/${currentPageCategory}/${p}?year=${y}&serie=${s}`);
@@ -43,6 +50,8 @@ async function fetchPosts(p, y, s) {
         console.log( error );
     }
 }
+
+//FILTER POSTS
 
 function displayFilteredData( posts ) {
     templateGrid.innerHTML = '';
@@ -196,7 +205,9 @@ function getDOMPosts() {
     }
 }
 
-// SINGLE POST EVENTS
+// EVENTS
+
+// DOM CHANGES EVENTS
 document.addEventListener("DOMContentLoaded", getDOMPosts());
 
 const mutationObserver = new MutationObserver( entries => {
@@ -205,6 +216,7 @@ const mutationObserver = new MutationObserver( entries => {
 
 mutationObserver.observe( templateGrid, { childList: true });
 
+// SINGLE POST EVENTS
 postModalCloseBtn.addEventListener( 'click', () => {
     postModalContent.replaceChildren();
     modal.classList.remove( 'show' );
@@ -219,6 +231,8 @@ postModalNextBtn.addEventListener('click', () => {
     let pId = postModalNextBtn.dataset.postId;
     comboFuncFetchDisplayPost( pId );
 })
+
+//LOAD MORE EVENTS
 
 
 
