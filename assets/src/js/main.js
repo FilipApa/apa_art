@@ -22,9 +22,12 @@ const postCads = document.getElementsByClassName( 'card-post' );
 //for posts
 let postCard;
 let postsIds = [];
+let serie = '';
+let year = '';
 
 //for load more
 const loadMoreBtn = document.getElementById('post-load-more');
+let postsPage = 1;
 
 function getCheckValues( inputFields ) {
     let counter = 0;
@@ -41,21 +44,18 @@ function getCheckValues( inputFields ) {
 //GET POSTS
 async function fetchPosts(p, y, s) {  
     try {
-        let response = await fetch(`${siteBody}/wp-json/apa/v1/filter/${currentPageCategory}/${p}?year=${y}&serie=${s}`);
+        let response = await fetch(`${siteBody}/wp-json/apa/v1/filter/${currentPageCategory}?page=${p}&year=${y}&serie=${s}`);
+        console.log(`${siteBody}/wp-json/apa/v1/filter/${currentPageCategory}?page=${p}&year=${y}&serie=${s}`);
         let data = await response.json();
-        console.log(data);
         return data;
     } catch( error ) {
         console.log( error );
     }
 }
 
-//FILTER POSTS
-function displayFilteredData( posts ) {
+//DISPLAY POSTS
+function displayPosts( posts ) {
     templateGrid.innerHTML = '';
-
-    const row = document.createElement( 'div' );
-    row.classList.add( 'post-row' );
 
     const getNumPosts = posts.total;
     numPosts.innerText = getNumPosts;
@@ -85,27 +85,8 @@ function displayFilteredData( posts ) {
                 </div>
             </div>    
             `; 
-            row.appendChild( column );
+            templateGrid.appendChild( column );
         }
-    templateGrid.appendChild( row );
-}
-
-if(filterBtn) {
-    filterBtn.addEventListener( 'click', () => {
-        const year = getCheckValues( inputElementsYear );
-        const serie = getCheckValues( inputElementsSerie );
-        const page = 1;
-        const filterdPosts = fetchPosts( page, year, serie );
-    
-        filterdPosts.then( data => {
-            if( data ) {
-               displayFilteredData( data ); 
-            }
-    
-        }).catch(error => {
-            console.log( error );
-        });
-    });
 }
 
 //SINGLE POST
@@ -162,7 +143,6 @@ function displaySinglePost( data ) {
         postModalNextBtn.hidden = true;
     }
 
-    
     postModalNextBtn.setAttribute('data-post-id', nextId);
 
     if(!modal.classList.contains('show')) {
@@ -170,8 +150,7 @@ function displaySinglePost( data ) {
     }  
 }
 
-//GET POSTS IDS FROM STATE POST IDS
-function comboFuncFetchDisplayPost( pId ) {
+function fetchDisplayPost( pId ) {
     const singlePost =  fetchSinglePost( pId );
     singlePost.then( data => {
         if( data ) {
@@ -200,9 +179,46 @@ function getDOMPosts() {
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
 
-            comboFuncFetchDisplayPost(postID);
+            fetchDisplayPost(postID);
         })
     }
+}
+
+// LOAD MORE POSTS
+function loadMorePosts() {
+    postsPage++;
+    console.log(postsPage);
+    const posts = fetchPosts(postsPage, year, serie);
+    posts.then( posts => {
+        const taxonomy = document.createElement( 'div' );
+        for(let post of posts.postData) {
+            const column = document.createElement( 'div' );
+            column.classList.add( 'post' );
+            
+            column.innerHTML = ` 
+            <div class="card card-post">
+                <div class="card-img-top" data-post-id="${post.id}" >
+                    ${post.thumbnail}
+                </div>
+                <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
+                    <h2 class="card-title fw-semibold fs-4 ps-2 text">
+                        ${post.title}
+                    </h2>
+
+                    <div>
+                
+                    ${post.year ? taxonomy.innerText = post.year : ''}
+                  
+                    ${post.serie ? taxonomy.innerText = post.serie : ''}
+
+                    </div>
+                </div>
+            </div>    
+            `; 
+            templateGrid.appendChild( column );
+        }
+    });
+    
 }
 
 // EVENTS
@@ -224,15 +240,38 @@ postModalCloseBtn.addEventListener( 'click', () => {
 
 postModalPrevBtn.addEventListener('click', () => {
     let pId = postModalPrevBtn.dataset.postId;
-    comboFuncFetchDisplayPost( pId );
+    fetchDisplayPost( pId );
 })
 
 postModalNextBtn.addEventListener('click', () => {
     let pId = postModalNextBtn.dataset.postId;
-    comboFuncFetchDisplayPost( pId );
+    fetchDisplayPost( pId );
 })
 
-//LOAD MORE EVENTS
+//FILTER POSTS EVENT
+if(filterBtn) {
+    filterBtn.addEventListener( 'click', () => {
+        year = getCheckValues( inputElementsYear );
+        serie = getCheckValues( inputElementsSerie );
+        postsPage = 1;
+        const filterdPosts = fetchPosts( postsPage, year, serie );
+    
+        filterdPosts.then( data => {
+            if( data ) {
+               displayPosts( data ); 
+            }
+    
+        }).catch(error => {
+            console.log( error );
+        });
+    });
+}
 
+//LOAD MORE EVENT
 
+if(loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+        loadMorePosts();
+    });
+};
 

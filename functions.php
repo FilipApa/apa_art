@@ -110,14 +110,14 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
   }
 
   $page = (array)$rest_params[0];
+  $paged = $page[0];
   $years = (array)$rest_params[1];
   $series = (array)$rest_params[2];
-  
 
   if(!empty( $rest_params)) {
       if ($years && $series) { 
           $args = array(
-              'paged' => $page,
+              'paged' => $paged,
               'post_per_page' => 9,
               'post_type' => 'post',
               'order' => 'ASC',
@@ -140,7 +140,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
         
         if(!empty($years)) {
           $args = array(
-            'paged' => $page,
+            'paged' => $paged,
             'post_per_page' => 9,
             'post_type' => 'post',
             'order' => 'ASC',
@@ -155,7 +155,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
             );
         } else if(!empty($series)) {
           $args = array(
-            'paged' => $page,
+            'paged' => $paged,
             'post_per_page' => 9,
             'post_type' => 'post',
             'order' => 'ASC',
@@ -171,7 +171,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
         }
     } else {
       $args = array(
-        'paged' => $page,
+        'paged' => $paged,
         'post_per_page' => 9,
         'post_type' => 'post',
         'order' => 'ASC',
@@ -212,18 +212,19 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
 }
 
 function apa_filter_paintings($params) {
+  $page = json_decode($params->get_param('page'));
+  var_dump($page);
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
-  $page = $params['page'];
   $filterdPosts =  filter_by_cat_and_terms( 'paintings', $page, $year, $serie );
 
   return $filterdPosts;
 }
 
 function apa_filter_digital_art($params) {
+  $page = json_decode($params->get_param('page'));
   $year = json_decode($params->get_param('year'));
   $serie = json_decode($params->get_param('serie'));
-  $page = $params['page'];
   $filterdPosts =  filter_by_cat_and_terms( 'digital-art', $page, $year, $serie );
 
   return $filterdPosts;
@@ -297,23 +298,13 @@ function apa_get_single_post($id) {
 }
 
 add_action( 'rest_api_init', function() {
-  register_rest_route( 'apa/v1', 'filter/paintings/(?P<page>[1-9]{1,2})', array(
+  register_rest_route( 'apa/v1', 'filter/paintings', array(
     'methods' => WP_REST_SERVER::READABLE,
-    'callback' => 'apa_filter_paintings',
-    'args' => array(
-      'page' => array (
-          'required' => true
-        ) 
-      )
+    'callback' => 'apa_filter_paintings'
     ));
-    register_rest_route( 'apa/v1', 'filter/digital-art/(?P<page>[1-9]{1,2})', array(
+    register_rest_route( 'apa/v1', 'filter/digital-art', array(
       'methods' => WP_REST_SERVER::READABLE,
-      'callback' => 'apa_filter_digital_art',
-      'args' => array(
-        'page' => array (
-            'required' => true
-          ) 
-        )
+      'callback' => 'apa_filter_digital_art'
       ));
       register_rest_route( 'apa/v1', 'posts/(?P<id>[a-zA-Z0-9-]+)', array(
         'methods' => 'GET',
