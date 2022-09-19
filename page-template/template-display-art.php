@@ -53,7 +53,7 @@ if ($slug) {
     </div>
 
     <div class="btn__wrapper">
-        <button class="btn btn__primary" id="post-load-more">Load more</button>
+        <button class="btn" id="post-load-more">Load more</button>
     </div>
 
     <div class="post-modal" id="post-modal">
