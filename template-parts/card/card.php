@@ -1,4 +1,4 @@
-<div class="card card-post" >
+<div class="card" >
     <?php 
         // Get the page slug
         $curr_slug = $GLOBALS['current_page']->slug;
@@ -15,8 +15,8 @@
     </div>
 
     <div>
-        <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
-            <h2 class="card-title fw-semibold fs-4 ps-2 text">
+        <div class="card-body">
+            <h2 class="card-title">
                 <?php the_title(); ?>
             </h2>
             <div>
