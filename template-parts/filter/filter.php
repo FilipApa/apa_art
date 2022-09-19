@@ -1,5 +1,5 @@
-<div class="filter-btn">  
-    <button class="" type="button" data-bs-toggle="" data-bs-target="" aria-expanded="" aria-controls="">
+<div>  
+    <button class="filter-btn" type="button">
         Filter
     </button>   
 </div>
@@ -7,23 +7,22 @@
 <div class="">
     <div class="">
         <div class="">
-            <a class="" role="button" aria-expanded="false" aria-controls="collapseYear">
+            <a class="" role="button" >
                 Year
             </a>
 
             <div class="">
-                <div class="card card-body mb-2">
+                <div class="">
                     <?php 
                         $args=array(
                         'name'    => 'year',
                         'public'   => true,
                         '_builtin' => false,
                         );
-                        $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );
                         // Get the page slug
-                        $slug = $current_page->slug;
+                        $slug = $GLOBALS['current_page']->slug;
 
-                        $output = 'names'; // or objects
+                        $output = 'names'; 
                         $operator = 'and';
                         $taxonomies=get_taxonomies($args,$output,$operator); 
 
@@ -37,7 +36,7 @@
                                     <input class="form-check-input form-check-input-year" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         <?php echo esc_html($term->name); ?> 
-                                        <span class="ms-1 text-secondary">
+                                        <span class="">
                                         <?php echo '(' . calc_num_of_posts($slug, 'year', $term->name) . ')'; ?>
                                     </span>
                                     </label>
@@ -53,7 +52,7 @@
             </a>
             
             <div class="">
-                <div class="card card-body mb-2">
+                <div class="">
                     <?php 
                         $args=array(
                         'name'    => 'serie',

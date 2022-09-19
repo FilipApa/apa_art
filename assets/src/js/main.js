@@ -66,12 +66,12 @@ function displayPosts( posts ) {
             column.classList.add( 'post' );
             
             column.innerHTML = ` 
-            <div class="card card-post">
-                <div class="card-img-top" data-post-id="${post.id}" >
+            <div class="post-card">
+                <div class="post-card-img-top" data-post-id="${post.id}" >
                     ${post.thumbnail}
                 </div>
-                <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
-                    <h2 class="card-title fw-semibold fs-4 ps-2 text">
+                <div class="post-card-body">
+                    <h2 class="post-card-title">
                         ${post.title}
                     </h2>
 
@@ -204,12 +204,12 @@ function loadMorePosts() {
                 column.classList.add( 'post' );
                 
                 column.innerHTML = ` 
-                <div class="card card-post">
-                    <div class="card-img-top" data-post-id="${post.id}" >
+                <div class="post-card">
+                    <div class="post-card-img-top" data-post-id="${post.id}" >
                         ${post.thumbnail}
                     </div>
-                    <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
-                        <h2 class="card-title fw-semibold fs-4 ps-2 text">
+                    <div class="post-card-body">
+                        <h2 class="post-card-title">
                             ${post.title}
                         </h2>
     
