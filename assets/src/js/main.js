@@ -187,38 +187,46 @@ function getDOMPosts() {
 // LOAD MORE POSTS
 function loadMorePosts() {
     postsPage++;
-    console.log(postsPage);
     const posts = fetchPosts(postsPage, year, serie);
     posts.then( posts => {
         const taxonomy = document.createElement( 'div' );
-        for(let post of posts.postData) {
-            const column = document.createElement( 'div' );
-            column.classList.add( 'post' );
-            
-            column.innerHTML = ` 
-            <div class="card card-post">
-                <div class="card-img-top" data-post-id="${post.id}" >
-                    ${post.thumbnail}
-                </div>
-                <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
-                    <h2 class="card-title fw-semibold fs-4 ps-2 text">
-                        ${post.title}
-                    </h2>
-
-                    <div>
+        const pages = posts.pages;
+        console.log(postsPage);
+        console.log(pages);
+        if(postsPage > pages) {
+            loadMoreBtn.disabled = true;
+            loadMoreBtn.innerText = 'No more posts'
+        }else {
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.innerText = 'Load more'
+            for(let post of posts.postData) {
+                const column = document.createElement( 'div' );
+                column.classList.add( 'post' );
                 
-                    ${post.year ? taxonomy.innerText = post.year : ''}
-                  
-                    ${post.serie ? taxonomy.innerText = post.serie : ''}
-
+                column.innerHTML = ` 
+                <div class="card card-post">
+                    <div class="card-img-top" data-post-id="${post.id}" >
+                        ${post.thumbnail}
                     </div>
-                </div>
-            </div>    
-            `; 
-            templateGrid.appendChild( column );
-        }
-    });
+                    <div class="card-body d-flex justify-content-between align-items-center shadow bg-white rounded py-4">
+                        <h2 class="card-title fw-semibold fs-4 ps-2 text">
+                            ${post.title}
+                        </h2>
     
+                        <div>
+                    
+                        ${post.year ? taxonomy.innerText = post.year : ''}
+                      
+                        ${post.serie ? taxonomy.innerText = post.serie : ''}
+    
+                        </div>
+                    </div>
+                </div>    
+                `; 
+                templateGrid.appendChild( column );
+            }
+        } 
+    });
 }
 
 // EVENTS
@@ -254,8 +262,10 @@ if(filterBtn) {
         year = getCheckValues( inputElementsYear );
         serie = getCheckValues( inputElementsSerie );
         postsPage = 1;
+        loadMoreBtn.disabled = false;
+        loadMoreBtn.innerText = 'Load more'
         const filterdPosts = fetchPosts( postsPage, year, serie );
-    
+        
         filterdPosts.then( data => {
             if( data ) {
                displayPosts( data ); 
