@@ -14,8 +14,8 @@
             wp_body_open();
         }
     ?>
-    <div id="page" class="site">
-        <header class="container mb-4" role="banner">
-            <?php get_template_part('template-parts/header/navigation') ?>
-        </header>
-        <main id="content" class="container site-content">   
+
+    <header class="container mb-4" role="banner">
+        <?php get_template_part('template-parts/header/navigation') ?>
+    </header>
+    <main id="content" class="container site-content" >   

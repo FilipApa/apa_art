@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 <div class="container">
-
     <section class="banner">
         <div class="row ">
             <div class="col-md-6 col-sm-12 d-flex flex-column order-2 order-md-1 justify-content-center px-4 py-2 background-shape" >
