@@ -66,12 +66,12 @@ function displayPosts( posts ) {
             column.classList.add( 'post' );
             
             column.innerHTML = ` 
-            <div class="post-card">
-                <div class="post-card-img-top" data-post-id="${post.id}" >
+            <div class="card">
+                <div class="card-img-top" data-post-id="${post.id}" >
                     ${post.thumbnail}
                 </div>
-                <div class="post-card-body">
-                    <h2 class="post-card-title">
+                <div class="card-body">
+                    <h2 class="card-title">
                         ${post.title}
                     </h2>
 
@@ -174,11 +174,10 @@ function getDOMPosts() {
         postsIds.push( postIds );
     }
 
-    console.log(postsIds);
     for( let post of postCard ) {
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
-
+            console.log(postID);
             fetchDisplayPost(postID);
         })
     }
@@ -191,8 +190,7 @@ function loadMorePosts() {
     posts.then( posts => {
         const taxonomy = document.createElement( 'div' );
         const pages = posts.pages;
-        console.log(postsPage);
-        console.log(pages);
+
         if(postsPage > pages) {
             loadMoreBtn.disabled = true;
             loadMoreBtn.innerText = 'No more posts'
@@ -204,12 +202,12 @@ function loadMorePosts() {
                 column.classList.add( 'post' );
                 
                 column.innerHTML = ` 
-                <div class="post-card">
-                    <div class="post-card-img-top" data-post-id="${post.id}" >
+                <div class="card">
+                    <div class="card-img-top" data-post-id="${post.id}" >
                         ${post.thumbnail}
                     </div>
-                    <div class="post-card-body">
-                        <h2 class="post-card-title">
+                    <div class="card-body">
+                        <h2 class="card-title">
                             ${post.title}
                         </h2>
     
@@ -278,7 +276,6 @@ if(filterBtn) {
 }
 
 //LOAD MORE EVENT
-
 if(loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
         loadMorePosts();
