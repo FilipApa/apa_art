@@ -8,7 +8,7 @@
             Year
         </button>
 
-        <ul class="filter-dropdown">
+        <ul class="filter-dropdown dropdown">
             <?php 
                 $args=array(
                 'name'    => 'year',
@@ -46,7 +46,7 @@
                 Series
             </button>
             
-            <ul class="filter-dropdown">    
+            <ul class="filter-dropdown dropdown">    
             <?php 
                 $args=array(
                 'name'    => 'serie',

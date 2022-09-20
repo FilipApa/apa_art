@@ -1,22 +1,21 @@
-<nav class="navbar ">
-  <div class="navbar-fluid">
-    <a class="navbar-brand" href="<?php echo home_url() ?>">Apaart</a>
-    <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<nav class="navbar">
+    <a class="nav-brand" href="<?php echo home_url() ?>">Apaart</a>
+    <button class="nav-toggler" id="nav-menu-btn" type="button" aria-label="Toggle navigation">
+      <span class="nav-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse" >
-      <ul class="navbar-nav">
+    <div class="nav-collapse dropdown" >
+      <ul class="nav-nav">
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown" role="button">
             Art
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="<?php echo site_url( 'category/paintings/' ) ?>">Paintings</a></li>
-            <li><a class="dropdown-item" href="<?php echo site_url( 'category/digital-art/' ) ?>">Digiral Art</a></li>
-            <li><a class="dropdown-item" href="<?php echo site_url( 'category/music/' ) ?>">Music</a></li>
+          <ul class="nav-dropdown-menu dropdown" aria-label="Toggle dropdown">
+            <li class="nav-item"><a class="nav-link" href="<?php echo site_url( 'category/paintings/' ) ?>">Paintings</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo site_url( 'category/digital-art/' ) ?>">Digiral Art</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo site_url( 'category/music/' ) ?>">Music</a></li>
           </ul>
         </li>
         <li class="nav-item ">
@@ -24,5 +23,4 @@
         </li>
       </ul>
     </div>
-  </div>
 </nav>
