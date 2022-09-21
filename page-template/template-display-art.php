@@ -35,7 +35,9 @@ if ($slug) {
         </div>
 
         <div class="post-container">
-            <div class="post-filter">
+
+            <div class="post-filter" aria-label="Sidebar filter posts">
+                <?php // FILTER ?>
                 <?php get_template_part( './template-parts/filter/filter'); ?>    
             </div>
             

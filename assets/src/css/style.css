@@ -76,6 +76,7 @@ header {
     display: flex;
     align-items: center;
     height: 100px;
+    margin-bottom: 50px;
 }
 
 .navbar {
@@ -112,7 +113,15 @@ header {
     margin: 10px 0;
 }
 /*BREADCRUMBS*/
+.post-breadcrumb,
+.breadcrumb {
+    display: flex;
+    align-items: center;
+}
 
+.post-breadcrumb {
+    justify-content: space-between;
+}
 
 /*FILTER*/
 
