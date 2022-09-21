@@ -32,6 +32,10 @@
       display: block;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   ol, ul {
       list-style: none;
   }
@@ -68,10 +72,44 @@
 }
 
 /*NAVBAR*/
+header {
+    display: flex;
+    align-items: center;
+    height: 100px;
+}
+
 .navbar {
+    width: 100%;
+}
+
+.navbar,
+.nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+}
+
+.nav .nav-item {
+    margin: 0 10px;
+} 
+
+.nav .nav-item.relative {
+    position: relative;
+}
+
+.nav .nav-dropdown-menu {
+    width: 100px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+.nav .nav-dropdown-menu.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav .nav-dropdown-menu .nav-item {
+    margin: 10px 0;
 }
 /*BREADCRUMBS*/
 

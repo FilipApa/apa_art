@@ -19,15 +19,22 @@ const postModalPrevBtn = document.getElementById( 'post-modal-prev' );
 const postModalNextBtn = document.getElementById( 'post-modal-next' );
 const postCads = document.getElementsByClassName( 'card-post' );
 
+//dropdown nav
+const navDropdown = document.getElementById('nav-dropdown');
+
+navDropdown.addEventListener('click', function() {
+    showDropdown( '#nav-dropdown' );
+});
+
+//for load more
+const loadMoreBtn = document.getElementById('post-load-more');
+let postsPage = 1;
+
 //for posts
 let postCard;
 let postsIds = [];
 let serie = '';
 let year = '';
-
-//for load more
-const loadMoreBtn = document.getElementById('post-load-more');
-let postsPage = 1;
 
 //DROPDOWN
 function showDropdown(target) {

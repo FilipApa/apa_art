@@ -1,12 +1,12 @@
 <nav class="navbar">
     <a class="nav-brand" href="<?php echo home_url() ?> ">Apaart</a>
    
-      <ul class="nav-nav">
+      <ul class="nav">
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown" role="button">
+        <li class="nav-item relative">
+          <a class="nav-link" href="#" id="nav-dropdown" role="button">
             Art
           </a>
           <ul class="nav-dropdown-menu dropdown" aria-label="Toggle dropdown">
