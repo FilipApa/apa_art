@@ -1,9 +1,6 @@
 <nav class="navbar">
-    <a class="nav-brand" href="<?php echo home_url() ?>">Apaart</a>
-    <button class="nav-toggler" id="nav-menu-btn" type="button" aria-label="Toggle navigation">
-      <span class="nav-toggler-icon"></span>
-    </button>
-    <div class="nav-collapse dropdown" >
+    <a class="nav-brand" href="<?php echo home_url() ?> ">Apaart</a>
+   
       <ul class="nav-nav">
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -22,5 +19,4 @@
           <a class="nav-link" href="#">Contact</a>
         </li>
       </ul>
-    </div>
 </nav>

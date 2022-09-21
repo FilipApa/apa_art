@@ -29,6 +29,12 @@ let year = '';
 const loadMoreBtn = document.getElementById('post-load-more');
 let postsPage = 1;
 
+//DROPDOWN
+function showDropdown(target) {
+    let targetElement = document.querySelector(`${target} + .dropdown`);
+    targetElement.classList.toggle('show');
+};
+
 function getCheckValues( inputFields ) {
     let counter = 0;
     const checkedValues = new Object;
