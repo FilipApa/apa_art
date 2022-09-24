@@ -77,4 +77,4 @@
         </div>
         <button class="filter-btn-submit" id="filterBtn" type="button">Filter</button>
     </div>
-</div>
+

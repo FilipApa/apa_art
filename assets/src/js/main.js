@@ -1,5 +1,5 @@
 const siteBody = document.getElementById( 'site-body' ).dataset.websiteUrl;
-const currentPageCategory = document.getElementById( 'container-category' ).dataset.postCategory;
+const currentPageCategory = document.getElementById( 'page-category' ).dataset.postCategory;
 
 //for filter
 const inputElementsYear = document.getElementsByClassName( 'form-check-input-year' );

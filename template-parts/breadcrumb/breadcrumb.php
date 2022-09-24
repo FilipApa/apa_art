@@ -1,7 +1,7 @@
 <?php $current_page = sanitize_post( $GLOBALS['wp_the_query']->get_queried_object() );?>
 
-<nav class="post-breadcrumb-navigation" aria-label="breadcrumb">
-    <ul class="breadcrumb">
+<nav aria-label="breadcrumb">
+    <ul>
         <li class="breadcrumb-item">
             <a href="<?php echo home_url(); ?>"> Home </a>  
         </li>

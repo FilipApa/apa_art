@@ -22,7 +22,7 @@
   function apa_features() {
       add_theme_support('title-tag');
       add_theme_support('post-thumbnails');
-      add_image_size('featuredImage', 400, 400, true);
+      add_image_size('featuredImage', 342, 342, true);
   }
   add_action('after_setup_theme', 'apa_features');
   

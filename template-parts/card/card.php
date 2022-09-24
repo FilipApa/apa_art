@@ -8,7 +8,7 @@
 
         <?php     
             if ( has_post_thumbnail( $id ) ) {?>
-                <?php echo get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') ); ?>
+                <?php echo get_the_post_thumbnail( $id, 'featuredImage' ); ?>
             <?php }
         ?>
      

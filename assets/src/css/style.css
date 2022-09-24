@@ -60,27 +60,32 @@
   }
 
   body {
+    font-size: 62.5%;
     font-family: 'Outfit', sans-serif;
     position: relative;
     overflow: auto;
     box-sizing: border-box;
     line-height: 1;
 }
-
 .container {
     margin: 0 auto;
 }
 
-/*NAVBAR*/
+/*HEADER*/
 header {
     display: flex;
     align-items: center;
     height: 100px;
-    margin-bottom: 50px;
 }
 
+header.container {
+    margin-bottom: 40px;
+}
+
+/*NAVBAR*/
 .navbar {
     width: 100%;
+   
 }
 
 .navbar,
@@ -90,7 +95,7 @@ header {
 }
 
 .nav .nav-item {
-    margin: 0 10px;
+    margin-left: 35px;
 } 
 
 .nav .nav-item.relative {
@@ -113,21 +118,45 @@ header {
     margin: 10px 0;
 }
 /*BREADCRUMBS*/
-.post-breadcrumb,
-.breadcrumb {
+.breadcrumb,
+.breadcrumb ul{
     display: flex;
     align-items: center;
 }
 
-.post-breadcrumb {
+.breadcrumb {
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 
 /*FILTER*/
 
 
 /*POST TEMPALTE*/
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1050px;
+}
+
+.post {
+    border-radius: 1rem;
+    border: 1px solid var(--border-color); 
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;  
+}
+
+.post img {
+    width: 100% !important;
+}
 
 /*MODAL*/
 .post-modal {
@@ -240,6 +269,10 @@ header {
     .container {
         max-width: 540px;
     }
+
+    .post {
+        width: calc((100% - 1.25rem) - 0.001rem);
+    }
 }
 
 @media screen and (min-width:768px) {
@@ -247,34 +280,29 @@ header {
         max-width: 720px;   
     }
 
-    /*MODAL*/
-    .post-modal.show .post-modal-dialog {
-        margin: 0;
+    .post {
+        width: calc((45% - 1.25rem) - 0.001rem);
+        margin: 1rem;
+        
     }
 }
 
-@media screen and (min-width:992px) {
-    .container {
-        max-width: 960px;
-    }
+@media screen and (min-width:1000px) {
 
-    /*FILTER*/
-    .post-filter .card-body {
-        max-width: 375px !important;
-    }  
-
-    /*POST TEMPLATE*/
-  
+   
 }
 
 @media screen and (min-width:1200px) {
     .container {
-        max-width: 1140px;
-    }
-}
-
-@media screen and (min-width:1400px) {
-    .container {
         max-width: 1200px;
+    }
+
+    .main-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .post {
+        width: calc((32% - 1.25rem) - 0.001rem);
     }
 }
