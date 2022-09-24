@@ -140,20 +140,24 @@ function displaySinglePost( data ) {
 
         count++;
     }
+    console.log(postsIds)
+    console.log(prevId);
+    console.log(nextId)
 
     if(prevId) {
-        postModalPrevBtn.hidden = false;
+        postModalPrevBtn.style.visibility = "visible";
         postModalPrevBtn.setAttribute('data-post-id', prevId );
+        console.log(true)
     } else {
-        postModalPrevBtn.hidden = true;
+        postModalPrevBtn.style.visibility = "hidden";
     }
 
     if(nextId) {
-        postModalNextBtn.hidden = false;
+        postModalNextBtn.style.visibility = "visible";
         postModalNextBtn.setAttribute('data-post-id', nextId);
 
     } else {
-        postModalNextBtn.hidden = true;
+        postModalNextBtn.style.visibility = "hidden";
     }
 
     postModalNextBtn.setAttribute('data-post-id', nextId);
@@ -190,7 +194,6 @@ function getDOMPosts() {
     for( let post of postCard ) {
         post.addEventListener( 'click', () => {
             const postID = post.dataset.postId;
-            console.log(postID);
             fetchDisplayPost(postID);
         })
     }

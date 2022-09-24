@@ -27,21 +27,18 @@
                 return;
                 }
 
-                foreach ($apa_taxonomies as $key => $apa_tax) {
-                    if($curr_slug !== $apa_tax -> slug) {?>
-                    <a class="" href="<?php echo esc_url(get_term_link($apa_tax))?>">
+                foreach ($apa_taxonomies as $key => $apa_tax) {?>
+                    <span class="">
                         <?php echo esc_html( $apa_tax->name ); ?>
-                    </a>
-                <?php }}?> 
+                    </span>
+                <?php }?> 
                 <?php 
                 if(is_tax( )) {
                     $category = get_the_category( $id );
-                    $category_slug = $category[0] -> slug;
-                    $category_url =  get_home_url() . '/category' . '/' . $category_slug;
                     ?> 
-                    <a class="" href="<?php echo esc_url($category_url)?>">
+                    <span class="">
                         <?php echo esc_html( $category[0] -> name); ?>
-                    </a> 
+                    </span> 
                 <?php } ?> 
             </div>
         </div>
