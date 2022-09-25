@@ -5,7 +5,7 @@
 <div class="filter-section filter-dropdown">
     <div class="filter-body">
         <button class="filter-dropdown-btn" id="filter-year" type="button" >
-            Year
+           <span>Year</span>  <img src="<?php echo get_theme_file_uri( './assets/images/plus.svg' ) ?>" alt="Plus icon">
         </button>
 
         <ul class="filter-dropdown dropdown">
@@ -43,7 +43,7 @@
         
         <div class="filter-body">
             <button class="filter-dropdown-btn" id="filter-series" type="button" >
-                Series
+                <span>Series</span> <img src="<?php echo get_theme_file_uri( './assets/images/plus.svg' ) ?>" alt="Plus icon">
             </button>
             
             <ul class="filter-dropdown dropdown">    

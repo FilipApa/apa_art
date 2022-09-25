@@ -157,7 +157,7 @@ header.container {
 
 .breadcrumb {
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 2.5rem;
 }
 
 .breadcrumb li .breadcrumb-divider {
@@ -165,24 +165,45 @@ header.container {
 }
 
 /*FILTER*/
+
 .filter-btn,
-.filter-dropdown-btn {
+.filter-dropdown-btn,
+.filter-btn-submit {
     display: flex;
     align-items: center;
     border: 1px solid #000;
     border-radius: .5rem;
     width: 100%;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
 }
 
 .filter-btn {
     justify-content: center;
-    margin-bottom: 1rem;
-    padding: 1rem 0;
 }
 
 .filter-dropdown-btn {
     justify-content: space-between;
+}
+
+.filter-dropdown-btn span{
+    margin-left: 1rem;
+}
+
+.filter-dropdown-btn img{
+    margin-right: 1rem;
+}
+
+.filter-body {
+    margin-bottom: 1rem;
+}
+
+.filter-btn-submit {
+    justify-content: center;
     padding: 1.2rem 0;
+    margin: 1rem 0 2.5rem 0;
+    background-color: #000;
+    color: #fff;
 }
 
 /*POST TEMPALTE*/
@@ -326,7 +347,7 @@ header.container {
     }
 
     .post {
-        width: calc((100% - 1.25rem) - 0.001rem);
+        width: calc((100% - 1.25rem));
     }
 }
 
@@ -336,7 +357,7 @@ header.container {
     }
 
     .post {
-        width: calc((45% - 1.25rem) - 0.001rem);
+        width: 47%;
         margin: 1rem;
         
     }
@@ -355,6 +376,12 @@ header.container {
     .main-container {
         flex-direction: row;
         justify-content: space-between;
+    }
+
+    .filter {
+        width: 28rem;
+        margin-right: 1.5rem;
+        margin-top: 1rem;
     }
 
     .post {
