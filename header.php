@@ -15,7 +15,7 @@
         }
     ?>
 
-    <header class="container" role="banner">
+    <header class="container">
         <?php get_template_part('template-parts/header/navigation') ?>
     </header>
     <main id="content" class="container site-content" >   

@@ -70,6 +70,7 @@
     overflow: auto;
     box-sizing: border-box;
     line-height: 1;
+    padding: 0 1.5rem;
 }
 .container {
     margin: 0 auto;
@@ -79,48 +80,69 @@
 header {
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 12rem;
 }
 
 header.container {
-    margin-bottom: 40px;
+    margin-bottom: 3rem;
 }
 
 /*NAVBAR*/
-.navbar {
-    width: 100%;
-   
-}
-
 .navbar,
 .nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
-.nav .nav-item {
-    margin-left: 35px;
-} 
+.navbar {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar .nav-logo {
+    margin-bottom: 3.5rem;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav .nav-item,
+.nav .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .nav .nav-item.relative {
     position: relative;
 }
 
+.nav .nav-link img{
+    margin-left: .5rem;
+    width: 20px;
+}
+
 .nav .nav-dropdown-menu {
-    width: 100px;
-    position: absolute;
     visibility: hidden;
+    width: 10rem;
+    position: absolute;
+    top: 2rem;
     opacity: 0;
     transition: opacity 0.3s linear;
 }
+
 .nav .nav-dropdown-menu.show {
     visibility: visible;
     opacity: 1;
 }
 
 .nav .nav-dropdown-menu .nav-item {
-    margin: 10px 0;
+    margin: 1rem 0;
+    text-align: left;
 }
+
 /*BREADCRUMBS*/
 .breadcrumb,
 .breadcrumb ul{
