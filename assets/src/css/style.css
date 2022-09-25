@@ -10,7 +10,7 @@
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
   del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
+  small, strike, sub, sup, tt, var,
   b, u, i, center,
   dl, dt, dd, ol, ul, li,
   fieldset, form, label, legend,
@@ -70,7 +70,7 @@
     overflow: auto;
     box-sizing: border-box;
     line-height: 1;
-    padding: 0 1.5rem;
+    padding: 0 1.8em;
 }
 .container {
     margin: 0 auto;
@@ -84,7 +84,7 @@ header {
 }
 
 header.container {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 /*NAVBAR*/
@@ -119,9 +119,13 @@ header.container {
     position: relative;
 }
 
+.nav .nav-link {
+    color: #000;
+}
+
 .nav .nav-link img{
     margin-left: .5rem;
-    width: 20px;
+    width: 2rem;
 }
 
 .nav .nav-dropdown-menu {
@@ -145,7 +149,8 @@ header.container {
 
 /*BREADCRUMBS*/
 .breadcrumb,
-.breadcrumb ul{
+.breadcrumb ul,
+.breadcrumb li {
     display: flex;
     align-items: center;
 }
@@ -153,6 +158,10 @@ header.container {
 .breadcrumb {
     justify-content: space-between;
     margin-bottom: 25px;
+}
+
+.breadcrumb li .breadcrumb-divider {
+    width: 20px;
 }
 
 /*FILTER*/
