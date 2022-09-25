@@ -1,10 +1,10 @@
-<button class="filter-btn" id="filter-section" type="button">  
+<button class="filter-btn btn" id="filter-section" type="button">  
         <img src="<?php echo get_theme_file_uri( './assets/images/filter.svg' ) ?>" alt="Filter icon">
 </button>
 
 <div class="filter-section filter-dropdown">
     <div class="filter-body">
-        <button class="filter-dropdown-btn" id="filter-year" type="button" >
+        <button class="filter-dropdown-btn btn" id="filter-year" type="button" >
            <span>Year</span>  <img src="<?php echo get_theme_file_uri( './assets/images/plus.svg' ) ?>" alt="Plus icon">
         </button>
 
@@ -42,7 +42,7 @@
         </div>
         
         <div class="filter-body">
-            <button class="filter-dropdown-btn" id="filter-series" type="button" >
+            <button class="filter-dropdown-btn btn" id="filter-series" type="button" >
                 <span>Series</span> <img src="<?php echo get_theme_file_uri( './assets/images/plus.svg' ) ?>" alt="Plus icon">
             </button>
             
@@ -75,6 +75,6 @@
                 <?php }}}?> 
             </ul>  
         </div>
-        <button class="filter-btn-submit" id="filterBtn" type="button">Filter</button>
+        <button class="filter-btn-submit btn" id="filterBtn" type="button">Filter</button>
     </div>
 

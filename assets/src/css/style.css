@@ -76,6 +76,17 @@
     margin: 0 auto;
 }
 
+/*BUTTON*/
+.btn {
+    display: flex;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: .5rem;
+    width: 100%;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
 /*HEADER*/
 header {
     display: flex;
@@ -166,18 +177,6 @@ header.container {
 
 /*FILTER*/
 
-.filter-btn,
-.filter-dropdown-btn,
-.filter-btn-submit {
-    display: flex;
-    align-items: center;
-    border: 1px solid #000;
-    border-radius: .5rem;
-    width: 100%;
-    padding: 1rem 0;
-    margin-bottom: 1rem;
-}
-
 .filter-btn {
     justify-content: center;
 }
@@ -232,6 +231,24 @@ header.container {
 .post img {
     width: 100% ;
     object-fit: cover;
+}
+
+/*LOAD MORE*/
+.load-more {
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.load-more-btn {
+    background: #000;
+    color: #fff;
+    width: 15rem;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*MODAL*/

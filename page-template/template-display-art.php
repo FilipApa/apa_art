@@ -51,8 +51,8 @@ if ($slug) {
                 <?php endwhile; ?>
             </div>  
         </div>
-        <div class="btn__wrapper">
-            <button class="btn" id="post-load-more" role="button">Load more</button>
+        <div class="load-more">
+            <button class="load-more-btn btn" id="post-load-more" role="button">Load more</button>
         </div>
     </section>
 
