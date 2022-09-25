@@ -1,10 +1,10 @@
 <button class="filter-btn" id="filter-section" type="button">  
-        Filter
+        <img src="<?php echo get_theme_file_uri( './assets/images/filter.svg' ) ?>" alt="Filter icon">
 </button>
 
 <div class="filter-section filter-dropdown">
     <div class="filter-body">
-        <button class="filter-btn" id="filter-year" type="button" >
+        <button class="filter-dropdown-btn" id="filter-year" type="button" >
             Year
         </button>
 
@@ -20,7 +20,7 @@
 
                 $output = 'names'; 
                 $operator = 'and';
-                $taxonomies=get_taxonomies($args,$output,$operator); 
+                $taxonomies = get_taxonomies($args,$output,$operator); 
 
                 if  ($taxonomies) {
                 foreach ($taxonomies  as $taxonomy ) {
@@ -42,7 +42,7 @@
         </div>
         
         <div class="filter-body">
-            <button class="filter-btn" id="filter-series" type="button" >
+            <button class="filter-dropdown-btn" id="filter-series" type="button" >
                 Series
             </button>
             

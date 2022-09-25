@@ -165,7 +165,25 @@ header.container {
 }
 
 /*FILTER*/
+.filter-btn,
+.filter-dropdown-btn {
+    display: flex;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: .5rem;
+    width: 100%;
+}
 
+.filter-btn {
+    justify-content: center;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+}
+
+.filter-dropdown-btn {
+    justify-content: space-between;
+    padding: 1.2rem 0;
+}
 
 /*POST TEMPALTE*/
 .main-container {
@@ -191,7 +209,8 @@ header.container {
 }
 
 .post img {
-    width: 100% !important;
+    width: 100% ;
+    object-fit: cover;
 }
 
 /*MODAL*/
