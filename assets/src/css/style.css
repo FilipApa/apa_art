@@ -215,7 +215,7 @@ header.container {
 .posts {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     max-width: 1050px;
 }
 
@@ -226,10 +226,17 @@ header.container {
     flex-direction: column;
     align-items: stretch;  
     cursor: pointer;
+    width: calc((100% - 1.25rem));
+}
+
+.post .card-img-top {
+    width: 100%;
+    
 }
 
 .post img {
     width: 100% ;
+    height: auto;
     object-fit: cover;
 }
 
@@ -363,14 +370,15 @@ header.container {
         max-width: 540px;
     }
 
-    .post {
-        width: calc((100% - 1.25rem));
-    }
 }
 
 @media screen and (min-width:768px) {
     .container {
         max-width: 720px;   
+    }
+
+    .posts {
+        justify-content: flex-start;
     }
 
     .post {
@@ -387,7 +395,7 @@ header.container {
 
 @media screen and (min-width:1200px) {
     .container {
-        max-width: 1200px;
+        max-width: 1300px;
     }
 
     .main-container {
@@ -402,6 +410,6 @@ header.container {
     }
 
     .post {
-        width: calc((32% - 1.25rem) - 0.001rem);
+        width: 31%;
     }
 }
