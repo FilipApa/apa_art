@@ -27,13 +27,19 @@
       vertical-align: baseline;
   }
 
-  article, aside, details, figcaption, figure, 
+  article, aside, details, figcaption, image, figure, 
   footer, header, hgroup, menu, nav, section {
       display: block;
   }
 
   a {
     text-decoration: none;
+  }
+
+  image {
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
   }
 
   ol, ul {
@@ -227,18 +233,32 @@ header.container {
     align-items: stretch;  
     cursor: pointer;
     width: calc((100% - 1.25rem));
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
+}
+
+.post .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .post .card-img-top {
     width: 100%;
-    
+    min-height: 25rem;
+    background-size: cover;
+    background-position: center;
 }
 
-.post img {
+.post .card-body {
     width: 100% ;
-    height: auto;
-    object-fit: cover;
+    padding: 2rem;
+    display: flex;
+    align-items: flex-end;
 }
+
 
 /*LOAD MORE*/
 .load-more {

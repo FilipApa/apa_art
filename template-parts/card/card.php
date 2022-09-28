@@ -4,18 +4,10 @@
         $curr_slug = $GLOBALS['current_page']->slug;
     ?>
     
-    <div class="card-img-top" data-post-id="<?php echo get_the_ID( )?>" id="post" >
+    <div class="card-img-top" data-post-id="<?php echo get_the_ID( )?>" id="post" style="background-image:url(<?php echo get_the_post_thumbnail_url( $id, 'featuredImage' );?>)"></div>
 
-        <?php     
-            if ( has_post_thumbnail( $id ) ) {?>
-                <?php echo get_the_post_thumbnail( $id, 'featuredImage' ); ?>
-            <?php }
-        ?>
-     
-    </div>
-
-    <div>
-        <div class="card-body">
+    <div class="card-body">
+        <div >
             <h2 class="card-title">
                 <?php the_title(); ?>
             </h2>
