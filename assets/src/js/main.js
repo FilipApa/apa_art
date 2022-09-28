@@ -27,6 +27,7 @@ navDropdown.addEventListener('click', function() {
 });
 
 //for load more
+const loadMoreElement = document.getElementById('load-more-element');
 const loadMoreBtn = document.getElementById('post-load-more');
 let postsPage = 1;
 
@@ -80,9 +81,7 @@ function displayPosts( posts ) {
             
             column.innerHTML = ` 
             <div class="card">
-                <div class="card-img-top" data-post-id="${post.id}" >
-                    ${post.thumbnail}
-                </div>
+                <div class="card-img-top" style="background-image:url(${post.thumbnail})" data-post-id="${post.id}" ></div>
                 <div class="card-body">
                     <h2 class="card-title">
                         ${post.title}
@@ -98,7 +97,7 @@ function displayPosts( posts ) {
                 </div>
             </div>    
             `; 
-            templateGrid.appendChild( column );
+            templateGrid.appendChild(column);
         }
 }
 
@@ -219,9 +218,7 @@ function loadMorePosts() {
                 
                 column.innerHTML = ` 
                 <div class="card">
-                    <div class="card-img-top" data-post-id="${post.id}" >
-                        ${post.thumbnail}
-                    </div>
+                    <div class="card-img-top" style="background-image:url(${post.thumbnail})" data-post-id="${post.id}" ></div>
                     <div class="card-body">
                         <h2 class="card-title">
                             ${post.title}
@@ -237,7 +234,7 @@ function loadMorePosts() {
                     </div>
                 </div>    
                 `; 
-                templateGrid.appendChild( column );
+                templateGrid.appendChild(column);
             }
         } 
     });

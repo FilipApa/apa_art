@@ -218,22 +218,28 @@ header.container {
     justify-content: center;
 }
 
+.posts-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .posts {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 1050px;
+    margin-bottom: 2.5rem;
 }
 
 .post {
     border-radius: 1rem;
     border: 1px solid var(--border-color); 
+    margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: stretch;  
     cursor: pointer;
     width: calc((100% - 1.25rem));
-    border-radius: 0.5rem;
     box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
     -webkit-box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
@@ -243,6 +249,7 @@ header.container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 0.5rem;
 }
 
 .post .card-img-top {
@@ -250,6 +257,8 @@ header.container {
     min-height: 25rem;
     background-size: cover;
     background-position: center;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
 }
 
 .post .card-body {
@@ -262,11 +271,12 @@ header.container {
 
 /*LOAD MORE*/
 .load-more {
-    margin: 1rem 0;
+    margin-top: 2.5rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .load-more-btn {
@@ -425,7 +435,7 @@ header.container {
 
     .filter {
         width: 28rem;
-        margin-right: 1.5rem;
+        margin-right: 1.6rem;
         margin-top: 1rem;
     }
 

@@ -39,20 +39,23 @@ if ($slug) {
                 <?php // FILTER ?>
                 <?php get_template_part( './template-parts/filter/filter'); ?>    
             </div>  
-    
-            <div class="posts" id="template-grid-content">
-                <?php  // WP LOOP
-                    while($query->have_posts()) : $query->the_post(); ?>
+            <div class="posts-wrapper">
+                <div class="posts" id="template-grid-content">
+                    <?php  // WP LOOP
+                        while($query->have_posts()) : $query->the_post(); ?>
 
-                    <?php // CARD TEMPLATE ?>
-                    <div class="post">
-                        <?php get_template_part( './template-parts/card/card'); ?>    
-                    </div>    
-                <?php endwhile; ?>
-            </div>  
-        </div>
-        <div class="load-more">
-            <button class="load-more-btn btn" id="post-load-more" role="button">Load more</button>
+                        <?php // CARD TEMPLATE ?>
+                        <div class="post">
+                            <?php get_template_part( './template-parts/card/card'); ?>    
+                        </div>    
+                    <?php endwhile; ?>
+                </div> 
+
+                <div class="load-more" id="load-more-element">
+                        <button class="load-more-btn btn" id="post-load-more" role="button">Load more</button>
+                </div>
+            </div>
+             
         </div>
     </section>
 

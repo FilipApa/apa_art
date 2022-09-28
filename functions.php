@@ -197,7 +197,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
       'link' => get_the_permalink(),
       'year' => $year ? $year[0]->name : null,
       'serie' => $serie ? $serie[0]->name : null,
-      'thumbnail' => get_the_post_thumbnail( $id, 'featuredImage', array('class' => 'img-fluid') ),
+      'thumbnail' => get_the_post_thumbnail_url( $id, 'featuredImage' ),
     );
 
     array_push($data['postData'], $post_data );
