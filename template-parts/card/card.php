@@ -29,7 +29,7 @@
                     $category = get_the_category( $id );
                     ?> 
                     <span class="card-tag">
-                        <?php echo '#' . esc_html( $category[0] -> name); ?>
+                        <?php echo '<strong> # </strong>' . esc_html( $category[0] -> name); ?>
                     </span> 
                 <?php } ?> 
             </div>

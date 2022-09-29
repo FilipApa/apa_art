@@ -1,5 +1,5 @@
 :root {
-    
+    --black: #181818;
 }
 
 *, *::before, *::after {
@@ -76,7 +76,8 @@
     overflow: auto;
     box-sizing: border-box;
     line-height: 1;
-    padding: 0 1.8em;
+    padding: 0 1.8rem;
+    color: var(--black);
 }
 .container {
     margin: 0 auto;
@@ -86,7 +87,7 @@
 .btn {
     display: flex;
     align-items: center;
-    border: 1px solid #000;
+    border: 1px solid var(--black);
     border-radius: .5rem;
     width: 100%;
     padding: 1rem 0;
@@ -137,7 +138,7 @@ header.container {
 }
 
 .nav .nav-link {
-    color: #000;
+    color: var(--black);
    
 }
 
@@ -213,6 +214,33 @@ header.container {
     margin-right: 1rem;
 }
 
+.filter-dropdown .form-check {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.filter-dropdown .form-check-input {
+    margin-right: 0.8rem;
+}
+
+.filter-dropdown .form-check-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter-dropdown .form-tag{
+    display: block;
+    margin-right: 1rem;
+}
+
+.filter-dropdown .form-tag-year{
+    width: 4rem;
+}
+
 .filter-body {
     margin-bottom: 2rem;
 }
@@ -221,7 +249,7 @@ header.container {
     justify-content: center;
     padding: 1.2rem 0;
     margin: 1rem 0 2.5rem 0;
-    background-color: #000;
+    background-color: var(--black);
     color: #fff;
 }
 
@@ -247,7 +275,6 @@ header.container {
 
 .post {
     border-radius: 1rem;
-    border: 1px solid var(--border-color); 
     margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
@@ -280,7 +307,7 @@ header.container {
     padding: 2.5rem 2.5rem 3rem 2.5rem;
     display: flex;
     align-items: flex-end;
-    color: #181818;
+    color: var(--black);
 }
 
 .post .card-title {
@@ -306,7 +333,7 @@ header.container {
 }
 
 .load-more-btn {
-    background: #000;
+    background: var(--black);
     color: #fff;
     width: 15rem;
     justify-content: center;
@@ -446,7 +473,7 @@ header.container {
 
 @media screen and (min-width:1200px) {
     .container {
-        max-width: 135rem;
+        max-width: 140rem;
     }
 
     .breadcrumb span {
@@ -460,8 +487,12 @@ header.container {
 
     .filter {
         width: 28rem;
-        margin-right: 1.6rem;
+        margin-right: 2.5rem;
         margin-top: 1rem;
+    }
+
+    .filter-dropdown .form-check-label {
+        width: 100%;
     }
 
     .post {

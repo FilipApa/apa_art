@@ -31,8 +31,10 @@
                         <li class="form-check">
                             <input class="form-check-input form-check-input-year" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->name); ?>" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                <?php echo esc_html($term->name); ?> 
-                                <span class="">
+                                <span class="form-tag form-tag-year">
+                                    <?php echo esc_html($term->name); ?> 
+                                </span>
+                                <span class="form-num">
                                 <?php echo '(' . calc_num_of_posts($slug, 'year', $term->name) . ')'; ?>
                             </span>
                             </label>
@@ -66,10 +68,12 @@
                         <li class="form-check">
                             <input class="form-check-input form-check-input-series" type="checkbox" name="<?php echo esc_html($term->name); ?>" value="<?php echo esc_html($term->slug); ?>" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                            <?php echo esc_html($term->name); ?>
-                            <span class="ms-1 text-secondary">
-                                <?php echo '(' . calc_num_of_posts($slug, 'serie', $term->name) . ')'; ?>
-                            </span>
+                                <span class="form-tag">
+                                    <?php echo esc_html($term->name); ?>
+                                </span>    
+                                <span class="form-num">
+                                    <?php echo '(' . calc_num_of_posts($slug, 'serie', $term->name) . ')'; ?>
+                                </span>
                             </label>
                         </li>
                 <?php }}}?> 
