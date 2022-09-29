@@ -71,7 +71,7 @@
 
   body {
     font-size: 1.8rem;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Poppins', sans-serif;
     position: relative;
     overflow: auto;
     box-sizing: border-box;
@@ -240,9 +240,9 @@ header.container {
     align-items: stretch;  
     cursor: pointer;
     width: calc((100% - 1.25rem));
-    box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 1rem 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 1rem 1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 0.5rem 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0.5rem 1px rgba(0,0,0,0.75);
 }
 
 .post .card {
@@ -425,7 +425,11 @@ header.container {
 
 @media screen and (min-width:1200px) {
     .container {
-        max-width: 1300px;
+        max-width: 135rem;
+    }
+
+    .breadcrumb span {
+        margin-right: 2.5rem;
     }
 
     .main-container {

@@ -8,7 +8,7 @@
       wp_register_script('apa-main-script',  get_template_directory_uri() . '/assets/src/js/main.js', array( 'jquery' ), filemtime(get_template_directory() . '/assets/src/js/main.js'), true);
 
       // Enqueue styles
-      wp_enqueue_style('apa_fonts', '//fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Overpass:wght@300;400;600;700&display=swap', [], null);
+      wp_enqueue_style('apa_fonts', '//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap', [], null);
       wp_enqueue_style( 'apa-main-styles' );
 
       // Enqueue styles
