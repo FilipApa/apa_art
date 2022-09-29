@@ -20,16 +20,16 @@
                 }
 
                 foreach ($apa_taxonomies as $key => $apa_tax) {?>
-                    <span class="">
-                        <?php echo esc_html( $apa_tax->name ); ?>
+                    <span class="card-tag">
+                        <?php echo '#' . esc_html( $apa_tax->name ); ?>
                     </span>
                 <?php }?> 
                 <?php 
                 if(is_tax( )) {
                     $category = get_the_category( $id );
                     ?> 
-                    <span class="">
-                        <?php echo esc_html( $category[0] -> name); ?>
+                    <span class="card-tag">
+                        <?php echo '#' . esc_html( $category[0] -> name); ?>
                     </span> 
                 <?php } ?> 
             </div>

@@ -138,6 +138,7 @@ header.container {
 
 .nav .nav-link {
     color: #000;
+   
 }
 
 .nav .nav-link img{
@@ -147,12 +148,24 @@ header.container {
 
 .nav .nav-dropdown-menu {
     visibility: hidden;
-    width: 10rem;
+    width: 11rem;
+    padding: 1rem 0 1rem 2rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 1rem 1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 0.5rem 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0.5rem 1px rgba(0,0,0,0.75);
     position: absolute;
-    top: 2rem;
+    top: 3.5rem;
+    left: 0;
     opacity: 0;
     transition: opacity 0.3s linear;
+    box-sizing: content-box;
 }
+
+.nav-dropdown-menu .nav-item {
+    justify-content: flex-start; 
+ }
 
 .nav .nav-dropdown-menu.show {
     visibility: visible;
@@ -161,7 +174,6 @@ header.container {
 
 .nav .nav-dropdown-menu .nav-item {
     margin: 1rem 0;
-    text-align: left;
 }
 
 /*BREADCRUMBS*/
@@ -185,10 +197,12 @@ header.container {
 
 .filter-btn {
     justify-content: center;
+    margin-bottom: 1.5rem;
 }
 
 .filter-dropdown-btn {
     justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .filter-dropdown-btn span{
@@ -200,7 +214,7 @@ header.container {
 }
 
 .filter-body {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .filter-btn-submit {
@@ -254,7 +268,7 @@ header.container {
 
 .post .card-img-top {
     width: 100%;
-    min-height: 25rem;
+    min-height: 26.5rem;
     background-size: cover;
     background-position: center;
     border-top-left-radius: 0.5rem;
@@ -263,11 +277,23 @@ header.container {
 
 .post .card-body {
     width: 100% ;
-    padding: 2rem;
+    padding: 2.5rem 2.5rem 3rem 2.5rem;
     display: flex;
     align-items: flex-end;
+    color: #181818;
 }
 
+.post .card-title {
+    font-weight: 500;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+}
+
+.post .card-tag {
+    border-radius: 0.5rem;
+    padding: 1rem 2px;
+    font-size: 1.6rem;
+}
 
 /*LOAD MORE*/
 .load-more {
@@ -418,11 +444,6 @@ header.container {
     }
 }
 
-@media screen and (min-width:1000px) {
-
-   
-}
-
 @media screen and (min-width:1200px) {
     .container {
         max-width: 135rem;
@@ -445,5 +466,9 @@ header.container {
 
     .post {
         width: 31%;
+    }
+
+    .post .card-title {
+        font-size: 2.6rem;
     }
 }
