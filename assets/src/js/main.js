@@ -10,7 +10,7 @@ const filterBtn = document.getElementById( 'filterBtn' );
 
 const filterDropBtn = document.getElementById( 'filter-section' );
 const filterYearBtn = document.getElementById( 'filter-year' );
-const filterSerieBtn = document.getElementById( 'filter-serie' );
+const filterSerieBtn = document.getElementById( 'filter-series' );
 
 //for modal
 const modal = document.getElementById( 'post-modal' );
@@ -306,10 +306,6 @@ navDropdown.addEventListener('click', function() {
 
 //DROPDOWN FILTER
 
-navDropdown.addEventListener('click', function() {
-    showDropdown( '#nav-dropdown' );
-});
-
 filterDropBtn.addEventListener('click', function() {
     showDropdown( '#filter-section' );
 });
@@ -319,7 +315,7 @@ filterYearBtn.addEventListener('click', function() {
 });
 
 filterSerieBtn.addEventListener('click', function() {
-    showDropdown( '#filter-serie' );
+    showDropdown( '#filter-series' );
 });
 
 

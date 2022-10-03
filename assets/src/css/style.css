@@ -1,5 +1,6 @@
 :root {
     --black: #181818;
+    --transition: all 0.2s ease-in;
 }
 
 *, *::before, *::after {
@@ -165,7 +166,7 @@ header.container {
     top: 3.5rem;
     left: 0;
     opacity: 0;
-    transition: opacity 0.3s linear;
+    transition: var(--transition);
     box-sizing: content-box;
 }
 
@@ -204,6 +205,30 @@ header.container {
 .filter-btn {
     justify-content: center;
     margin-bottom: 1.5rem;
+}
+
+.filter-section {
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.filter-section.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.filter-dropdown {
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.filter-dropdown.show {
+    visibility: visible;
+    display: block;
+    opacity: 1;
 }
 
 .filter-dropdown-btn {
@@ -350,10 +375,7 @@ header.container {
 
 /*MODAL*/
 .post-modal {
-    display: none; 
-}
-
-.post-modal.show {
+    visibility: hidden;
     background: rgba(0, 0, 0, 0.45);
     position: fixed;
     top: 0;
@@ -365,9 +387,13 @@ header.container {
     align-items: center;
 }
 
+.post-modal.show {
+    visibility: visible;
+}
+
 .post-modal-dialog {
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: var(--transition);
     border-radius: 10px;
 }
 
