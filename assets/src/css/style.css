@@ -202,6 +202,10 @@ header.container {
 
 /*FILTER*/
 
+.filter {
+    margin-bottom: 1.5rem;
+}
+
 .filter-btn {
     justify-content: center;
     margin-bottom: 1.5rem;
@@ -500,7 +504,6 @@ header.container {
     .post {
         width: 47%;
         margin: 1rem;
-        
     }
 }
 
