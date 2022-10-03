@@ -2,7 +2,7 @@
         <img src="<?php echo get_theme_file_uri( './assets/images/filter.svg' ) ?>" alt="Filter icon">
 </button>
 
-<div class="filter-section filter-dropdown">
+<div class="filter-section filter-dropdown dropdown">
     <div class="filter-body">
         <button class="filter-dropdown-btn btn" id="filter-year" type="button" >
            <span>Year</span>  <img src="<?php echo get_theme_file_uri( './assets/images/plus.svg' ) ?>" alt="Plus icon">

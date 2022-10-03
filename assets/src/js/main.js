@@ -5,8 +5,11 @@ const currentPageCategory = document.getElementById( 'page-category' ).dataset.p
 const inputElementsYear = document.getElementsByClassName( 'form-check-input-year' );
 const inputElementsSerie = document.getElementsByClassName( 'form-check-input-series' );
 const templateGrid = document.getElementById( 'template-grid-content' );
-const filterBtn = document.getElementById( 'filterBtn' );
 const numPosts = document.getElementById( 'num-posts' );
+const filterBtn = document.getElementById( 'filterBtn' );
+const filterDropBtn = document.getElementById( 'filter-section' );
+const filterYearBtn = document.getElementById( 'filter-section' );
+const filterSerieBtn = document.getElementById( 'filter-section' );
 
 //for modal
 const modal = document.getElementById( 'post-modal' );
@@ -74,11 +77,12 @@ function displayPosts( posts ) {
     const getNumPosts = posts.total;
     numPosts.innerText = getNumPosts;
 
+    const hash = '#';
     const taxonomy = document.createElement( 'div' );
         for(let post of posts.postData) {
             const column = document.createElement( 'div' );
             column.classList.add( 'post' );
-            
+
             column.innerHTML = ` 
             <div class="card">
                 <div class="card-img-top" style="background-image:url(${post.thumbnail})" data-post-id="${post.id}" ></div>
@@ -88,11 +92,13 @@ function displayPosts( posts ) {
                     </h2>
 
                     <div>
-                
-                    ${post.year ? taxonomy.innerText = post.year : ''}
-                  
-                    ${post.serie ? taxonomy.innerText = post.serie : ''}
+                    <span class="card-tag">
+                        ${post.year ? taxonomy.innerText = hash + post.year : ''}
+                    </span>
 
+                    <span class="card-tag">
+                        ${post.serie ? taxonomy.innerText = hash + post.serie : ''}
+                    </span>
                     </div>
                 </div>
             </div>    
