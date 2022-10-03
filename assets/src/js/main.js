@@ -7,9 +7,10 @@ const inputElementsSerie = document.getElementsByClassName( 'form-check-input-se
 const templateGrid = document.getElementById( 'template-grid-content' );
 const numPosts = document.getElementById( 'num-posts' );
 const filterBtn = document.getElementById( 'filterBtn' );
+
 const filterDropBtn = document.getElementById( 'filter-section' );
-const filterYearBtn = document.getElementById( 'filter-section' );
-const filterSerieBtn = document.getElementById( 'filter-section' );
+const filterYearBtn = document.getElementById( 'filter-year' );
+const filterSerieBtn = document.getElementById( 'filter-serie' );
 
 //for modal
 const modal = document.getElementById( 'post-modal' );
@@ -24,10 +25,6 @@ const postCads = document.getElementsByClassName( 'card-post' );
 
 //dropdown nav
 const navDropdown = document.getElementById('nav-dropdown');
-
-navDropdown.addEventListener('click', function() {
-    showDropdown( '#nav-dropdown' );
-});
 
 //for load more
 const loadMoreElement = document.getElementById('load-more-element');
@@ -300,4 +297,29 @@ if(loadMoreBtn) {
         loadMorePosts();
     });
 };
+
+//DROPDOWN NAVIGATION
+
+navDropdown.addEventListener('click', function() {
+    showDropdown( '#nav-dropdown' );
+});
+
+//DROPDOWN FILTER
+
+navDropdown.addEventListener('click', function() {
+    showDropdown( '#nav-dropdown' );
+});
+
+filterDropBtn.addEventListener('click', function() {
+    showDropdown( '#filter-section' );
+});
+
+filterYearBtn.addEventListener('click', function() {
+    showDropdown( '#filter-year' );
+});
+
+filterSerieBtn.addEventListener('click', function() {
+    showDropdown( '#filter-serie' );
+});
+
 
