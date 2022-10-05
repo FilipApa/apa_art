@@ -225,14 +225,12 @@ header.container {
 .filter-dropdown {
     visibility: hidden;
     display: none;
-    opacity: 0;
     transition: var(--transition);
 }
 
 .filter-dropdown.show {
     visibility: visible;
     display: block;
-    opacity: 1;
 }
 
 .filter-dropdown-btn {
@@ -529,6 +527,28 @@ header.container {
 
     .filter-dropdown .form-check-label {
         width: 100%;
+    }
+
+    .filter-section {
+        visibility: hidden;
+        opacity: 1;
+        transition: var(--transition);
+    }
+    
+    .filter-section.show {
+        visibility: hidden;
+        opacity: 0;
+    }
+    
+    .filter-dropdown {
+        visibility: visible;
+        display: block;
+    }
+    
+    .filter-dropdown.show {
+        visibility: hidden;
+        display: none;
+
     }
 
     .post {
