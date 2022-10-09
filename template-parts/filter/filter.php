@@ -80,5 +80,6 @@
             </ul>  
         </div>
         <button class="filter-btn-submit btn" id="filterBtn" type="button">Filter</button>
+        <button class="filter-btn-reset btn" id="resetBtn" type="button">Reset</button>
     </div>
 

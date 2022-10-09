@@ -23,26 +23,21 @@ const postModalPrevBtn = document.getElementById( 'post-modal-prev' );
 const postModalNextBtn = document.getElementById( 'post-modal-next' );
 const postCads = document.getElementsByClassName( 'card-post' );
 
-//dropdown nav
-const navDropdown = document.getElementById('nav-dropdown');
-
 //for load more
 const loadMoreElement = document.getElementById('load-more-element');
 const loadMoreBtn = document.getElementById('post-load-more');
-let postsPage = 1;
+
+//for reset
+const resetBtn = document.getElementById('resetBtn');
 
 //for posts
+let postsPage = 1;
 let postCard;
 let postsIds = [];
 let serie = '';
 let year = '';
 
-//DROPDOWN
-function showDropdown(target) {
-    let targetElement = document.querySelector(`${target} + .dropdown`);
-    targetElement.classList.toggle('show');
-};
-
+//GET CHECKED VALUES
 function getCheckValues( inputFields ) {
     let counter = 0;
     const checkedValues = new Object;
@@ -211,7 +206,7 @@ function loadMorePosts() {
 
         if(postsPage > pages) {
             loadMoreBtn.disabled = true;
-            loadMoreBtn.innerText = 'No more posts'
+            loadMoreBtn.innerText = 'No more pictures'
         }else {
             loadMoreBtn.disabled = false;
             loadMoreBtn.innerText = 'Load more'
@@ -248,7 +243,7 @@ function loadMorePosts() {
 // DOM CHANGES EVENTS
 document.addEventListener("DOMContentLoaded", getDOMPosts());
 
-const mutationObserver = new MutationObserver( entries => {
+const mutationObserver = new MutationObserver( () => {
     getDOMPosts();
 });
 
@@ -291,6 +286,33 @@ if(filterBtn) {
     });
 }
 
+//RESET POSTS
+if(resetBtn) {
+    resetBtn.addEventListener( 'click', () => {
+        postsPage = 1;
+        loadMoreBtn.disabled = false;
+        loadMoreBtn.innerText = 'Load more'
+        const filterdPosts = fetchPosts( postsPage, '', '' );
+        
+        filterdPosts.then( data => {
+            if( data ) {
+               displayPosts( data ); 
+            }
+
+            [...inputElementsYear].forEach(element => {
+                element.checked = false;
+            });
+
+            [...inputElementsSerie].forEach(element => {
+                element.checked = false;
+            });
+    
+        }).catch(error => {
+            console.log( error );
+        });
+    });
+}
+
 //LOAD MORE EVENT
 if(loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
@@ -298,24 +320,26 @@ if(loadMoreBtn) {
     });
 };
 
-//DROPDOWN NAVIGATION
-
-navDropdown.addEventListener('click', function() {
-    showDropdown( '#nav-dropdown' );
-});
-
 //DROPDOWN FILTER
 
-filterDropBtn.addEventListener('click', function() {
-    showDropdown( '#filter-section' );
-});
+if(filterDropBtn) {
+    filterDropBtn.addEventListener('click', function() {
+        showDropdown( '#filter-section' );
+    });
+}
 
-filterYearBtn.addEventListener('click', function() {
-    showDropdown( '#filter-year' );
-});
+if(filterYearBtn) {
+    filterYearBtn.addEventListener('click', function() {
+        showDropdown( '#filter-year' );
+    });
+}
 
-filterSerieBtn.addEventListener('click', function() {
-    showDropdown( '#filter-series' );
-});
+if(filterSerieBtn) {
+    filterSerieBtn.addEventListener('click', function() {
+        showDropdown( '#filter-series' );
+    });
+}
+
+
 
 
