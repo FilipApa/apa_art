@@ -500,35 +500,13 @@ header.container {
 }
 
 footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2.5rem 0 4rem 0;
+    padding: 2.5rem 0;
 }
 
-footer nav {
-    width: 100%;
-}
-
-footer ul {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-}
-
-footer li {
-    margin: .5rem .8rem;
-}
-
-footer a {
-    font-size: 1.8rem;
-    color: var(--black);
-}
 footer p {
     font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
 }
 
 @media screen and (min-width:576px) {
@@ -609,16 +587,6 @@ footer p {
 
     .post .card-title {
         font-size: 2.6rem;
-    }
-
-    footer {
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
-    }
-
-    footer ul {
-        margin-bottom: 3.5rem;
-        justify-content: space-between;
     }
 
 }
