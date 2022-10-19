@@ -21,7 +21,7 @@
 
                 <h2>Paintings</h2>
             
-                <a href="#">See more</a>
+                <a href="<?php echo site_url( 'category/paintings/' ) ?>">See more</a>
             </div>
         </div>
         <div class="flex-reverse red">
@@ -39,7 +39,7 @@
                 
                 <h2>Digital art</h2>
             
-                <a href="#">See more</a>
+                <a href="<?php echo site_url( 'category/digital-art/' ) ?>">See more</a>
             </div>
         </div>
         <div class="flex-reverse yellow">
@@ -57,7 +57,7 @@
 
                 <h2>3D Animations</h2>
             
-                <a href="#">See more</a>
+                <a href="<?php echo site_url( '3d-animations' ) ?>">See more</a>
             </div>
         </div>
     </section>
