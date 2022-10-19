@@ -8,8 +8,8 @@
     <section class="art-selection">
         <div class="art-selection-wrap blue">     
             <div class="art-selection-text">
-                <div>
-                    <img src="" alt="">
+                <div class="art-selection-text-icon">
+                    <img src="<?php echo get_theme_file_uri( './assets/images/paintings.png' ) ?>" alt="Brushes for painting">
                 </div>
 
                 <h2>Paintings</h2>
@@ -26,8 +26,8 @@
         </div>
         <div class="art-selection-wrap flex-reverse red">    
             <div class="art-selection-text">
-                <div>
-                    <img src="" alt="">
+                <div class="art-selection-text-icon">
+                    <img src="<?php echo get_theme_file_uri( './assets/images/digital-art.png' ) ?>" alt="Smartfone with app for painting on screen">
                 </div>
                 
                 <h2>Digital art</h2>
@@ -44,7 +44,7 @@
         </div>
         <div class="art-selection-wrap yellow">     
             <div class="art-selection-text">
-                <div>
+                <div class="art-selection-text-icon">
                     <img src="" alt="">
                 </div>
 
