@@ -203,6 +203,15 @@ footer p {
 /*BANNER*/
 
 /*TESTEMONIALS*/
+.art-selection,
+.art-selection-wrap,
+.art-selection-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+}
 
 /************************************CATEGORY PAGE***************************************************/
 
