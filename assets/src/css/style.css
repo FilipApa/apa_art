@@ -1,5 +1,8 @@
 :root {
     --black: #181818;
+    --blue: hsl(198, 62%, 26%);
+    --softred: hsl(7, 99%, 70%);
+    --yellow: rgb(250, 212, 0);
     --transition: all 0.2s ease-in;
 }
 
@@ -69,6 +72,10 @@
   table {
       border-collapse: collapse;
       border-spacing: 0;
+  }
+
+  img {
+    width: 100%;
   }
 
   html {
@@ -213,6 +220,25 @@ footer p {
     text-align: center;
 }
 
+.art-selection-text-icon {
+    max-width: 22rem;
+}
+
+.art-selection h2 {
+    margin: 1.5rem 0;
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.art-selection a {
+    width: max-content;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: var(--black);
+}
+ 
 /************************************CATEGORY PAGE***************************************************/
 
 /*BREADCRUMBS*/
@@ -241,6 +267,10 @@ footer p {
 .filter-btn {
     justify-content: center;
     margin-bottom: 1.5rem;
+}
+
+.filter-btn img {
+    width: 2.5rem;
 }
 
 .filter-section {
@@ -276,6 +306,7 @@ footer p {
 
 .filter-dropdown-btn img{
     margin-right: 1rem;
+    width: 2.5rem;
 }
 
 .filter-dropdown .form-check {
