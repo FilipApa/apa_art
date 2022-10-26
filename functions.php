@@ -83,7 +83,7 @@
   function calc_num_of_posts($category, $tax, $term) {
     $args = array(
       'paged' => get_query_var( 'paged', 1),
-      'post_per_page' => 9,
+      'post_per_page' => 24,
       'post_type' => 'post',
       'order' => 'ASC',
       'category_name' => $category,
@@ -122,7 +122,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
       if ($years && $series) { 
           $args = array(
               'paged' => $paged,
-              'post_per_page' => 9,
+              'post_per_page' => 24,
               'post_type' => 'post',
               'order' => 'ASC',
               'category_name' => $category,
@@ -145,7 +145,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
         if(!empty($years)) {
           $args = array(
             'paged' => $paged,
-            'post_per_page' => 9,
+            'post_per_page' => 24,
             'post_type' => 'post',
             'order' => 'ASC',
             'category_name' => $category,
@@ -160,7 +160,7 @@ function filter_by_cat_and_terms( $category, ...$paramatars ) {
         } else if(!empty($series)) {
           $args = array(
             'paged' => $paged,
-            'post_per_page' => 9,
+            'post_per_page' => 24,
             'post_type' => 'post',
             'order' => 'ASC',
             'category_name' => $category,

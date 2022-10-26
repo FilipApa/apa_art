@@ -14,7 +14,7 @@ $slug = $current_page->slug;
 if ($slug) {
     $args = array(
         'paged' => get_query_var( 'paged', 1),
-        'post_per_page' => 9,
+        'post_per_page' => 24,
         'post_type' => 'post',
         'order' => 'ASC',
         'category_name' => $slug

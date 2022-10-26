@@ -71,32 +71,41 @@ function displayPosts( posts ) {
 
     const hash = '#';
     const taxonomy = document.createElement( 'div' );
-        for(let post of posts.postData) {
-            const column = document.createElement( 'div' );
-            column.classList.add( 'post' );
 
-            column.innerHTML = ` 
-            <div class="card">
-                <div class="card-img-top" style="background-image:url(${post.thumbnail})" data-post-id="${post.id}" ></div>
-                <div class="card-body">
-                    <h2 class="card-title">
-                        ${post.title}
-                    </h2>
+        if(Array.isArray(posts.postData) && posts.postData.length ) {
 
-                    <div>
-                    <span class="card-tag">
-                        ${post.year ? taxonomy.innerText = hash + post.year : ''}
-                    </span>
-
-                    <span class="card-tag">
-                        ${post.serie ? taxonomy.innerText = hash + post.serie : ''}
-                    </span>
+            for(let post of posts.postData) {
+                const column = document.createElement( 'div' );
+                column.classList.add( 'post' );
+    
+                column.innerHTML = ` 
+                <div class="card">
+                    <div class="card-img-top" style="background-image:url(${post.thumbnail})" data-post-id="${post.id}" ></div>
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            ${post.title}
+                        </h2>
+    
+                        <div>
+                        <span class="card-tag">
+                            ${post.year ? taxonomy.innerText = hash + post.year : ''}
+                        </span>
+    
+                        <span class="card-tag">
+                            ${post.serie ? taxonomy.innerText = hash + post.serie : ''}
+                        </span>
+                        </div>
                     </div>
-                </div>
-            </div>    
-            `; 
-            templateGrid.appendChild(column);
-        }
+                </div>    
+                `; 
+                templateGrid.appendChild(column);
+            }
+        } else {
+            const message = document.createElement( 'span' );
+            message.classList.add('posts-error-message');
+            message.innerText = "Sorry no posts available";
+            templateGrid.appendChild(message);
+        }    
 }
 
 //SINGLE POST

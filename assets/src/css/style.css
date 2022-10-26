@@ -422,6 +422,12 @@ footer p {
     font-size: 1.6rem;
 }
 
+.posts-error-message {
+    font-weight: bold;
+    margin: 0 auto;
+    font-size: 2rem;
+}
+
 /*LOAD MORE*/
 .load-more {
     margin: 2.5rem 0;
@@ -469,6 +475,7 @@ footer p {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
 }
 
 .post-modal.show .post-modal-dialog {
